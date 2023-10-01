@@ -1,3 +1,4 @@
+import { HomePage } from '@/pages/home/home-page'
 import { AppTemplate } from '@/templates/app-template'
 import { createBrowserRouter } from 'react-router-dom'
 
@@ -5,7 +6,12 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <AppTemplate />,
-    children: [],
+    children: [
+      {
+        element: <HomePage />,
+        index: true,
+      },
+    ],
   },
 ])
 

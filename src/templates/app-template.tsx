@@ -7,7 +7,11 @@ export const AppTemplate: FC = () => {
   return (
     <>
       <AppHeader />
-      <main>
+      <main
+        style={{
+          minHeight: 'calc(100vh - 64px - 64px)',
+        }}
+      >
         <Outlet />
       </main>
       <AppFooter />
