@@ -1,4 +1,4 @@
-import { vars } from '@/_theme'
+import { vars } from '@/configs/theme'
 import { rgba } from '@mantine/core'
 import { style } from '@vanilla-extract/css'
 

@@ -1,11 +1,11 @@
-import { HomePage } from '@/pages/home/home-page'
-import { AppTemplate } from '@/templates/app-template'
+import { HomePage } from '@/pages/home'
+import { AppLayout } from '@/layouts/app-layout'
 import { createBrowserRouter } from 'react-router-dom'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AppTemplate />,
+    element: <AppLayout />,
     children: [
       {
         element: <HomePage />,

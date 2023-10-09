@@ -1,4 +1,4 @@
-import { vars } from '@/_theme'
+import { vars } from '@/configs/theme'
 import { style } from '@vanilla-extract/css'
 
 export const classes = {
@@ -8,6 +8,9 @@ export const classes = {
     padding: 8,
     ':hover': {
       backgroundColor: vars.colors.gray.lightHover,
+    },
+    ':active': {
+      transform: 'scale(0.95)',
     },
   }),
 }

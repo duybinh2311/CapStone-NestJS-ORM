@@ -1,5 +1,5 @@
 import { Menu, Button, TextInput } from '@mantine/core'
-import { IconChevronDown } from '@tabler/icons-react'
+import { IconChevronDown, IconSearch } from '@tabler/icons-react'
 import { FC } from 'react'
 import { classes } from './action-menu.css'
 
@@ -41,6 +41,13 @@ export const ActionMenu: FC<ActionMenuProps> = (props) => {
       </Menu>
 
       <TextInput
+        leftSection={
+          <IconSearch
+            size={20}
+            stroke={3}
+          />
+        }
+        placeholder='Search Pin'
         radius={'xl'}
         style={{
           flex: 1,
