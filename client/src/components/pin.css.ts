@@ -2,10 +2,12 @@ import { vars } from '@/configs/theme'
 import { style } from '@vanilla-extract/css'
 
 export const classes = {
+  image: style({
+    borderRadius: vars.radius.lg,
+  }),
   pin: style({
     backgroundColor: 'red',
     margin: 8,
-    borderRadius: vars.spacing.md,
   }),
   small: style({
     gridRowEnd: 'span 26',

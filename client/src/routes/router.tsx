@@ -1,6 +1,7 @@
 import { HomePage } from '@/pages/home'
 import { AppLayout } from '@/layouts/app-layout'
 import { createBrowserRouter } from 'react-router-dom'
+import { PinPage } from '@/pages/pin'
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,10 @@ const router = createBrowserRouter([
       {
         element: <HomePage />,
         index: true,
+      },
+      {
+        element: <PinPage />,
+        path: '/pin/:id',
       },
     ],
   },
