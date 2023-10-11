@@ -19,6 +19,7 @@ export const PinPage: FC = () => {
       <section>
         <Container>
           <SimpleGrid
+            id='pin-detail-box'
             style={{
               boxShadow: '0 0 10px 5px rgba(0,0,0,0.1)',
               borderRadius: vars.radius.xl,
@@ -105,6 +106,7 @@ export const PinPage: FC = () => {
               </ScrollArea>
             </Stack>
           </SimpleGrid>
+
           <PinLayout>
             <Pin size='small' />
             <Pin size='small' />

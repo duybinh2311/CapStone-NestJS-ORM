@@ -13,6 +13,7 @@ export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
       innerZ={1}
       innerClass={classes.pinActionMenu}
       innerActiveClass={classes.pinActionMenuActive}
+      bottomBoundary={'#pin-detail-box'}
     >
       <Group justify='space-between'>
         <Group>
