@@ -1,7 +1,7 @@
 import { vars } from '@/configs/theme'
 import { style } from '@vanilla-extract/css'
 
-export const classes = {
+export const userMenuStyle = {
   menuItem: style({
     borderRadius: vars.radius.xl,
     cursor: 'pointer',

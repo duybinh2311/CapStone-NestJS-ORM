@@ -1,6 +1,6 @@
 import { Box, Image } from '@mantine/core'
 import { FC } from 'react'
-import { classes } from './pin.css'
+import { pinStyle } from './pin.css'
 import clsx from 'clsx'
 
 interface PinProps {
@@ -9,7 +9,7 @@ interface PinProps {
 
 export const Pin: FC<PinProps> = (props) => {
   return (
-    <Box className={clsx(classes.pin, classes[props.size])}>
+    <Box className={clsx(pinStyle.pin, pinStyle[props.size])}>
       {/* <Image
         className={classes.image}
         src='https://i.pinimg.com/564x/3a/63/46/3a6346e65a60031fdb89ecb3db9f5c3a.jpg'

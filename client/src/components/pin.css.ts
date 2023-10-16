@@ -1,7 +1,7 @@
 import { vars } from '@/configs/theme'
 import { style } from '@vanilla-extract/css'
 
-export const classes = {
+export const pinStyle = {
   image: style({
     borderRadius: vars.radius.lg,
   }),

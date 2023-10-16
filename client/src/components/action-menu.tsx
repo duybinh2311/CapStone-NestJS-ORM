@@ -1,7 +1,7 @@
 import { Menu, Button, TextInput } from '@mantine/core'
 import { IconChevronDown, IconSearch } from '@tabler/icons-react'
 import { FC } from 'react'
-import { classes } from './action-menu.css'
+import { actionMenuStyle } from './action-menu.css'
 
 interface ActionMenuProps {}
 
@@ -11,7 +11,7 @@ export const ActionMenu: FC<ActionMenuProps> = (props) => {
       <Menu
         offset={5}
         classNames={{
-          item: classes.menuItem,
+          item: actionMenuStyle.menuItem,
         }}
       >
         <Menu.Target>

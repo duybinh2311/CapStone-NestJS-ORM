@@ -1,140 +1,153 @@
 import { vars } from '@/configs/theme'
-import { Avatar, Box, Group, Menu, Stack, Text } from '@mantine/core'
-import {
-  IconBellFilled,
-  IconCheck,
-  IconChevronDown,
-  IconMessageCircle,
-} from '@tabler/icons-react'
+import { Avatar, Box, Button, Group, Menu, Stack, Text } from '@mantine/core'
+import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
 import { FC } from 'react'
-import { classes } from './user-menu.css'
+import { userMenuStyle } from './user-menu.css'
+import { onModalLogin } from '@/modals/modal-login'
 
 interface UserMenuProps {}
 
 export const UserMenu: FC<UserMenuProps> = (props) => {
   return (
-    <Group gap={0}>
-      <Box
-        display={'flex'}
-        c={vars.colors.gray[6]}
-        className={classes.menuItem}
-      >
-        <IconBellFilled />
-      </Box>
+    <>
+      {/* <Group gap={0}>
+        <Box
+          display={'flex'}
+          c={vars.colors.gray[6]}
+          className={classes.menuItem}
+        >
+          <IconBellFilled />
+        </Box>
 
-      <Box
-        display={'flex'}
-        c={vars.colors.gray[6]}
-        className={classes.menuItem}
-      >
-        <IconMessageCircle />
-      </Box>
+        <Box
+          display={'flex'}
+          c={vars.colors.gray[6]}
+          className={classes.menuItem}
+        >
+          <IconMessageCircle />
+        </Box>
 
-      <Box
-        display={'flex'}
-        className={classes.menuItem}
-      >
-        <Avatar
-          src={'/img/avatar.jpg'}
-          size={'sm'}
-        />
-      </Box>
+        <Box
+          display={'flex'}
+          className={classes.menuItem}
+        >
+          <Avatar
+            src={'/img/avatar.jpg'}
+            size={'sm'}
+          />
+        </Box>
 
-      <Menu
-        position='bottom-end'
-        width={300}
-      >
-        <Menu.Target>
-          <Box
-            display={'flex'}
-            c={vars.colors.gray[6]}
-            className={classes.menuItem}
-          >
-            <IconChevronDown size={22} />
-          </Box>
-        </Menu.Target>
-
-        <Menu.Dropdown>
-          <Menu.Label>Currently in</Menu.Label>
-          <Menu.Item bg={'gray.1'}>
-            <Group
-              wrap='nowrap'
-              gap={'xs'}
+        <Menu
+          position='bottom-end'
+          width={300}
+        >
+          <Menu.Target>
+            <Box
+              display={'flex'}
+              c={vars.colors.gray[6]}
+              className={classes.menuItem}
             >
-              <Avatar
-                src={'/img/avatar.jpg'}
-                size={'lg'}
-              />
+              <IconChevronDown size={22} />
+            </Box>
+          </Menu.Target>
 
-              <Box
-                style={{
-                  flex: 1,
-                }}
+          <Menu.Dropdown>
+            <Menu.Label>Currently in</Menu.Label>
+            <Menu.Item bg={'gray.1'}>
+              <Group
+                wrap='nowrap'
+                gap={'xs'}
               >
-                <Text
-                  inline
-                  fw={500}
-                  fz={14}
-                >
-                  Bình Nguyễn
-                </Text>
-                <Text
-                  inline
-                  fw={'lighter'}
-                  fz={12}
-                >
-                  Personal
-                </Text>
-                <Text
-                  inline
-                  fw={500}
-                  w={180}
-                  fz={12}
-                  c={'dimmed'}
-                  truncate
-                >
-                  duybinh.nguyen2311@gmail.comasdassadasdasdasd
-                </Text>
-              </Box>
+                <Avatar
+                  src={'/img/avatar.jpg'}
+                  size={'lg'}
+                />
 
-              <Box>
-                <IconCheck size={16} />
-              </Box>
-            </Group>
-          </Menu.Item>
+                <Box
+                  style={{
+                    flex: 1,
+                  }}
+                >
+                  <Text
+                    inline
+                    fw={500}
+                    fz={14}
+                  >
+                    Bình Nguyễn
+                  </Text>
+                  <Text
+                    inline
+                    fw={'lighter'}
+                    fz={12}
+                  >
+                    Personal
+                  </Text>
+                  <Text
+                    inline
+                    fw={500}
+                    w={180}
+                    fz={12}
+                    c={'dimmed'}
+                    truncate
+                  >
+                    duybinh.nguyen2311@gmail.comasdassadasdasdasd
+                  </Text>
+                </Box>
 
-          <Menu.Label>Your accounts</Menu.Label>
-          {['Add account', 'Convert to business'].map((item) => {
-            return (
-              <Menu.Item
-                fw={'bold'}
-                key={item}
-              >
-                {item}
-              </Menu.Item>
-            )
-          })}
+                <Box>
+                  <IconCheck size={16} />
+                </Box>
+              </Group>
+            </Menu.Item>
 
-          <Menu.Label>More options</Menu.Label>
-          {[
-            'Settings',
-            'Tune your home feed',
-            'Get help',
-            'See terms of service',
-            'See privacy policy',
-            'Log out',
-          ].map((item) => {
-            return (
-              <Menu.Item
-                fw={'bold'}
-                key={item}
-              >
-                {item}
-              </Menu.Item>
-            )
-          })}
-        </Menu.Dropdown>
-      </Menu>
-    </Group>
+            <Menu.Label>Your accounts</Menu.Label>
+            {['Add account', 'Convert to business'].map((item) => {
+              return (
+                <Menu.Item
+                  fw={'bold'}
+                  key={item}
+                >
+                  {item}
+                </Menu.Item>
+              )
+            })}
+
+            <Menu.Label>More options</Menu.Label>
+            {[
+              'Settings',
+              'Tune your home feed',
+              'Get help',
+              'See terms of service',
+              'See privacy policy',
+              'Log out',
+            ].map((item) => {
+              return (
+                <Menu.Item
+                  fw={'bold'}
+                  key={item}
+                >
+                  {item}
+                </Menu.Item>
+              )
+            })}
+          </Menu.Dropdown>
+        </Menu>
+      </Group> */}
+      <Group gap={'sm'}>
+        <Button
+          radius={'xl'}
+          color='red'
+          onClick={onModalLogin}
+        >
+          Log in
+        </Button>
+        <Button
+          radius={'xl'}
+          variant='default'
+        >
+          Sign up
+        </Button>
+      </Group>
+    </>
   )
 }

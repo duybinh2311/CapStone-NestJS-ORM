@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-export const classes = {
+export const pinLayoutStyle = {
   pinLayout: style({
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, 236px)',

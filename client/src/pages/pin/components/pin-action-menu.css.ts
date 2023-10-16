@@ -1,7 +1,7 @@
 import { vars } from '@/configs/theme'
 import { style } from '@vanilla-extract/css'
 
-export const classes = {
+export const pinActionMenuStyle = {
   pinActionMenu: style({
     padding: `${vars.spacing.xl} ${vars.spacing.xl} ${vars.spacing.xs}`,
     borderBottom: `1px solid ${vars.colors.gray[2]}`,
