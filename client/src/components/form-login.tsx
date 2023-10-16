@@ -1,5 +1,5 @@
 import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
-import { isEmail, useForm } from '@mantine/form'
+import { useForm, isNotEmpty } from '@mantine/form'
 import { FC } from 'react'
 
 interface FormLoginProps {}
@@ -12,8 +12,8 @@ export const FormLogin: FC<FormLoginProps> = (props) => {
       password: '',
     },
     validate: {
-      email: isEmail('Please enter valid email'),
-      password: (value) => (!value ? 'Password is required' : value.trim().length < 6 ? 'Password is too short' : null),
+      email: isNotEmpty('Email is required'),
+      password: isNotEmpty('Password is required'),
     },
   })
   /* Logic */
@@ -23,7 +23,7 @@ export const FormLogin: FC<FormLoginProps> = (props) => {
 
   return (
     <form onSubmit={submit}>
-      <Stack>
+      <Stack gap={'xs'}>
         <TextInput
           label='Email'
           {...form.getInputProps('email')}
@@ -34,7 +34,12 @@ export const FormLogin: FC<FormLoginProps> = (props) => {
           {...form.getInputProps('password')}
         />
 
-        <Button type='submit'>Submit</Button>
+        <Button
+          mt={'sm'}
+          type='submit'
+        >
+          Log In
+        </Button>
       </Stack>
     </form>
   )

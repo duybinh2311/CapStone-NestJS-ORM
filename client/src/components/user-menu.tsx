@@ -4,17 +4,18 @@ import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@
 import { FC } from 'react'
 import { userMenuStyle } from './user-menu.css'
 import { onModalLogin } from '@/modals/modal-login'
+import { onModalSignup } from '@/modals/modal-signup'
 
 interface UserMenuProps {}
 
 export const UserMenu: FC<UserMenuProps> = (props) => {
   return (
     <>
-      {/* <Group gap={0}>
+      <Group gap={0}>
         <Box
           display={'flex'}
           c={vars.colors.gray[6]}
-          className={classes.menuItem}
+          className={userMenuStyle.menuItem}
         >
           <IconBellFilled />
         </Box>
@@ -22,14 +23,14 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         <Box
           display={'flex'}
           c={vars.colors.gray[6]}
-          className={classes.menuItem}
+          className={userMenuStyle.menuItem}
         >
           <IconMessageCircle />
         </Box>
 
         <Box
           display={'flex'}
-          className={classes.menuItem}
+          className={userMenuStyle.menuItem}
         >
           <Avatar
             src={'/img/avatar.jpg'}
@@ -45,7 +46,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
             <Box
               display={'flex'}
               c={vars.colors.gray[6]}
-              className={classes.menuItem}
+              className={userMenuStyle.menuItem}
             >
               <IconChevronDown size={22} />
             </Box>
@@ -132,8 +133,9 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
             })}
           </Menu.Dropdown>
         </Menu>
-      </Group> */}
-      <Group gap={'sm'}>
+      </Group>
+
+      {/* <Group gap={'sm'}>
         <Button
           radius={'xl'}
           color='red'
@@ -144,10 +146,11 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         <Button
           radius={'xl'}
           variant='default'
+          onClick={onModalSignup}
         >
           Sign up
         </Button>
-      </Group>
+      </Group> */}
     </>
   )
 }
