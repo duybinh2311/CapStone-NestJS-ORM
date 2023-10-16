@@ -1,17 +1,8 @@
 import { vars } from '@/configs/theme'
-import {
-  ActionIcon,
-  Avatar,
-  Box,
-  Group,
-  Stack,
-  Text,
-  TextInput,
-  rgba,
-} from '@mantine/core'
+import { ActionIcon, Avatar, Box, Button, Group, Stack, Text, TextInput, Textarea, rgba } from '@mantine/core'
 import { IconHeart } from '@tabler/icons-react'
-import { FC, useState } from 'react'
-import EmojiPicker, { Emoji } from 'emoji-picker-react'
+import { FC, useEffect, useState } from 'react'
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 import { useForm } from '@mantine/form'
 import { useClickOutside } from '@mantine/hooks'
 
@@ -20,14 +11,20 @@ interface PinCommentBoxProps {}
 export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   /* Local State */
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false)
+  const [emojiClickData, setEmojiClickData] = useState<EmojiClickData | null>(null)
   /* Hook Init */
   const emojiPickerRef = useClickOutside(() => setShowEmojiPicker(false))
-
   const form = useForm({
     initialValues: {
       comment: '',
     },
   })
+  /* Logic */
+  useEffect(() => {
+    if (emojiClickData) {
+      form.setFieldValue('comment', form.values.comment + emojiClickData.emoji)
+    }
+  }, [emojiClickData])
 
   return (
     <Stack
@@ -73,7 +70,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
               'https://scontent.fsgn5-6.fna.fbcdn.net/v/t39.30808-6/261463275_2098436070312988_9106714437153092476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=nNYtUUOdgkgAX8pMjLC&_nc_ht=scontent.fsgn5-6.fna&oh=00_AfD7xbI12F-6COeXpKZf6jeGdH7CM9ai2bLjKFmP4tAisg&oe=652FFB4B'
             }
           />
-          
+
           <Box
             ref={emojiPickerRef}
             pos={'absolute'}
@@ -81,13 +78,15 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
             right={0}
             display={showEmojiPicker ? 'block' : 'none'}
           >
-            <EmojiPicker onEmojiClick={(value) => {}} />
+            <EmojiPicker onEmojiClick={(emojiClickData) => setEmojiClickData(emojiClickData)} />
           </Box>
 
-          <TextInput
+          <Textarea
             size='md'
             placeholder='Add a comment'
             radius={'xl'}
+            autosize
+            w={'100%'}
             rightSection={
               <ActionIcon
                 variant='transparent'
@@ -101,9 +100,12 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
                 </Text>
               </ActionIcon>
             }
+            styles={{
+              input: {
+                padding: '12px 16px',
+              },
+            }}
             {...form.getInputProps('comment')}
-            step={6}
-            w={'100%'}
           />
         </Group>
       </form>
