@@ -11,6 +11,7 @@ export const AppLayout: FC = () => {
         style={{
           minHeight: 'calc(100vh - 64px - 64px)',
           paddingTop: vars.spacing.md,
+          paddingBottom: 80,
         }}
       >
         <Outlet />
