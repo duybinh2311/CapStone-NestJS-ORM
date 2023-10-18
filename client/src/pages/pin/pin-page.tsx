@@ -10,7 +10,11 @@ import { Pin } from '@/components/pin'
 export const PinPage: FC = () => {
   return (
     <>
-      <section>
+      <section
+        style={{
+          paddingTop: vars.spacing.md,
+        }}
+      >
         <Container size={'lg'}>
           <SimpleGrid
             style={{
@@ -30,7 +34,7 @@ export const PinPage: FC = () => {
               />
             </Box>
             <Box>
-              <Box className='pin-description'>
+              <Box id='pin-description'>
                 <PinActionMenu />
 
                 <ScrollArea h={'calc(100vh - 325px'}>
@@ -48,7 +52,7 @@ export const PinPage: FC = () => {
 
       <section
         style={{
-          paddingTop: vars.spacing.xl,
+          padding: `${vars.spacing.xl} 0`,
         }}
       >
         <Container fluid>

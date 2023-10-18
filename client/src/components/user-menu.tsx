@@ -11,7 +11,7 @@ interface UserMenuProps {}
 export const UserMenu: FC<UserMenuProps> = (props) => {
   return (
     <>
-      <Group gap={0}>
+      {/* <Group gap={0}>
         <Box
           display={'flex'}
           c={vars.colors.gray[6]}
@@ -133,9 +133,9 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
             })}
           </Menu.Dropdown>
         </Menu>
-      </Group>
+      </Group> */}
 
-      {/* <Group gap={'sm'}>
+      <Group gap={'sm'}>
         <Button
           radius={'xl'}
           color='red'
@@ -150,7 +150,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         >
           Sign up
         </Button>
-      </Group> */}
+      </Group>
     </>
   )
 }

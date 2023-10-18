@@ -1,7 +1,10 @@
 const AppRoutes = {
   home: '/',
   detail: '/pin/:id',
-  profile: '/profile',
+  profile: {
+    root: '/profile',
+    editProfile: '/profile/edit-profile',
+  },
 }
 
 export default AppRoutes

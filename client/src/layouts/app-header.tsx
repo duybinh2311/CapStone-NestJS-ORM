@@ -17,11 +17,9 @@ export const AppHeader: FC<AppHeaderProps> = (props) => {
     >
       <header
         style={{
-          // position: 'sticky',
           zIndex: 10,
-          // top: 0,
           width: '100%',
-          padding: `${theme.spacing.sm} 0`,
+          padding: `${theme.spacing.md} 0`,
           boxShadow: theme.shadows.sm,
           backgroundColor: 'white',
         }}

@@ -11,7 +11,7 @@ export const FormSignup: FC<FormSignupProps> = (props) => {
       email: '',
       password: '',
       fullName: '',
-      age: 0,
+      age: 18,
     },
     validate: {
       email: isEmail('Please enter valid email'),
@@ -24,7 +24,7 @@ export const FormSignup: FC<FormSignupProps> = (props) => {
           ? 'Password is too short'
           : null,
       fullName: isNotEmpty('Full name is required'),
-      age: isInRange({ min: 8, max: 100 }, 'Age must be between 8 and 100'),
+      age: isInRange({ min: 18, max: 100 }, 'Age must be between 18 and 100'),
     },
   })
   /* Logic */

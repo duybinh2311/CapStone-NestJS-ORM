@@ -9,11 +9,11 @@ interface PinActionMenuProps {}
 export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
   return (
     <Sticky
-      top={66}
+      top={68}
       innerZ={1}
       innerClass={pinActionMenuStyle.pinActionMenu}
       innerActiveClass={pinActionMenuStyle.pinActionMenuActive}
-      bottomBoundary={'.pin-description'}
+      bottomBoundary={'#pin-description'}
     >
       <Group justify='space-between'>
         <Group>
