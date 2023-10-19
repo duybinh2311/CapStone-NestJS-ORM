@@ -5,13 +5,17 @@ import { FC } from 'react'
 import { userMenuStyle } from './user-menu.css'
 import { onModalLogin } from '@/modals/modal-login'
 import { onModalSignup } from '@/modals/modal-signup'
+import { useNavigate } from 'react-router-dom'
+import AppRoutes from '@/routes/routes'
 
 interface UserMenuProps {}
 
 export const UserMenu: FC<UserMenuProps> = (props) => {
+  const navigate = useNavigate()
+
   return (
     <>
-      {/* <Group gap={0}>
+      <Group gap={0}>
         <Box
           display={'flex'}
           c={vars.colors.gray[6]}
@@ -31,6 +35,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         <Box
           display={'flex'}
           className={userMenuStyle.menuItem}
+          onClick={() => navigate(AppRoutes.profile.index)}
         >
           <Avatar
             src={'/img/avatar.jpg'}
@@ -54,7 +59,10 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
 
           <Menu.Dropdown>
             <Menu.Label>Currently in</Menu.Label>
-            <Menu.Item bg={'gray.1'}>
+            <Menu.Item
+              bg={'gray.1'}
+              onClick={() => navigate(AppRoutes.profile.index)}
+            >
               <Group
                 wrap='nowrap'
                 gap={'xs'}
@@ -133,9 +141,9 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
             })}
           </Menu.Dropdown>
         </Menu>
-      </Group> */}
+      </Group>
 
-      <Group gap={'sm'}>
+      {/* <Group gap={'sm'}>
         <Button
           radius={'xl'}
           color='red'
@@ -150,7 +158,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         >
           Sign up
         </Button>
-      </Group>
+      </Group> */}
     </>
   )
 }

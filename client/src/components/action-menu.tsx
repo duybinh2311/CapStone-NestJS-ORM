@@ -2,12 +2,23 @@ import { Menu, Button, TextInput } from '@mantine/core'
 import { IconChevronDown, IconSearch } from '@tabler/icons-react'
 import { FC } from 'react'
 import { actionMenuStyle } from './action-menu.css'
+import { useNavigate } from 'react-router-dom'
+import AppRoutes from '@/routes/routes'
 
 interface ActionMenuProps {}
 
-export const ActionMenu: FC<ActionMenuProps> = (props) => {
+export const ActionMenu: FC<ActionMenuProps> = () => {
+  const navigate = useNavigate()
+
   return (
     <>
+      <Button
+        radius={'xl'}
+        onClick={() => navigate(AppRoutes.home)}
+      >
+        Home
+      </Button>
+
       <Menu
         offset={5}
         classNames={{
@@ -36,7 +47,7 @@ export const ActionMenu: FC<ActionMenuProps> = (props) => {
 
         <Menu.Dropdown w={150}>
           <Menu.Item>Create Idea Pin</Menu.Item>
-          <Menu.Item>Create Pin</Menu.Item>
+          <Menu.Item onClick={() => navigate(AppRoutes.upload)}>Create Pin</Menu.Item>
         </Menu.Dropdown>
       </Menu>
 

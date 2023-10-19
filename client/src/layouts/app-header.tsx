@@ -1,15 +1,16 @@
 import { ActionMenu } from '@/components/action-menu'
 import { AppLogo } from '@/components/app-logo'
 import { UserMenu } from '@/components/user-menu'
-import { Button, Container, Group, useMantineTheme } from '@mantine/core'
+import { Container, Group, useMantineTheme } from '@mantine/core'
 import { FC } from 'react'
 import Sticky from 'react-stickynode'
 
 interface AppHeaderProps {}
 
-export const AppHeader: FC<AppHeaderProps> = (props) => {
+export const AppHeader: FC<AppHeaderProps> = () => {
   /* Hook Init */
   const theme = useMantineTheme()
+
   return (
     <Sticky
       top={0}
@@ -25,10 +26,8 @@ export const AppHeader: FC<AppHeaderProps> = (props) => {
         }}
       >
         <Container fluid>
-          <Group>
+          <Group gap={'sm'}>
             <AppLogo />
-
-            <Button radius={'xl'}>Home</Button>
 
             <ActionMenu />
 

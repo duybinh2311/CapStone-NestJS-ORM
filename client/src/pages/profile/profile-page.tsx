@@ -4,8 +4,12 @@ import { Avatar, Container, Stack, Title, Text, Box, Group, Button, Tabs } from 
 import { FC } from 'react'
 import { vars } from '@/configs/theme'
 import { profilePageStyle } from './profile-page.css'
+import { useNavigate } from 'react-router-dom'
+import AppRoutes from '@/routes/routes'
 
 export const ProfilePage: FC = () => {
+  const navigate = useNavigate()
+
   return (
     <section
       style={{
@@ -52,6 +56,7 @@ export const ProfilePage: FC = () => {
               radius={'xl'}
               size='md'
               variant='light'
+              onClick={() => navigate(AppRoutes.profile.editProfile)}
             >
               Edit Profile
             </Button>
