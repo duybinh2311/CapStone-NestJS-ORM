@@ -145,7 +145,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         </Button>
         <Button
           radius={'xl'}
-          variant='default'
+          variant='light'
           onClick={onModalSignup}
         >
           Sign up

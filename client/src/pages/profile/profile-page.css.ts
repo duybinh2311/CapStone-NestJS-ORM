@@ -1,4 +1,4 @@
-import { ComplexStyleRule, StyleRule, style } from '@vanilla-extract/css'
+import { CSSProperties, ComplexStyleRule, StyleRule, style } from '@vanilla-extract/css'
 
 export const profilePageStyle = {
   Tabs: {
@@ -10,7 +10,7 @@ export const profilePageStyle = {
     tab: style({
       '&[data-active]': {
         borderBottomWidth: '3px',
-      } as StyleRule,
-    } as ComplexStyleRule),
+      },
+    } as CSSProperties),
   },
 }

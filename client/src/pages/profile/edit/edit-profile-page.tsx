@@ -8,7 +8,7 @@ export const EditProfilePage: FC = () => {
       <section
         style={{
           paddingTop: vars.spacing.md,
-          paddingBottom: 100,
+          paddingBottom: 150,
         }}
       >
         <Container size={'sm'}>
@@ -42,7 +42,12 @@ export const EditProfilePage: FC = () => {
                       }
                     />
 
-                    <Button variant='outline'>Change</Button>
+                    <Button
+                      variant='light'
+                      radius={'xl'}
+                    >
+                      Change
+                    </Button>
                   </Group>
                 </Box>
 
@@ -82,7 +87,7 @@ export const EditProfilePage: FC = () => {
           >
             <Button
               size='md'
-              variant='default'
+              variant='light'
               radius={'xl'}
             >
               Reset

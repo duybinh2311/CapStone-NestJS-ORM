@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { PinPage } from '@/pages/pin/pin-page'
 import { ProfilePage } from '@/pages/profile/profile-page'
 import { EditProfilePage } from '@/pages/profile/edit/edit-profile-page'
+import { UploadPage } from '@/pages/upload/upload-page'
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             path: 'edit-profile',
           },
         ],
+      },
+      {
+        Component: UploadPage,
+        path: 'upload',
       },
     ],
   },

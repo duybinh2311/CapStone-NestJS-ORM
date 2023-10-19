@@ -5,6 +5,7 @@ const AppRoutes = {
     root: '/profile',
     editProfile: '/profile/edit-profile',
   },
+  upload: '/upload',
 }
 
 export default AppRoutes

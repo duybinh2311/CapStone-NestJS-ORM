@@ -4,7 +4,7 @@ import { style } from '@vanilla-extract/css'
 export const modalStyle = {
   closeButton: style({
     ':hover': {
-      backgroundColor: vars.colors.gray.lightHover,
+      backgroundColor: vars.colors.dark.light,
     },
   }),
 

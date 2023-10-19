@@ -44,22 +44,14 @@ export const ProfilePage: FC = () => {
             <Button
               radius={'xl'}
               size='md'
-              variant='default'
-              bg={vars.colors.gray.lightHover}
-              style={{
-                border: 'unset',
-              }}
+              variant='light'
             >
               Share
             </Button>
             <Button
               radius={'xl'}
               size='md'
-              variant='default'
-              bg={vars.colors.gray.lightHover}
-              style={{
-                border: 'unset',
-              }}
+              variant='light'
             >
               Edit Profile
             </Button>
