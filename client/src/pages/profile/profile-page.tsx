@@ -1,11 +1,11 @@
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
-import { Avatar, Container, Stack, Title, Text, Box, Group, Button, Tabs } from '@mantine/core'
-import { FC } from 'react'
 import { vars } from '@/configs/theme'
-import { profilePageStyle } from './profile-page.css'
-import { useNavigate } from 'react-router-dom'
 import AppRoutes from '@/routes/routes'
+import { Avatar, Box, Button, Container, Group, Stack, Tabs, Text, Title } from '@mantine/core'
+import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { profilePageStyle } from './profile-page.css'
 
 export const ProfilePage: FC = () => {
   const navigate = useNavigate()

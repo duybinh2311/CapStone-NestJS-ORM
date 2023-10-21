@@ -1,4 +1,4 @@
-import { CSSProperties, ComplexStyleRule, StyleRule, style } from '@vanilla-extract/css'
+import { CSSProperties, style } from '@vanilla-extract/css'
 
 export const profilePageStyle = {
   Tabs: {

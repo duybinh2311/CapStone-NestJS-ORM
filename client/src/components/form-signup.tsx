@@ -1,5 +1,5 @@
 import { Button, NumberInput, PasswordInput, Stack, TextInput } from '@mantine/core'
-import { isEmail, isNotEmpty, useForm, isInRange } from '@mantine/form'
+import { isEmail, isInRange, isNotEmpty, useForm } from '@mantine/form'
 import { FC } from 'react'
 
 interface FormSignupProps {}

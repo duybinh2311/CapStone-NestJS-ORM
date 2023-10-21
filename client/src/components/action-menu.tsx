@@ -1,9 +1,9 @@
-import { Menu, Button, TextInput } from '@mantine/core'
+import AppRoutes from '@/routes/routes'
+import { Button, Menu, TextInput } from '@mantine/core'
 import { IconChevronDown, IconSearch } from '@tabler/icons-react'
 import { FC } from 'react'
-import { actionMenuStyle } from './action-menu.css'
 import { useNavigate } from 'react-router-dom'
-import AppRoutes from '@/routes/routes'
+import { actionMenuStyle } from './action-menu.css'
 
 interface ActionMenuProps {}
 

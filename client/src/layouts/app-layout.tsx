@@ -1,6 +1,6 @@
+import { AppHeader } from '@/layouts/app-header'
 import { FC } from 'react'
 import { Outlet } from 'react-router-dom'
-import { AppHeader } from '@/layouts/app-header'
 
 export const AppLayout: FC = () => {
   return (

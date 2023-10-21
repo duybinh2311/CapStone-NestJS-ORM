@@ -1,5 +1,5 @@
 import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
-import { useForm, isNotEmpty } from '@mantine/form'
+import { isNotEmpty, useForm } from '@mantine/form'
 import { FC } from 'react'
 
 interface FormLoginProps {}

@@ -1,11 +1,11 @@
+import { Pin } from '@/components/pin'
+import { PinLayout } from '@/components/pin-layout'
 import { vars } from '@/configs/theme'
 import { Box, Container, Image, ScrollArea, SimpleGrid, Text } from '@mantine/core'
 import { FC } from 'react'
 import { PinActionMenu } from './components/pin-action-menu'
 import { PinCommentBox } from './components/pin-comment-box'
 import { PinDescription } from './components/pin-description'
-import { PinLayout } from '@/components/pin-layout'
-import { Pin } from '@/components/pin'
 
 export const PinPage: FC = () => {
   return (

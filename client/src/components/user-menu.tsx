@@ -1,12 +1,10 @@
 import { vars } from '@/configs/theme'
-import { Avatar, Box, Button, Group, Menu, Stack, Text } from '@mantine/core'
+import AppRoutes from '@/routes/routes'
+import { Avatar, Box, Group, Menu, Text } from '@mantine/core'
 import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
 import { FC } from 'react'
-import { userMenuStyle } from './user-menu.css'
-import { onModalLogin } from '@/modals/modal-login'
-import { onModalSignup } from '@/modals/modal-signup'
 import { useNavigate } from 'react-router-dom'
-import AppRoutes from '@/routes/routes'
+import { userMenuStyle } from './user-menu.css'
 
 interface UserMenuProps {}
 

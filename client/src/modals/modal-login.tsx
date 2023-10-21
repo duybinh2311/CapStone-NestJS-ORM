@@ -1,8 +1,8 @@
 import { AppLogo } from '@/components/app-logo'
 import { FormLogin } from '@/components/form-login'
+import { Title } from '@mantine/core'
 import { modals } from '@mantine/modals'
 import { modalStyle } from './modal.css'
-import { Title } from '@mantine/core'
 
 export const onModalLogin = () => {
   return modals.open({

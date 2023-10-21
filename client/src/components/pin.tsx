@@ -1,7 +1,7 @@
-import { Box, Image } from '@mantine/core'
+import { Box } from '@mantine/core'
+import clsx from 'clsx'
 import { FC } from 'react'
 import { pinStyle } from './pin.css'
-import clsx from 'clsx'
 
 interface PinProps {
   size: 'small' | 'medium' | 'large'

@@ -1,5 +1,5 @@
-import { Group, Avatar, Stack, ActionIcon, Text } from '@mantine/core'
-import { IconHeart, IconDots } from '@tabler/icons-react'
+import { ActionIcon, Avatar, Group, Stack, Text } from '@mantine/core'
+import { IconDots, IconHeart } from '@tabler/icons-react'
 import { FC } from 'react'
 
 interface PinCommentProps {}
@@ -20,8 +20,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
           >
             SimpleB
           </Text>{' '}
-          ayo when I do that with my hand it matches his hand perfectly lol 🤣 I
-          smell luv blossoming 🤨🤨
+          ayo when I do that with my hand it matches his hand perfectly lol 🤣 I smell luv blossoming 🤨🤨
         </Text>
 
         <Group>

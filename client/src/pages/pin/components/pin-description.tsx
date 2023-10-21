@@ -1,14 +1,5 @@
-import {
-  ActionIcon,
-  Anchor,
-  Avatar,
-  Button,
-  Group,
-  Stack,
-  Text,
-  Title,
-} from '@mantine/core'
-import { IconChevronDown, IconDots, IconHeart } from '@tabler/icons-react'
+import { ActionIcon, Anchor, Avatar, Button, Group, Stack, Text, Title } from '@mantine/core'
+import { IconChevronDown } from '@tabler/icons-react'
 import { FC, useState } from 'react'
 import { PinComment } from './pin-comment'
 
@@ -39,10 +30,9 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
           Galaxy Universe
         </Title>
         <Text lineClamp={3}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, ut
-          voluptatum. Mollitia, repellendus voluptates ipsum quae accusamus
-          exercitationem neque dignissimos atque molestiae minima. Non voluptate
-          dolor veritatis consequatur quas eos?
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, ut voluptatum. Mollitia, repellendus
+          voluptates ipsum quae accusamus exercitationem neque dignissimos atque molestiae minima. Non voluptate dolor
+          veritatis consequatur quas eos?
         </Text>
       </Stack>
 
