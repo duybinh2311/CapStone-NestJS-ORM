@@ -23,6 +23,7 @@
     "@types/node": "^20.8.0",
     "@types/react-stickynode": "^4.0.1",
     "@vanilla-extract/css": "^1.13.0",
+    "axios": "^1.5.1",
     "clsx": "^2.0.0",
     "emoji-picker-react": "^4.5.2",
     "prettier": "^3.0.3",

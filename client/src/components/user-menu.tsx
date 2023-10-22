@@ -1,10 +1,8 @@
-import { vars } from '@/configs/theme'
-import AppRoutes from '@/routes/routes'
-import { Avatar, Box, Group, Menu, Text } from '@mantine/core'
-import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
+import { onModalLogin } from '@/modals/modal-login'
+import { onModalSignup } from '@/modals/modal-signup'
+import { Button, Group } from '@mantine/core'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { userMenuStyle } from './user-menu.css'
 
 interface UserMenuProps {}
 
@@ -13,7 +11,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
 
   return (
     <>
-      <Group gap={0}>
+      {/* <Group gap={0}>
         <Box
           display={'flex'}
           c={vars.colors.gray[6]}
@@ -139,9 +137,9 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
             })}
           </Menu.Dropdown>
         </Menu>
-      </Group>
+      </Group> */}
 
-      {/* <Group gap={'sm'}>
+      <Group gap={'sm'}>
         <Button
           radius={'xl'}
           color='red'
@@ -156,7 +154,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         >
           Sign up
         </Button>
-      </Group> */}
+      </Group>
     </>
   )
 }

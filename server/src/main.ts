@@ -5,12 +5,13 @@ import { ValidationPipe } from '@nestjs/common'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
+  app.enableCors({ origin: '*' })
 
   app.useGlobalPipes(new ValidationPipe())
 
   const config = new DocumentBuilder()
-    .setTitle('Pinterest Clone')
-    .setDescription('The Pinterest Clone API description')
+    .setTitle('Pinterest Server')
+    .setDescription('The Pinterest Server API description')
     .setVersion('1.0')
     .build()
 
