@@ -3,7 +3,7 @@ import { SignInDto } from './dto/sign-in.dto'
 import { PrismaService } from 'nestjs-prisma'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
-import { ValidateStatus, ResponseLocalStrategy, AuthMessage } from './interface'
+import { ValidateStatus, ResponseLocalStrategy, AuthMessage, PayloadUser } from './interface'
 
 @Injectable()
 export class AuthService {
@@ -12,7 +12,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signIn(signInDto: SignInDto): Promise<ResponseLocalStrategy> {
+  async validateUser(signInDto: SignInDto): Promise<ResponseLocalStrategy> {
     const user = await this.prisma.user.findUnique({
       where: { email: signInDto.email },
     })
@@ -25,10 +25,16 @@ export class AuthService {
       return { validateStatus: ValidateStatus.PASSWORD_INCORRECT }
     }
 
-    const { password, ...payload } = user
+    const { password, ...restUser } = user
     return {
-      accessToken: this.jwtService.sign(payload),
-      message: AuthMessage.LOGIN_SUCCESSFULLY,
+      user: restUser,
+      validateStatus: ValidateStatus.VALIDATE_SUCCESSFULLY,
+    }
+  }
+
+  async signIn(user: PayloadUser) {
+    return {
+      accessToken: this.jwtService.sign(user),
     }
   }
 }

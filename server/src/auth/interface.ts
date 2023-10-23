@@ -1,4 +1,5 @@
-import { IResponse } from 'src/interface'
+import { User } from '@prisma/client'
+import { Extensions } from '@prisma/client/runtime/library'
 
 export enum AuthMessage {
   EMAIL_INCORRECT = 'Email is incorrect',
@@ -9,10 +10,12 @@ export enum AuthMessage {
 export enum ValidateStatus {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
   PASSWORD_INCORRECT = 'PASSWORD_INCORRECT',
+  VALIDATE_SUCCESSFULLY = 'VALIDATE_SUCCESSFULLY',
 }
 
+export type PayloadUser = Omit<User, 'password'>
+
 export interface ResponseLocalStrategy {
-  accessToken?: string
+  user?: PayloadUser
   validateStatus?: ValidateStatus
-  message?: AuthMessage
 }
