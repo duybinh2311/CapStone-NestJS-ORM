@@ -5,19 +5,22 @@ import { PrismaService } from 'nestjs-prisma'
 import { IResponse } from 'src/interface'
 import * as bcrypt from 'bcrypt'
 import { User } from '@prisma/client'
+import { UserCreateStatus, UserMessage } from './types/interface'
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  checkEmail(email: string) {
-    const isEmailExist = this.prisma.user.findUnique({
+  async checkEmail(email: string): Promise<UserCreateStatus | null> {
+    const isEmailExist = await this.prisma.user.findUnique({
       where: { email },
     })
 
     if (isEmailExist) {
-      throw new ConflictException('Email already exists')
+      return UserCreateStatus.EMAIL_EXIST
     }
+
+    return null
   }
 
   findAll() {
@@ -28,7 +31,11 @@ export class UserService {
     return `This action returns a #${id} user`
   }
 
-  async create(createUserDto: CreateUserDto): IResponse<Omit<User, 'password'>> {
+  async create(createUserDto: CreateUserDto) {
+    if (await this.checkEmail(createUserDto.email)) {
+      throw new ConflictException(UserMessage.EMAIL_EXIST)
+    }
+
     const user = await this.prisma.user.create({
       data: {
         ...createUserDto,
@@ -40,7 +47,7 @@ export class UserService {
 
     return {
       data: result,
-      message: 'Create user successfully',
+      message: UserMessage.CREATE_USER_SUCCESSFULLY,
       statusCode: HttpStatus.CREATED,
     }
   }
