@@ -2,8 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { IResponse } from 'src/interface'
+import { UserMessage } from './types/interface'
 
 @ApiTags('User')
 @Controller('user')
@@ -20,6 +21,8 @@ export class UserController {
     return this.userService.findOne(+id)
   }
 
+  @ApiResponse({ status: 201, description: UserMessage.CREATE_USER_SUCCESSFULLY })
+  @ApiResponse({ status: 409, description: UserMessage.EMAIL_EXIST })
   @Post('create')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto)
