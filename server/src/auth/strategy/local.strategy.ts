@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException, NotFoundException } from '@nestjs/co
 import { PassportStrategy } from '@nestjs/passport'
 import { Strategy } from 'passport-local'
 import { AuthService } from '../auth.service'
-import { AuthMessage, PayloadUser, ValidateStatus } from '../interface'
+import { AuthMessage, ValidateStatus } from '../types/interface'
 import { User } from '@prisma/client'
 
 @Injectable()
@@ -14,7 +14,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  async validate(email: string, password: string): Promise<PayloadUser> {
+  async validate(email: string, password: string): Promise<User> {
     const result = await this.authService.validateUser({ email, password })
 
     if (result.validateStatus === ValidateStatus.USER_NOT_FOUND) {

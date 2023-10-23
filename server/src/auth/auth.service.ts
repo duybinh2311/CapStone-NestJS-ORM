@@ -3,7 +3,8 @@ import { SignInDto } from './dto/sign-in.dto'
 import { PrismaService } from 'nestjs-prisma'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
-import { ValidateStatus, ResponseLocalStrategy, AuthMessage, PayloadUser } from './interface'
+import { ValidateStatus, ResponseLocalStrategy } from './types/interface'
+import { User } from '@prisma/client'
 
 @Injectable()
 export class AuthService {
@@ -25,16 +26,16 @@ export class AuthService {
       return { validateStatus: ValidateStatus.PASSWORD_INCORRECT }
     }
 
-    const { password, ...restUser } = user
     return {
-      user: restUser,
+      user,
       validateStatus: ValidateStatus.VALIDATE_SUCCESSFULLY,
     }
   }
 
-  async signIn(user: PayloadUser) {
+  async signIn(user: User) {
+    const { password, ...restUser } = user
     return {
-      accessToken: this.jwtService.sign(user),
+      accessToken: this.jwtService.sign(restUser),
     }
   }
 }
