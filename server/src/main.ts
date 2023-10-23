@@ -18,6 +18,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document, {
     customSiteTitle: 'Pinterest Server APIs Docs',
+    swaggerOptions: {
+      tagsSorter: 'alpha',
+    },
   })
 
   await app.listen(process.env.PORT)

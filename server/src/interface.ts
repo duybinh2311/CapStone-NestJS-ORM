@@ -13,4 +13,3 @@ interface IResponseListData<T> {
 
 export type IResponse<T> = Promise<IResponseData<T>>
 export type IResponseList<T> = Promise<IResponseListData<T>>
-
