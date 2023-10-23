@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class AppService {
-  ping(): string {
-    return 'server is running'
+  ping(): { success: boolean; message: string } {
+    return { success: true, message: 'Server is running' }
   }
 }

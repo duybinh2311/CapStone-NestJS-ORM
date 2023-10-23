@@ -7,8 +7,8 @@ import { ApiTags } from '@nestjs/swagger'
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get('ping')
-  ping(): string {
+  @Get()
+  ping(): { success: boolean; message: string } {
     return this.appService.ping()
   }
 }
