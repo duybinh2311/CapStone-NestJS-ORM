@@ -32,10 +32,8 @@ export class AuthService {
     }
   }
 
-  async signIn(user: User) {
+  signIn(user: User) {
     const { password, ...restUser } = user
-    return {
-      accessToken: this.jwtService.sign(restUser),
-    }
+    return { accessToken: this.jwtService.sign(restUser) }
   }
 }
