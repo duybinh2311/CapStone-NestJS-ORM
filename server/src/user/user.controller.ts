@@ -3,7 +3,7 @@ import { UserService } from './user.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
-import { UserMessage } from './types/interface'
+import { UserMessage } from './user.types'
 
 @ApiTags('User')
 @Controller('user')

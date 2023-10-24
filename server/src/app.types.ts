@@ -11,5 +11,5 @@ interface IResponseListData<T> {
   total: number
 }
 
-export type IResponse<T> = Promise<IResponseData<T>>
-export type IResponseList<T> = Promise<IResponseListData<T>>
+export type IRes<T> = Promise<IResponseData<T>>
+export type IResList<T> = Promise<IResponseListData<T>>

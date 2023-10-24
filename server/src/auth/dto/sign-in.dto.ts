@@ -12,3 +12,9 @@ export class SignInDto {
   @IsNotEmpty()
   password: string
 }
+
+export class SignInResDto {
+  token: string
+  message: string
+  statusCode: number
+}

@@ -3,9 +3,10 @@ import { JwtService } from '@nestjs/jwt'
 import { User } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
 import { PrismaService } from 'nestjs-prisma'
-import { SignInDto } from './dto/sign-in.dto'
-import { AuthMessage } from './types/interface'
-import { IResponse } from 'src/interface'
+import { SignInDto, SignInResDto } from './dto/sign-in.dto'
+import { AuthMessage } from './auth.types'
+import { IRes } from 'src/app.types'
+import { AuthUserDto } from './dto/auth-user'
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(signInDto: SignInDto): Promise<User> {
+  async validateUser(signInDto: SignInDto): Promise<AuthUserDto> {
     const user = await this.prisma.user.findUnique({
       where: { email: signInDto.email },
     })
@@ -26,15 +27,13 @@ export class AuthService {
     if (!bcrypt.compareSync(signInDto.password, user.password)) {
       throw new UnauthorizedException(AuthMessage.PASSWORD_INCORRECT)
     }
-
-    return user
+    const { password, ...restUser } = user
+    return restUser
   }
 
-  async signIn(user: User): IResponse<string> {
-    const { password, ...restUser } = user
-
+  async signIn(authUser: AuthUserDto): Promise<SignInResDto> {
     return {
-      data: this.jwtService.sign(restUser),
+      token: this.jwtService.sign(authUser),
       message: AuthMessage.LOGIN_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }

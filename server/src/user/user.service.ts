@@ -1,10 +1,10 @@
 import { ConflictException, HttpStatus, Injectable } from '@nestjs/common'
 import * as bcrypt from 'bcrypt'
 import { PrismaService } from 'nestjs-prisma'
-import { CreateUserDto } from './dto/create-user.dto'
+import { CreateUserDto, CreateUserResDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { UserMessage } from './types/interface'
-import { IResponse } from 'src/interface'
+import { UserMessage } from './user.types'
+import { IRes } from 'src/app.types'
 import { User } from '@prisma/client'
 
 @Injectable()
@@ -27,7 +27,7 @@ export class UserService {
     return `This action returns a #${id} user`
   }
 
-  async create(createUserDto: CreateUserDto): IResponse<Omit<User, 'password'>> {
+  async create(createUserDto: CreateUserDto): IRes<CreateUserResDto> {
     await this.checkEmailExist(createUserDto.email)
 
     const user = await this.prisma.user.create({
