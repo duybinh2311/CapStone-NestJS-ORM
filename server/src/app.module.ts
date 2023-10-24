@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module'
 import { UserModule } from './user/user.module'
 import { APP_GUARD } from '@nestjs/core'
 import { JwtAuthGuard } from './auth/guards/jwt.guard'
+import { PinModule } from './pin/pin.module'
+import { FileModule } from './file/file.module'
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { JwtAuthGuard } from './auth/guards/jwt.guard'
     }),
     UserModule,
     AuthModule,
+    PinModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [

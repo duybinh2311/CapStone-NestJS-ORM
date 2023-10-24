@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common'
-import { ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiNotFoundResponse, ApiOkResponse, ApiResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger'
 import { AuthUser, SkipJwtAuth } from 'src/app.decorators'
 import { AuthService } from './auth.service'
 import { SignInDto } from './dto/sign-in.dto'
@@ -15,9 +15,9 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @SkipJwtAuth()
-  @ApiResponse({ status: 200, description: AuthMessage.LOGIN_SUCCESSFULLY })
-  @ApiResponse({ status: 401, description: AuthMessage.PASSWORD_INCORRECT })
-  @ApiResponse({ status: 404, description: AuthMessage.EMAIL_INCORRECT })
+  @ApiOkResponse({ description: AuthMessage.LOGIN_SUCCESSFULLY })
+  @ApiUnauthorizedResponse({ description: AuthMessage.PASSWORD_INCORRECT })
+  @ApiNotFoundResponse({ description: AuthMessage.EMAIL_INCORRECT })
   @HttpCode(200)
   @Post('login')
   signIn(@AuthUser() authUser: AuthUserDto, @Body() _: SignInDto) {
@@ -25,8 +25,8 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @ApiResponse({ status: 200, description: AuthMessage.GET_PROFILE_SUCCESSFULLY })
-  @ApiResponse({ status: 401, description: AuthMessage.UNAUTHORIZED })
+  @ApiOkResponse({ description: AuthMessage.GET_PROFILE_SUCCESSFULLY })
+  @ApiUnauthorizedResponse({ description: AuthMessage.UNAUTHORIZED })
   @Get('profile')
   getProfile(@AuthUser() authUser: AuthUserDto) {
     return authUser
