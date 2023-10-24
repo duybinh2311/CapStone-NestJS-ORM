@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common'
-import { SignInDto } from './dto/sign-in.dto'
-import { PrismaService } from 'nestjs-prisma'
+import { HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import * as bcrypt from 'bcrypt'
-import { ValidationStatus, ResponseLocalStrategy } from './types/interface'
 import { User } from '@prisma/client'
+import * as bcrypt from 'bcrypt'
+import { PrismaService } from 'nestjs-prisma'
+import { SignInDto } from './dto/sign-in.dto'
+import { AuthMessage } from './types/interface'
+import { IResponse } from 'src/interface'
 
 @Injectable()
 export class AuthService {
@@ -13,27 +14,29 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(signInDto: SignInDto): Promise<ResponseLocalStrategy> {
+  async validateUser(signInDto: SignInDto): Promise<User> {
     const user = await this.prisma.user.findUnique({
       where: { email: signInDto.email },
     })
 
     if (!user) {
-      return { validationStatus: ValidationStatus.USER_NOT_FOUND }
+      throw new NotFoundException(AuthMessage.EMAIL_INCORRECT)
     }
 
     if (!bcrypt.compareSync(signInDto.password, user.password)) {
-      return { validationStatus: ValidationStatus.PASSWORD_INCORRECT }
+      throw new UnauthorizedException(AuthMessage.PASSWORD_INCORRECT)
     }
 
-    return {
-      user,
-      validationStatus: ValidationStatus.VALIDATE_SUCCESSFULLY,
-    }
+    return user
   }
 
-  signIn(user: User) {
+  async signIn(user: User): IResponse<string> {
     const { password, ...restUser } = user
-    return { accessToken: this.jwtService.sign(restUser) }
+
+    return {
+      data: this.jwtService.sign(restUser),
+      message: AuthMessage.LOGIN_SUCCESSFULLY,
+      statusCode: HttpStatus.OK,
+    }
   }
 }

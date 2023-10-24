@@ -1,26 +1,22 @@
 import { ConflictException, HttpStatus, Injectable } from '@nestjs/common'
+import * as bcrypt from 'bcrypt'
+import { PrismaService } from 'nestjs-prisma'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { PrismaService } from 'nestjs-prisma'
+import { UserMessage } from './types/interface'
 import { IResponse } from 'src/interface'
-import * as bcrypt from 'bcrypt'
 import { User } from '@prisma/client'
-import { UserCreateStatus, UserMessage } from './types/interface'
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async checkEmail(email: string): Promise<UserCreateStatus | null> {
+  async checkEmailExist(email: string): Promise<void> {
     const isEmailExist = await this.prisma.user.findUnique({
       where: { email },
     })
 
-    if (isEmailExist) {
-      return UserCreateStatus.EMAIL_EXIST
-    }
-
-    return null
+    if (isEmailExist) throw new ConflictException(UserMessage.EMAIL_EXIST)
   }
 
   findAll() {
@@ -31,10 +27,8 @@ export class UserService {
     return `This action returns a #${id} user`
   }
 
-  async create(createUserDto: CreateUserDto) {
-    if (await this.checkEmail(createUserDto.email)) {
-      throw new ConflictException(UserMessage.EMAIL_EXIST)
-    }
+  async create(createUserDto: CreateUserDto): IResponse<Omit<User, 'password'>> {
+    await this.checkEmailExist(createUserDto.email)
 
     const user = await this.prisma.user.create({
       data: {
