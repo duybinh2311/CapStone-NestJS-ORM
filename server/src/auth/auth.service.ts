@@ -3,7 +3,7 @@ import { SignInDto } from './dto/sign-in.dto'
 import { PrismaService } from 'nestjs-prisma'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
-import { ValidateStatus, ResponseLocalStrategy } from './types/interface'
+import { ValidationStatus, ResponseLocalStrategy } from './types/interface'
 import { User } from '@prisma/client'
 
 @Injectable()
@@ -19,16 +19,16 @@ export class AuthService {
     })
 
     if (!user) {
-      return { validateStatus: ValidateStatus.USER_NOT_FOUND }
+      return { validationStatus: ValidationStatus.USER_NOT_FOUND }
     }
 
     if (!bcrypt.compareSync(signInDto.password, user.password)) {
-      return { validateStatus: ValidateStatus.PASSWORD_INCORRECT }
+      return { validationStatus: ValidationStatus.PASSWORD_INCORRECT }
     }
 
     return {
       user,
-      validateStatus: ValidateStatus.VALIDATE_SUCCESSFULLY,
+      validationStatus: ValidationStatus.VALIDATE_SUCCESSFULLY,
     }
   }
 

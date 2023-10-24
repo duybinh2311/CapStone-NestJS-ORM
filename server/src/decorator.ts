@@ -3,5 +3,6 @@ import { Request } from 'express'
 
 export const GetUser = createParamDecorator((data: unknown, context: ExecutionContext) => {
   const req: Request = context.switchToHttp().getRequest()
+  console.log(req.user)
   return req.user
 })

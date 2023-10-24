@@ -6,7 +6,7 @@ export enum AuthMessage {
   LOGIN_SUCCESSFULLY = 'Login successfully',
 }
 
-export enum ValidateStatus {
+export enum ValidationStatus {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
   PASSWORD_INCORRECT = 'PASSWORD_INCORRECT',
   VALIDATE_SUCCESSFULLY = 'VALIDATE_SUCCESSFULLY',
@@ -14,5 +14,5 @@ export enum ValidateStatus {
 
 export interface ResponseLocalStrategy {
   user?: User
-  validateStatus?: ValidateStatus
+  validationStatus?: ValidationStatus
 }
