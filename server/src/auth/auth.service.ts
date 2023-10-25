@@ -1,12 +1,10 @@
 import { HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { User } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
 import { PrismaService } from 'nestjs-prisma'
-import { SignInDto, SignInResDto } from './dto/sign-in.dto'
 import { AuthMessage } from './auth.types'
-import { IRes } from 'src/app.types'
 import { AuthUserDto } from './dto/auth-user'
+import { SignInDto, SignInResDto } from './dto/sign-in.dto'
 
 @Injectable()
 export class AuthService {
@@ -21,7 +19,7 @@ export class AuthService {
     })
 
     if (!user) {
-      throw new NotFoundException(AuthMessage.EMAIL_INCORRECT)
+      throw new NotFoundException(AuthMessage.EMAIL_NOT_FOUND)
     }
 
     if (!bcrypt.compareSync(signInDto.password, user.password)) {

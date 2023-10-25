@@ -1,29 +1,33 @@
-import { Module, UnsupportedMediaTypeException } from '@nestjs/common'
+import { BadRequestException, Module, UnsupportedMediaTypeException } from '@nestjs/common'
 import { FileService } from './file.service'
 import { FileController } from './file.controller'
 import { MulterModule } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
 import * as path from 'path'
+import { StringUtils } from 'src/utils/string.utils'
 
 @Module({
   imports: [
     MulterModule.register({
-      dest: './uploads',
       fileFilter(_, file, callback) {
         const extension = path.extname(file.originalname)
-        if (extension !== '.png' && extension !== '.jpg' && extension !== '.jpeg') {
-          return callback(new UnsupportedMediaTypeException('Only png, jpg, jpeg files are allowed!'), false)
+        const regex = new RegExp(/\.(jpeg|jpg|png|gif)$/, 'i')
+
+        if (regex.test(extension)) {
+          return callback(null, true)
         }
 
-        callback(null, true)
+        return callback(new UnsupportedMediaTypeException('Only Support Media Type JPG, JPEG, PNG, GIF'), false)
       },
       limits: {
-        fileSize: 1024 * 1024,
+        fileSize: 5e6,
       },
       storage: diskStorage({
+        destination: process.cwd() + '/public',
         filename(_, file, callback) {
-          const fileExtension = file.originalname.slice(file.originalname.lastIndexOf('.') + 1)
-          const fileName = `${file.originalname.slice}-${Date.now()}.${fileExtension}`
+          const extension = path.extname(file.originalname)
+          const name = file.originalname.slice(0, file.originalname.lastIndexOf('.'))
+          const fileName = `${Date.now()}-${StringUtils.toSlug(name)}${extension}`
 
           callback(null, fileName)
         },

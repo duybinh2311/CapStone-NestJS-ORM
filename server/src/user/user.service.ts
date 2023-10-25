@@ -5,7 +5,6 @@ import { CreateUserDto, CreateUserResDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserMessage } from './user.types'
 import { IRes } from 'src/app.types'
-import { User } from '@prisma/client'
 
 @Injectable()
 export class UserService {

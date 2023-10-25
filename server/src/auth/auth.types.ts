@@ -1,5 +1,5 @@
 export enum AuthMessage {
-  EMAIL_INCORRECT = 'Email is incorrect',
+  EMAIL_NOT_FOUND = 'Email not found in the system',
   PASSWORD_INCORRECT = 'Password is incorrect',
   LOGIN_SUCCESSFULLY = 'Login successfully',
   UNAUTHORIZED = 'Unauthorized',

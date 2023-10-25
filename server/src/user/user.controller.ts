@@ -20,8 +20,8 @@ export class UserController {
     return this.userService.findOne(+id)
   }
 
-  @ApiCreatedResponse({ description: UserMessage.CREATE_USER_SUCCESSFULLY })
-  @ApiConflictResponse({ description: UserMessage.EMAIL_EXIST })
+  @ApiResponse({ status: 201, description: UserMessage.CREATE_USER_SUCCESSFULLY })
+  @ApiResponse({ status: 409, description: UserMessage.EMAIL_EXIST })
   @Post('create')
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto)
