@@ -1,7 +1,6 @@
-import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common'
-import { FileMessage } from './file.types'
-import { IRes } from 'src/app.types'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { FileUploadResDto } from './dto/file-upload.dto'
+import { FileMessage } from './file.types'
 
 @Injectable()
 export class FileService {
