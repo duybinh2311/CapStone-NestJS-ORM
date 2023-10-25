@@ -1,12 +1,13 @@
 import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
-import { AuthUser, SkipJwtAuth } from 'src/app.decorators'
 import { AuthService } from './auth.service'
 import { AuthMessage } from './auth.types'
 import { AuthUserDto } from './dto/auth-user'
 import { SignInDto } from './dto/sign-in.dto'
 import { JwtAuthGuard } from './guards/jwt.guard'
 import { LocalAuthGuard } from './guards/local.guard'
+import { AuthUser } from './decorators/auth-user.decorator'
+import { SkipJwtAuth } from './decorators/skip-jwt.decorator'
 
 @ApiTags('Auth')
 @Controller('auth')

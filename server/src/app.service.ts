@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common'
-import { ConfigService } from '@nestjs/config'
 
 @Injectable()
 export class AppService {
@@ -7,3 +6,5 @@ export class AppService {
     return { success: true, message: 'Server is running' }
   }
 }
+
+const a = '10'

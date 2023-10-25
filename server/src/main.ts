@@ -9,7 +9,7 @@ async function bootstrap() {
 
   app.enableCors({ origin: '*' })
   app.useGlobalPipes(new ValidationPipe({}))
-  app.use(express.static('.'))
+  app.use(express.static('assets/images'))
 
   const config = new DocumentBuilder()
     .setTitle('Pinterest Server')

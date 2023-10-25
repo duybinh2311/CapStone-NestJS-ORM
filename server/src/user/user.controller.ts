@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'
-import { UserService } from './user.service'
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
+import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
-import { ApiConflictResponse, ApiCreatedResponse, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { UserService } from './user.service'
 import { UserMessage } from './user.types'
 
 @ApiTags('User')

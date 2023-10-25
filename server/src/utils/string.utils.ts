@@ -6,6 +6,7 @@ export class StringUtils {
     special: /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/,
     email:
       /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+    extImage: /\.(jpeg|jpg|png|gif)$/i,
   }
 
   /* Nguyễn Duy Bình => nguyen-duy-binh */

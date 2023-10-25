@@ -1,14 +1,6 @@
-import { Controller, Post, UploadedFile, UseInterceptors, Body } from '@nestjs/common'
+import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common'
 import { FileInterceptor } from '@nestjs/platform-express'
-import {
-  ApiBadRequestResponse,
-  ApiBody,
-  ApiConsumes,
-  ApiCreatedResponse,
-  ApiResponse,
-  ApiTags,
-  ApiUnsupportedMediaTypeResponse,
-} from '@nestjs/swagger'
+import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { FileUploadDto } from './dto/file-upload.dto'
 import { FileService } from './file.service'
 import { FileMessage } from './file.types'
@@ -24,6 +16,7 @@ export class FileController {
   @ApiResponse({ status: 201, description: FileMessage.UPLOAD_SUCCESSFULLY })
   @ApiResponse({ status: 415, description: FileMessage.UNSUPPORTED })
   @ApiResponse({ status: 400, description: FileMessage.REQUIRED })
+  @ApiResponse({ status: 413, description: FileMessage.LIMIT })
   @Post('upload')
   upload(@UploadedFile() file: Express.Multer.File) {
     return this.fileService.upload(file)
