@@ -9,4 +9,5 @@ export class FileUploadResDto {
   url: string
   fileName: string
   type: string
+  size: number
 }

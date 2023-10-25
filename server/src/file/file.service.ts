@@ -11,6 +11,7 @@ export class FileService {
       fileName: file.filename,
       url: `${process.env.SERVER_URL}/${file.filename}`,
       type: file.mimetype,
+      size: file.size,
     }
   }
 }
