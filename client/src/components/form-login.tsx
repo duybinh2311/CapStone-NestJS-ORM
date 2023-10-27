@@ -16,6 +16,7 @@ export const FormLogin: FC<FormLoginProps> = (props) => {
       password: isNotEmpty('Password is required'),
     },
   })
+  
   /* Logic */
   const submit = form.onSubmit((values) => {
     console.log(values)

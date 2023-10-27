@@ -33,6 +33,7 @@ export const PinPage: FC = () => {
                 src={'https://i.pinimg.com/564x/e6/22/ce/e622ce555bcb0ac835a98027868934f3.jpg'}
               />
             </Box>
+            
             <Box>
               <Box id='pin-description'>
                 <PinActionMenu />

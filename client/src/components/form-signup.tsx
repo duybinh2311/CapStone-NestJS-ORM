@@ -27,6 +27,7 @@ export const FormSignup: FC<FormSignupProps> = (props) => {
       age: isInRange({ min: 18, max: 100 }, 'Age must be between 18 and 100'),
     },
   })
+
   /* Logic */
   const submit = form.onSubmit((values) => {
     console.log(values)

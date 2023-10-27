@@ -12,6 +12,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   /* Local State */
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false)
   const [emojiClickData, setEmojiClickData] = useState<EmojiClickData | null>(null)
+
   /* Hook Init */
   const emojiPickerRef = useClickOutside(() => setShowEmojiPicker(false))
   const form = useForm({
@@ -19,6 +20,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
       comment: '',
     },
   })
+
   /* Logic */
   useEffect(() => {
     if (emojiClickData) {

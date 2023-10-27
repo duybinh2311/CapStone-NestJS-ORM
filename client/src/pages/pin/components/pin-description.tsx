@@ -8,6 +8,7 @@ interface PinDescriptionProps {}
 export const PinDescription: FC<PinDescriptionProps> = (props) => {
   /* Local State */
   const [showComment, setShowComment] = useState<boolean>(false)
+  
   return (
     <Stack
       py={'md'}
