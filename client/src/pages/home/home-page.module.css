@@ -1,0 +1,15 @@
+.box {
+  animation: 2.5s linear forwards translateX;
+  animation-timeline: view();
+}
+
+@keyframes translateX {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(500px);
+    opacity: 1;
+  }
+}

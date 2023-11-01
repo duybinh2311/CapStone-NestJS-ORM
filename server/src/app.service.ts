@@ -6,5 +6,3 @@ export class AppService {
     return { success: true, message: 'Server is running' }
   }
 }
-
-const a = '10'

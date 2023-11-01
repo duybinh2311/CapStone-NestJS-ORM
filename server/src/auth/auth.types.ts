@@ -4,4 +4,5 @@ export enum AuthMessage {
   LOGIN_SUCCESSFULLY = 'Login successfully',
   UNAUTHORIZED = 'Unauthorized',
   GET_PROFILE_SUCCESSFULLY = 'Get profile successfully',
+  UPDATE_PROFILE_SUCCESSFULLY = 'Update profile successfully',
 }

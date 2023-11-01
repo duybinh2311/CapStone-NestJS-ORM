@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { User } from '@prisma/client'
 import { IsEmail, IsNotEmpty, IsNumber, IsString, Max, Min } from 'class-validator'
 
 export class CreateUserDto {
@@ -25,12 +24,8 @@ export class CreateUserDto {
   age: number
 }
 
-export class CreateUserResDto implements Omit<User, 'password'> {
-  id: number
+export class CreateUserResDto implements Omit<CreateUserDto, 'password'> {
   email: string
   fullName: string
   age: number
-  avatar: string
-  createdAt: Date
-  updatedAt: Date
 }

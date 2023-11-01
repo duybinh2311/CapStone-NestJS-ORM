@@ -2,12 +2,13 @@ import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 import { AuthMessage } from './auth.types'
-import { AuthUserDto } from './dto/auth-user'
+import { AuthUserDto } from './dto/auth-user.dto'
 import { SignInDto } from './dto/sign-in.dto'
 import { JwtAuthGuard } from './guards/jwt.guard'
 import { LocalAuthGuard } from './guards/local.guard'
 import { AuthUser } from './decorators/auth-user.decorator'
 import { SkipJwtAuth } from './decorators/skip-jwt.decorator'
+import { UpdateProfileDto } from './dto/update-profile.dto'
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -28,8 +29,13 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @ApiResponse({ status: 200, description: AuthMessage.GET_PROFILE_SUCCESSFULLY })
   @ApiResponse({ status: 401, description: AuthMessage.UNAUTHORIZED })
-  @Get('profile')
+  @Get('get-profile')
   getProfile(@AuthUser() authUser: AuthUserDto) {
-    return authUser
+    return this.authService.getProfile(authUser)
+  }
+
+  @Post('update-profile')
+  updateProfile(@AuthUser() authUser: AuthUserDto, @Body() profile: UpdateProfileDto) {
+    return this.authService.updateProfile(authUser, profile)
   }
 }
