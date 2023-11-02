@@ -42,6 +42,8 @@ export class UserService {
   }
 
   async update(id: number, userUpdate: UpdateUserDto) {
+    await this.checkEmailExist(userUpdate.email)
+
     return await this.prisma.user.update({
       where: { id },
       data: userUpdate,
