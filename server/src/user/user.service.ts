@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt'
 import { PrismaService } from 'nestjs-prisma'
 import { UserMessage } from './user.types'
 import { CreateUserDto } from './dto/create-user.dto'
+import { UpdateUserDto } from './dto/update-user.dto'
 
 @Injectable()
 export class UserService {
@@ -37,6 +38,13 @@ export class UserService {
   async findByEmail(email: string): Promise<User> {
     return await this.prisma.user.findUnique({
       where: { email },
+    })
+  }
+
+  async update(id: number, userUpdate: UpdateUserDto) {
+    return await this.prisma.user.update({
+      where: { id },
+      data: userUpdate,
     })
   }
 }

@@ -1,9 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors } from '@nestjs/common'
-import { PinService } from './pin.service'
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
 import { CreatePinDto } from './dto/create-pin.dto'
 import { UpdatePinDto } from './dto/update-pin.dto'
-import { ApiTags } from '@nestjs/swagger'
-import { FileInterceptor } from '@nestjs/platform-express'
+import { PinService } from './pin.service'
 
 @ApiTags('Pin')
 @Controller('pin')

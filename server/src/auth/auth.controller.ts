@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 import { AuthMessage } from './auth.types'
@@ -31,5 +31,12 @@ export class AuthController {
   @Post('sign-up')
   signUp(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto)
+  }
+
+  @ApiResponse({ status: 200, description: AuthMessage.GET_PROFILE_SUCCESSFULLY })
+  @ApiResponse({ status: 401, description: AuthMessage.UNAUTHORIZED })
+  @Get('profile')
+  getProfile(@AuthUser() authUser: AuthUserDto) {
+    return this.authService.getProfile(authUser)
   }
 }

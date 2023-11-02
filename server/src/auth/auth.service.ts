@@ -7,6 +7,7 @@ import { AuthMessage } from './auth.types'
 import { AuthUserDto } from './dto/auth-user.dto'
 import { SignInDto, SignInResDto } from './dto/sign-in.dto'
 import { SignUpDto, SignUpResDto } from './dto/sign-up.dto'
+import { ProfileUserDto } from './dto/profile-user'
 
 @Injectable()
 export class AuthService {
@@ -46,6 +47,21 @@ export class AuthService {
       },
       message: AuthMessage.SIGN_UP_SUCCESSFULLY,
       statusCode: HttpStatus.CREATED,
+    }
+  }
+
+  async getProfile(authUser: AuthUserDto): IRes<ProfileUserDto> {
+    const user = await this.userService.findById(authUser.id)
+
+    return {
+      data: {
+        email: user.email,
+        fullName: user.fullName,
+        age: user.age,
+        avatar: user.avatar,
+      },
+      message: AuthMessage.GET_PROFILE_SUCCESSFULLY,
+      statusCode: HttpStatus.OK,
     }
   }
 }
