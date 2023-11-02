@@ -1,24 +1,22 @@
 import { HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
-import { PrismaService } from 'nestjs-prisma'
+import { IRes } from 'src/app.types'
+import { UserService } from 'src/user/user.service'
 import { AuthMessage } from './auth.types'
 import { AuthUserDto } from './dto/auth-user.dto'
 import { SignInDto, SignInResDto } from './dto/sign-in.dto'
-import { UpdateProfileDto } from './dto/update-profile.dto'
-import { IRes } from 'src/app.types'
+import { SignUpDto, SignUpResDto } from './dto/sign-up.dto'
 
 @Injectable()
 export class AuthService {
   constructor(
-    private prisma: PrismaService,
     private jwtService: JwtService,
+    private userService: UserService,
   ) {}
 
   async validateUser(signInDto: SignInDto): Promise<AuthUserDto> {
-    const user = await this.prisma.user.findUnique({
-      where: { email: signInDto.email },
-    })
+    const user = await this.userService.findByEmail(signInDto.email)
 
     if (!user) {
       throw new NotFoundException(AuthMessage.EMAIL_NOT_FOUND)
@@ -27,8 +25,7 @@ export class AuthService {
     if (!bcrypt.compareSync(signInDto.password, user.password)) {
       throw new UnauthorizedException(AuthMessage.PASSWORD_INCORRECT)
     }
-    const { password, ...restUser } = user
-    return restUser
+    return { id: user.id }
   }
 
   async signIn(authUser: AuthUserDto): Promise<SignInResDto> {
@@ -39,25 +36,16 @@ export class AuthService {
     }
   }
 
-  getProfile(authUser: AuthUserDto): AuthUserDto {
-    return authUser
-  }
-
-  async updateProfile(authUser: AuthUserDto, profile: UpdateProfileDto): IRes<UpdateProfileDto> {
-    const user = await this.prisma.user.update({
-      where: { id: authUser.id },
-      data: profile,
-    })
-
+  async signUp(signUpDto: SignUpDto): IRes<SignUpResDto> {
+    const user = await this.userService.create(signUpDto)
     return {
       data: {
-        age: user.age,
-        avatar: user.avatar,
         email: user.email,
         fullName: user.fullName,
+        age: user.age,
       },
-      message: AuthMessage.UPDATE_PROFILE_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
+      message: AuthMessage.SIGN_UP_SUCCESSFULLY,
+      statusCode: HttpStatus.CREATED,
     }
   }
 }
