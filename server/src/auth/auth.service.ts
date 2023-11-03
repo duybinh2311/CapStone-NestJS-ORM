@@ -51,4 +51,19 @@ export class AuthService {
       statusCode: HttpStatus.OK,
     }
   }
+
+  async updateProfile(authUser: AuthUserDto, profileUserDto: ProfileUserDto) {
+    const user = await this.userService.update(authUser.id, profileUserDto)
+
+    return {
+      data: {
+        email: user.email,
+        fullName: user.fullName,
+        age: user.age,
+        avatar: user.avatar,
+      },
+      message: AuthMessage.UPDATE_PROFILE_SUCCESSFULLY,
+      statusCode: HttpStatus.OK,
+    }
+  }
 }

@@ -10,23 +10,12 @@ import { UpdateUserDto } from './dto/update-user.dto'
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async checkEmailExist(email: string): Promise<void> {
-    const emailExist = await this.prisma.user.findUnique({
+  async checkEmailExists(email: string): Promise<void> {
+    const emailExists = await this.prisma.user.findUnique({
       where: { email },
     })
 
-    if (emailExist) throw new ConflictException(UserMessage.EMAIL_EXIST)
-  }
-
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    await this.checkEmailExist(createUserDto.email)
-
-    return await this.prisma.user.create({
-      data: {
-        ...createUserDto,
-        password: await bcrypt.hash(createUserDto.password, 10),
-      },
-    })
+    if (emailExists) throw new ConflictException(UserMessage.EMAIL_EXISTS)
   }
 
   async findById(id: number): Promise<User> {
@@ -41,8 +30,19 @@ export class UserService {
     })
   }
 
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    await this.checkEmailExists(createUserDto.email)
+
+    return await this.prisma.user.create({
+      data: {
+        ...createUserDto,
+        password: await bcrypt.hash(createUserDto.password, 10),
+      },
+    })
+  }
+
   async update(id: number, userUpdate: UpdateUserDto) {
-    await this.checkEmailExist(userUpdate.email)
+    await this.checkEmailExists(userUpdate.email)
 
     return await this.prisma.user.update({
       where: { id },

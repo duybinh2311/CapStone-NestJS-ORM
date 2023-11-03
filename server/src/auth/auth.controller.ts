@@ -8,6 +8,8 @@ import { AuthUserDto } from './dto/auth-user.dto'
 import { SignInDto } from './dto/sign-in.dto'
 import { SignUpDto } from './dto/sign-up.dto'
 import { LocalAuthGuard } from './guards/local.guard'
+import { profile } from 'console'
+import { ProfileUserDto } from './dto/profile-user'
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -27,7 +29,7 @@ export class AuthController {
 
   @SkipJwtAuth()
   @ApiResponse({ status: 201, description: AuthMessage.SIGN_UP_SUCCESSFULLY })
-  @ApiResponse({ status: 409, description: AuthMessage.EMAIL_EXISTED })
+  @ApiResponse({ status: 409, description: AuthMessage.EMAIL_EXISTS })
   @Post('sign-up')
   signUp(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto)
@@ -35,8 +37,13 @@ export class AuthController {
 
   @ApiResponse({ status: 200, description: AuthMessage.GET_PROFILE_SUCCESSFULLY })
   @ApiResponse({ status: 401, description: AuthMessage.TOKEN_INVALID })
-  @Get('profile')
+  @Get('get-profile')
   getProfile(@AuthUser() authUser: AuthUserDto) {
     return this.authService.getProfile(authUser)
+  }
+
+  @Post('update-profile')
+  updateProfile(@AuthUser() authUser: AuthUserDto, @Body() profileUserDto: ProfileUserDto) {
+    return this.authService.updateProfile(authUser, profileUserDto)
   }
 }

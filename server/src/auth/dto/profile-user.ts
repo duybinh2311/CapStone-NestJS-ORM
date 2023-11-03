@@ -1,22 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNumber, IsString, Max, Min } from 'class-validator'
+import { IsNumber, IsOptional, IsString, Max, Min } from 'class-validator'
 
 export class ProfileUserDto {
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsString()
-  email: string
+  @IsOptional()
+  email?: string
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsString()
-  fullName: string
+  @IsOptional()
+  fullName?: string
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsNumber()
+  @IsOptional()
   @Min(18)
   @Max(100)
-  age: number
+  age?: number
 
-  @ApiProperty()
+  @ApiProperty({ required: false })
   @IsString()
-  avatar: string
+  @IsOptional()
+  avatar?: string
 }

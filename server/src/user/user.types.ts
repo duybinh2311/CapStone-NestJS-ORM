@@ -1,4 +1,4 @@
 export enum UserMessage {
-  EMAIL_EXIST = 'Email already exists',
+  EMAIL_EXISTS = 'Email already exists',
   CREATE_USER_SUCCESSFULLY = 'Create user successfully',
 }

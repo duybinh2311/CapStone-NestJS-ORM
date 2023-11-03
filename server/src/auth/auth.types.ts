@@ -6,5 +6,5 @@ export enum AuthMessage {
   TOKEN_INVALID = 'Token invalid',
   UPDATE_PROFILE_SUCCESSFULLY = 'Update profile successfully',
   SIGN_UP_SUCCESSFULLY = 'Sign up successfully',
-  EMAIL_EXISTED = 'Email existed',
+  EMAIL_EXISTS = 'Email already exists',
 }
