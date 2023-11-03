@@ -8,7 +8,7 @@ export class FileService {
     if (!file) throw new BadRequestException(FileMessage.REQUIRED)
 
     return {
-      fileName: file.filename,
+      path: `/${file.filename}`,
       url: `${process.env.SERVER_URL}/${file.filename}`,
       type: file.mimetype,
       size: file.size,

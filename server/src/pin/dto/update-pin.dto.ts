@@ -1,4 +1,13 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreatePinDto } from './create-pin.dto';
+import { ApiProperty } from '@nestjs/swagger'
+import { Pin } from '@prisma/client'
+import { IsString } from 'class-validator'
 
-export class UpdatePinDto extends PartialType(CreatePinDto) {}
+export class UpdatePinDto implements Partial<Pin> {
+  @ApiProperty({ required: false })
+  @IsString()
+  title?: string
+
+  @ApiProperty({ required: false })
+  @IsString()
+  description?: string
+}

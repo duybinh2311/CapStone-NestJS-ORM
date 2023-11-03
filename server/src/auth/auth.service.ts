@@ -2,7 +2,7 @@ import { HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { IRes } from 'src/app.types'
 import { UserService } from 'src/user/user.service'
-import { AuthMessage } from './auth.types'
+import { AuthMessages } from './auth.types'
 import { AuthUserDto } from './dto/auth-user.dto'
 import { ProfileUserDto } from './dto/profile-user'
 import { SignInResDto } from './dto/sign-in.dto'
@@ -18,7 +18,7 @@ export class AuthService {
   async signIn(authUser: AuthUserDto): Promise<SignInResDto> {
     return {
       token: await this.jwtService.signAsync(authUser),
-      message: AuthMessage.LOGIN_SUCCESSFULLY,
+      message: AuthMessages.LOGIN_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }
   }
@@ -32,7 +32,7 @@ export class AuthService {
         fullName: user.fullName,
         age: user.age,
       },
-      message: AuthMessage.SIGN_UP_SUCCESSFULLY,
+      message: AuthMessages.SIGN_UP_SUCCESSFULLY,
       statusCode: HttpStatus.CREATED,
     }
   }
@@ -47,7 +47,7 @@ export class AuthService {
         age: user.age,
         avatar: user.avatar,
       },
-      message: AuthMessage.GET_PROFILE_SUCCESSFULLY,
+      message: AuthMessages.GET_PROFILE_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }
   }
@@ -62,7 +62,7 @@ export class AuthService {
         age: user.age,
         avatar: user.avatar,
       },
-      message: AuthMessage.UPDATE_PROFILE_SUCCESSFULLY,
+      message: AuthMessages.UPDATE_PROFILE_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }
   }

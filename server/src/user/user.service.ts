@@ -2,7 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common'
 import { User } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
 import { PrismaService } from 'nestjs-prisma'
-import { UserMessage } from './user.types'
+import { UserMessages } from './user.types'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 
@@ -15,7 +15,7 @@ export class UserService {
       where: { email },
     })
 
-    if (emailExists) throw new ConflictException(UserMessage.EMAIL_EXISTS)
+    if (emailExists) throw new ConflictException(UserMessages.EMAIL_EXISTS)
   }
 
   async findById(id: number): Promise<User> {
@@ -41,10 +41,10 @@ export class UserService {
     })
   }
 
-  async update(id: number, userUpdate: UpdateUserDto) {
+  async update(id: number, userUpdate: UpdateUserDto): Promise<User> {
     const user = userUpdate.email && (await this.findByEmail(userUpdate.email))
 
-    if (user && user.id !== id) throw new ConflictException(UserMessage.EMAIL_EXISTS)
+    if (user && user.id !== id) throw new ConflictException(UserMessages.EMAIL_EXISTS)
 
     return await this.prisma.user.update({
       where: { id },

@@ -7,7 +7,7 @@ export class FileUploadDto {
 
 export class FileUploadResDto {
   url: string
-  fileName: string
+  path: string
   type: string
   size: number
 }

@@ -1,4 +1,4 @@
-export enum AuthMessage {
+export enum AuthMessages {
   EMAIL_NOT_FOUND = 'Email not found',
   PASSWORD_INCORRECT = 'Password is incorrect',
   LOGIN_SUCCESSFULLY = 'Login successfully',
