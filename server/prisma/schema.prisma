@@ -37,8 +37,8 @@ model Pin {
 model Comment {
   id        Int      @id @default(autoincrement())
   content   String
-  authorId  Int
-  author    User     @relation(fields: [authorId], references: [id])
+  userID    Int
+  user      User     @relation(fields: [userID], references: [id])
   pinId     Int
   pin       Pin      @relation(fields: [pinId], references: [id])
   createdAt DateTime @default(now())
