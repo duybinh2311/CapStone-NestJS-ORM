@@ -11,11 +11,11 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async checkEmailExist(email: string): Promise<void> {
-    const isEmailExist = await this.prisma.user.findUnique({
+    const emailExist = await this.prisma.user.findUnique({
       where: { email },
     })
 
-    if (isEmailExist) throw new ConflictException(UserMessage.EMAIL_EXIST)
+    if (emailExist) throw new ConflictException(UserMessage.EMAIL_EXIST)
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -24,7 +24,7 @@ export class UserService {
     return await this.prisma.user.create({
       data: {
         ...createUserDto,
-        password: bcrypt.hashSync(createUserDto.password, 10),
+        password: await bcrypt.hash(createUserDto.password, 10),
       },
     })
   }

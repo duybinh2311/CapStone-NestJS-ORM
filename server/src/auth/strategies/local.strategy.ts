@@ -1,13 +1,14 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
-import { User } from '@prisma/client'
+import * as bcrypt from 'bcrypt'
 import { Strategy } from 'passport-local'
-import { AuthService } from '../auth.service'
+import { UserService } from 'src/user/user.service'
+import { AuthMessage } from '../auth.types'
 import { AuthUserDto } from '../dto/auth-user.dto'
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
-  constructor(private authService: AuthService) {
+  constructor(private userService: UserService) {
     super({
       usernameField: 'email',
       passwordField: 'password',
@@ -15,7 +16,16 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(email: string, password: string): Promise<AuthUserDto> {
-    const authUser = await this.authService.validateUser({ email, password })
-    return authUser
+    const user = await this.userService.findByEmail(email)
+
+    if (!user) {
+      throw new NotFoundException(AuthMessage.EMAIL_NOT_FOUND)
+    }
+
+    if (!(await bcrypt.compare(password, user.password))) {
+      throw new UnauthorizedException(AuthMessage.PASSWORD_INCORRECT)
+    }
+
+    return { id: user.id }
   }
 }

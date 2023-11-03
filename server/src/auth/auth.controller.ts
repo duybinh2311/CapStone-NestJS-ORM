@@ -34,7 +34,7 @@ export class AuthController {
   }
 
   @ApiResponse({ status: 200, description: AuthMessage.GET_PROFILE_SUCCESSFULLY })
-  @ApiResponse({ status: 401, description: AuthMessage.UNAUTHORIZED })
+  @ApiResponse({ status: 401, description: AuthMessage.TOKEN_INVALID })
   @Get('profile')
   getProfile(@AuthUser() authUser: AuthUserDto) {
     return this.authService.getProfile(authUser)

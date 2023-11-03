@@ -1,13 +1,12 @@
-import { HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common'
+import { HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import * as bcrypt from 'bcrypt'
 import { IRes } from 'src/app.types'
 import { UserService } from 'src/user/user.service'
 import { AuthMessage } from './auth.types'
 import { AuthUserDto } from './dto/auth-user.dto'
-import { SignInDto, SignInResDto } from './dto/sign-in.dto'
-import { SignUpDto, SignUpResDto } from './dto/sign-up.dto'
 import { ProfileUserDto } from './dto/profile-user'
+import { SignInResDto } from './dto/sign-in.dto'
+import { SignUpDto, SignUpResDto } from './dto/sign-up.dto'
 
 @Injectable()
 export class AuthService {
@@ -16,22 +15,9 @@ export class AuthService {
     private userService: UserService,
   ) {}
 
-  async validateUser(signInDto: SignInDto): Promise<AuthUserDto> {
-    const user = await this.userService.findByEmail(signInDto.email)
-
-    if (!user) {
-      throw new NotFoundException(AuthMessage.EMAIL_NOT_FOUND)
-    }
-
-    if (!bcrypt.compareSync(signInDto.password, user.password)) {
-      throw new UnauthorizedException(AuthMessage.PASSWORD_INCORRECT)
-    }
-    return { id: user.id }
-  }
-
   async signIn(authUser: AuthUserDto): Promise<SignInResDto> {
     return {
-      token: this.jwtService.sign(authUser),
+      token: await this.jwtService.signAsync(authUser),
       message: AuthMessage.LOGIN_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }
@@ -39,6 +25,7 @@ export class AuthService {
 
   async signUp(signUpDto: SignUpDto): IRes<SignUpResDto> {
     const user = await this.userService.create(signUpDto)
+
     return {
       data: {
         email: user.email,

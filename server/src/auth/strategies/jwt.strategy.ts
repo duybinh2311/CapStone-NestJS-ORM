@@ -1,12 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport'
 import { ExtractJwt, Strategy } from 'passport-jwt'
+import { UserService } from 'src/user/user.service'
+import { AuthMessage } from '../auth.types'
 import { AuthUserDto } from '../dto/auth-user.dto'
-import { PrismaClient, User } from '@prisma/client'
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor() {
+  constructor(private userService: UserService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -14,15 +15,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  async validate(user: AuthUserDto): Promise<AuthUserDto> {
-    const prisma = new PrismaClient()
-    const userExists = await prisma.user.findUnique({
-      where: { id: user.id },
-    })
-    if (!userExists) {
-      throw new NotFoundException('User not found')
-    }
-    
-    return user
+  async validate(authUser: AuthUserDto): Promise<AuthUserDto> {
+    const userExist = await this.userService.findById(authUser.id)
+
+    if (!userExist) throw new UnauthorizedException(AuthMessage.TOKEN_INVALID)
+
+    return authUser
   }
 }

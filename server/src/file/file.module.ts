@@ -5,6 +5,7 @@ import * as path from 'path'
 import { StringUtils } from 'src/utils/string.utils'
 import { FileController } from './file.controller'
 import { FileService } from './file.service'
+import { FileMessage } from './file.types'
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { FileService } from './file.service'
           return callback(null, true)
         }
 
-        return callback(new UnsupportedMediaTypeException('Only Support Media Type JPG, JPEG, PNG, GIF'), false)
+        return callback(new UnsupportedMediaTypeException(FileMessage.UNSUPPORTED), false)
       },
       limits: {
         fileSize: 10e6,
