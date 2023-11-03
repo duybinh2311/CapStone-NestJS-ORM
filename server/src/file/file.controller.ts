@@ -12,7 +12,7 @@ export class FileController {
 
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
-  @ApiBody({ type: FileUploadDto, description: FileMessage.UPLOAD_DESC_BODY })
+  @ApiBody({ type: FileUploadDto, description: FileMessage.DESC_BODY })
   @ApiResponse({ status: 201, description: FileMessage.UPLOAD_SUCCESSFULLY })
   @ApiResponse({ status: 415, description: FileMessage.UNSUPPORTED })
   @ApiResponse({ status: 400, description: FileMessage.REQUIRED })

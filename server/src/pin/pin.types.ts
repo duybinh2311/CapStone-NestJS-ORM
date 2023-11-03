@@ -1,5 +1,6 @@
 export enum PinMessages {
-  UPLOAD_PIN_SUCCESSFULLY = 'Create pin successfully',
-  UPDATE_PIN_SUCCESSFULLY = 'Update pin successfully',
-  PIN_NOT_FOUND = 'Pin not found',
+  UPLOAD_SUCCESSFULLY = 'Create pin successfully',
+  UPDATE_SUCCESSFULLY = 'Update pin successfully',
+  NOT_FOUND = 'Pin not found',
+  DELETED_SUCCESSFULLY = 'Pin deleted successfully',
 }

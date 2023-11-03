@@ -11,6 +11,13 @@ import { Pin } from '@prisma/client'
 export class PinService {
   constructor(private readonly prisma: PrismaService) {}
 
+  async checkPinExist(id: number): Promise<void> {
+    const pin = await this.prisma.pin.findUnique({
+      where: { id },
+    })
+    if (!pin) throw new NotFoundException(PinMessages.NOT_FOUND)
+  }
+
   async create(authUser: AuthUserDto, createPinDto: CreatePinDto): IRes<Pin> {
     const pin = await this.prisma.pin.create({
       data: {
@@ -21,7 +28,7 @@ export class PinService {
 
     return {
       data: pin,
-      message: PinMessages.UPLOAD_PIN_SUCCESSFULLY,
+      message: PinMessages.UPLOAD_SUCCESSFULLY,
       statusCode: HttpStatus.CREATED,
     }
   }
@@ -37,24 +44,32 @@ export class PinService {
   }
 
   async update(id: number, updatePinDto: UpdatePinDto): IRes<Pin> {
-    const pin = await this.prisma.pin.findUnique({
-      where: { id },
-    })
-    if (!pin) throw new NotFoundException(PinMessages.PIN_NOT_FOUND)
+    await this.checkPinExist(id)
 
-    const pinUpdate = await this.prisma.pin.update({
+    const pin = await this.prisma.pin.update({
       where: { id },
       data: updatePinDto,
     })
 
     return {
-      data: pinUpdate,
-      message: PinMessages.UPDATE_PIN_SUCCESSFULLY,
+      data: pin,
+      message: PinMessages.UPDATE_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pin`
+  async remove(id: number): IRes<Pin> {
+    await this.checkPinExist(id)
+
+    await this.prisma.pin.delete({
+      where: { id },
+    })
+    console.log('red')
+
+    return {
+      data: null,
+      message: PinMessages.DELETED_SUCCESSFULLY,
+      statusCode: HttpStatus.OK,
+    }
   }
 }

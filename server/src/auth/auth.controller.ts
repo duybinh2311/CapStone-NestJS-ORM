@@ -17,7 +17,7 @@ export class AuthController {
 
   @SkipJwtAuth()
   @UseGuards(LocalAuthGuard)
-  @ApiResponse({ status: 200, description: AuthMessages.LOGIN_SUCCESSFULLY })
+  @ApiResponse({ status: 200, description: AuthMessages.SIGN_IN_SUCCESSFULLY })
   @ApiResponse({ status: 401, description: AuthMessages.PASSWORD_INCORRECT })
   @ApiResponse({ status: 404, description: AuthMessages.EMAIL_NOT_FOUND })
   @HttpCode(200)

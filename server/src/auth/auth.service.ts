@@ -18,7 +18,7 @@ export class AuthService {
   async signIn(authUser: AuthUserDto): Promise<SignInResDto> {
     return {
       token: await this.jwtService.signAsync(authUser),
-      message: AuthMessages.LOGIN_SUCCESSFULLY,
+      message: AuthMessages.SIGN_IN_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }
   }

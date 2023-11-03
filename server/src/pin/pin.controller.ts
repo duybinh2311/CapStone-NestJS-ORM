@@ -12,7 +12,7 @@ import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 export class PinController {
   constructor(private readonly pinService: PinService) {}
 
-  @ApiResponse({ status: 201, description: PinMessages.UPLOAD_PIN_SUCCESSFULLY })
+  @ApiResponse({ status: 201, description: PinMessages.UPLOAD_SUCCESSFULLY })
   @Post('create')
   create(@AuthUser() authUser: AuthUserDto, @Body() createPinDto: CreatePinDto) {
     return this.pinService.create(authUser, createPinDto)
@@ -28,12 +28,15 @@ export class PinController {
     return this.pinService.findById(+id)
   }
 
-  @ApiResponse({ status: 200, description: PinMessages.UPDATE_PIN_SUCCESSFULLY })
+  @ApiResponse({ status: 200, description: PinMessages.UPDATE_SUCCESSFULLY })
+  @ApiResponse({ status: 404, description: PinMessages.NOT_FOUND })
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePinDto: UpdatePinDto) {
     return this.pinService.update(+id, updatePinDto)
   }
 
+  @ApiResponse({ status: 200, description: PinMessages.DELETED_SUCCESSFULLY })
+  @ApiResponse({ status: 404, description: PinMessages.NOT_FOUND })
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.pinService.remove(+id)
