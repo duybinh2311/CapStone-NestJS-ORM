@@ -26,6 +26,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException(AuthMessage.PASSWORD_INCORRECT)
     }
 
-    return { id: user.id }
+    return { userId: user.id }
   }
 }

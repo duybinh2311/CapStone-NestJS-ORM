@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   async getProfile(authUser: AuthUserDto): IRes<ProfileUserDto> {
-    const user = await this.userService.findById(authUser.id)
+    const user = await this.userService.findById(authUser.userId)
 
     return {
       data: {
@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   async updateProfile(authUser: AuthUserDto, profileUserDto: ProfileUserDto) {
-    const user = await this.userService.update(authUser.id, profileUserDto)
+    const user = await this.userService.update(authUser.userId, profileUserDto)
 
     return {
       data: {

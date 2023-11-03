@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
+import { User } from '@prisma/client'
 import { IsNotEmpty, IsString } from 'class-validator'
 
-export class SignInDto {
+export class SignInDto implements Partial<User> {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()

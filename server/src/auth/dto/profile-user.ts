@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
+import { PrismaClient, User } from '@prisma/client'
 import { IsNumber, IsOptional, IsString, Max, Min } from 'class-validator'
 
-export class ProfileUserDto {
+export class ProfileUserDto implements Partial<User> {
   @ApiProperty({ required: false })
   @IsString()
   @IsOptional()

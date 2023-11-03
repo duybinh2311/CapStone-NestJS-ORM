@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
   app.enableCors({ origin: '*' })
-  app.useGlobalPipes(new ValidationPipe({}))
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }))
   app.use(express.static('assets/images'))
 
   const config = new DocumentBuilder()

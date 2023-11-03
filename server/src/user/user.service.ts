@@ -42,7 +42,7 @@ export class UserService {
   }
 
   async update(id: number, userUpdate: UpdateUserDto) {
-    const user = await this.findByEmail(userUpdate.email)
+    const user = userUpdate.email && (await this.findByEmail(userUpdate.email))
 
     if (user && user.id !== id) throw new ConflictException(UserMessage.EMAIL_EXISTS)
 

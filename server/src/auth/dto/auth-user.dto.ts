@@ -1,3 +1,3 @@
 export class AuthUserDto {
-  id: number
+  userId: number
 }

@@ -1,26 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger'
-import { IsNumber, IsOptional, IsString, Max, Min } from 'class-validator'
+import { User } from '@prisma/client'
 
-export class UpdateUserDto {
-  @ApiProperty({ required: false })
-  @IsString()
-  @IsOptional()
+export class UpdateUserDto implements Partial<User> {
   email?: string
-
-  @ApiProperty({ required: false })
-  @IsString()
-  @IsOptional()
   fullName?: string
-
-  @ApiProperty({ required: false })
-  @IsNumber()
-  @IsOptional()
-  @Min(18)
-  @Max(100)
   age?: number
-
-  @ApiProperty({ required: false })
-  @IsString()
-  @IsOptional()
   avatar?: string
 }
