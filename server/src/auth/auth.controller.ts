@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, HttpCode, Patch, Post, UseGuards } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 import { AuthMessage } from './auth.types'
@@ -8,7 +8,6 @@ import { AuthUserDto } from './dto/auth-user.dto'
 import { SignInDto } from './dto/sign-in.dto'
 import { SignUpDto } from './dto/sign-up.dto'
 import { LocalAuthGuard } from './guards/local.guard'
-import { profile } from 'console'
 import { ProfileUserDto } from './dto/profile-user'
 
 @ApiTags('Auth')
@@ -36,13 +35,14 @@ export class AuthController {
   }
 
   @ApiResponse({ status: 200, description: AuthMessage.GET_PROFILE_SUCCESSFULLY })
-  @ApiResponse({ status: 401, description: AuthMessage.TOKEN_INVALID })
   @Get('get-profile')
   getProfile(@AuthUser() authUser: AuthUserDto) {
     return this.authService.getProfile(authUser)
   }
 
-  @Post('update-profile')
+  @ApiResponse({ status: 200, description: AuthMessage.UPDATE_PROFILE_SUCCESSFULLY })
+  @ApiResponse({ status: 409, description: AuthMessage.EMAIL_EXISTS })
+  @Patch('update-profile')
   updateProfile(@AuthUser() authUser: AuthUserDto, @Body() profileUserDto: ProfileUserDto) {
     return this.authService.updateProfile(authUser, profileUserDto)
   }

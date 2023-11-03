@@ -8,7 +8,7 @@ import { UpdateUserDto } from './dto/update-user.dto'
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async checkEmailExists(email: string): Promise<void> {
     const emailExists = await this.prisma.user.findUnique({
@@ -42,7 +42,9 @@ export class UserService {
   }
 
   async update(id: number, userUpdate: UpdateUserDto) {
-    await this.checkEmailExists(userUpdate.email)
+    const user = await this.findByEmail(userUpdate.email)
+
+    if (user && user.id !== id) throw new ConflictException(UserMessage.EMAIL_EXISTS)
 
     return await this.prisma.user.update({
       where: { id },

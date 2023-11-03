@@ -9,7 +9,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @SkipJwtAuth()
-  @Get()
+  @Get('ping')
   ping(): { success: boolean; message: string } {
     return this.appService.ping()
   }
