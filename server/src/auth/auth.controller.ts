@@ -9,6 +9,7 @@ import { SignInDto } from './dto/sign-in.dto'
 import { SignUpDto } from './dto/sign-up.dto'
 import { LocalAuthGuard } from './guards/local.guard'
 import { ProfileUserDto } from './dto/profile-user'
+import { AuthGuard } from '@nestjs/passport'
 
 @ApiTags('Auth')
 @Controller('auth')

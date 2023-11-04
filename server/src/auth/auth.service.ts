@@ -1,6 +1,6 @@
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
-import { IRes } from 'src/app.types'
+import { IRes } from 'src/common/app.types'
 import { UserService } from 'src/user/user.service'
 import { AuthMessages } from './auth.types'
 import { AuthUserDto } from './dto/auth-user.dto'

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { CreatePinDto } from './dto/create-pin.dto'
 import { UpdatePinDto } from './dto/update-pin.dto'
@@ -6,6 +6,8 @@ import { PinService } from './pin.service'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { PinMessages } from './pin.types'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
+import { PinQueryDto } from './dto/pin-query.dto'
+import { AuthorPinGuard } from './guards/author.guard'
 
 @ApiTags('Pin')
 @Controller('pin')
@@ -19,8 +21,8 @@ export class PinController {
   }
 
   @Get()
-  findAll() {
-    return this.pinService.findAll()
+  findAll(@Query() query: PinQueryDto) {
+    return this.pinService.findAll(query)
   }
 
   @Get(':id')
@@ -28,6 +30,7 @@ export class PinController {
     return this.pinService.findById(+id)
   }
 
+  @UseGuards(AuthorPinGuard)
   @ApiResponse({ status: 200, description: PinMessages.UPDATE_SUCCESSFULLY })
   @ApiResponse({ status: 404, description: PinMessages.NOT_FOUND })
   @Patch(':id')
@@ -35,6 +38,7 @@ export class PinController {
     return this.pinService.update(+id, updatePinDto)
   }
 
+  @UseGuards(AuthorPinGuard)
   @ApiResponse({ status: 200, description: PinMessages.DELETED_SUCCESSFULLY })
   @ApiResponse({ status: 404, description: PinMessages.NOT_FOUND })
   @Delete(':id')

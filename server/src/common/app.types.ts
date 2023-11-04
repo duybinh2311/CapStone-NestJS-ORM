@@ -8,7 +8,7 @@ interface IResponseListData<T> {
   data: T[]
   message: string
   statusCode: number
-  total: number
+  count: number
 }
 
 export type IRes<T> = Promise<IResponseData<T>>
