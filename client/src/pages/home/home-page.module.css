@@ -13,3 +13,8 @@
     opacity: 1;
   }
 }
+
+.box-test {
+  animation: 2.5s linear forwards translateX;
+  animation-timeline: view();
+}

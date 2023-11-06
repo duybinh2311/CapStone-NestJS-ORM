@@ -5,7 +5,7 @@ import * as path from 'path'
 import { StringUtils } from 'src/utils/string.utils'
 import { FileController } from './file.controller'
 import { FileService } from './file.service'
-import { FileMessage } from './file.types'
+import { FileMessage } from './types/file.messages'
 
 @Module({
   imports: [

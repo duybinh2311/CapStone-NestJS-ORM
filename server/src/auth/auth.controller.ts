@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, Patch, Post, UseGuards } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
-import { AuthMessages } from './auth.types'
+import { AuthMessages } from './types/auth.messages'
 import { AuthUser } from './decorators/auth-user.decorator'
 import { SkipJwtAuth } from './decorators/skip-jwt.decorator'
 import { AuthUserDto } from './dto/auth-user.dto'

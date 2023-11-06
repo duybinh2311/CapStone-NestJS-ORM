@@ -1,26 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { Type } from 'class-transformer'
-import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsEnum, IsNumber, IsOptional } from 'class-validator'
 
-enum SortOrder {
+export enum SortOrder {
   ASC = 'asc',
   DESC = 'desc',
 }
 
-export class QueryDto {
+export class PaginationQueryDto {
   @ApiProperty({ required: false })
-  @IsString()
+  @IsNumber()
   @IsOptional()
-  // @Type(() => Number)
-  page?: number = 1
+  @Type(() => Number)
+  page?: number
 
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
   @Type(() => Number)
-  pageSize?: number = 2
+  pageSize?: number
 
-  @ApiProperty({ required: false, description: 'asc | desc' })
+  @ApiProperty({ required: false, enum: SortOrder })
   @IsOptional()
   @IsEnum(SortOrder)
   sortOrder?: SortOrder

@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport'
 import * as bcrypt from 'bcrypt'
 import { Strategy } from 'passport-local'
 import { UserService } from 'src/user/user.service'
-import { AuthMessages } from '../auth.types'
+import { AuthMessages } from '../types/auth.messages'
 import { AuthUserDto } from '../dto/auth-user.dto'
 
 @Injectable()

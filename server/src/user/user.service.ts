@@ -2,7 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common'
 import { User } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
 import { PrismaService } from 'nestjs-prisma'
-import { UserMessages } from './user.types'
+import { UserMessages } from './types/user.messages'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 
