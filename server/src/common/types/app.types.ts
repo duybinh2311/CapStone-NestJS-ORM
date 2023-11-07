@@ -5,11 +5,18 @@ interface IResponseData<T> {
 }
 
 interface IResponseListData<T> {
+  count: number
   data: T[]
   message: string
   statusCode: number
-  count: number
 }
 
-export type IRes<T> = Promise<IResponseData<T>>
-export type IResList<T> = Promise<IResponseListData<T>>
+type IRes<T> = Promise<IResponseData<T>>
+type IResList<T> = Promise<IResponseListData<T>>
+
+enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
+export { IRes, IResList, SortOrder }

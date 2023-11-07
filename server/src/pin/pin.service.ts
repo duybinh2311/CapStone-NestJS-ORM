@@ -4,9 +4,10 @@ import { PrismaService } from 'nestjs-prisma'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { IRes, IResList } from 'src/common/types/app.types'
 import { CreatePinDto } from './dto/create-pin.dto'
-import { PinQueryDto } from './dto/pin-query.dto'
+import { PinPaginationQueryDto } from './dto/pin-pagination-query.dto'
 import { UpdatePinDto } from './dto/update-pin.dto'
 import { PinMessages } from './types/pin.messages'
+import { PinQuery } from './dto/pin-query.dto'
 
 @Injectable()
 export class PinService {
@@ -27,20 +28,33 @@ export class PinService {
     }
   }
 
-  async findAll(query: PinQueryDto): IResList<Pin> {
-    const queryOption = {}
+  async findAll(query: PinQuery): IResList<Pin> {
+    return {
+      count: await this.prisma.pin.count(),
+      data: await this.prisma.pin.findMany({
+        orderBy: {
+          createdAt: query.sortOrder || 'asc',
+        },
+      }),
+      message: PinMessages.GET_ALL_SUCCESSFULLY,
+      statusCode: HttpStatus.OK,
+    }
+  }
 
-    if (query.page) Object.assign(queryOption, { skip: query.pageSize * (query.page - 1) })
-    if (query.pageSize) Object.assign(queryOption, { take: query.pageSize })
-    if (query.sortOrder) Object.assign(queryOption, { orderBy: { createdAt: query.sortOrder } })
-
-    const data = await this.prisma.pin.findMany(queryOption)
+  async findAllPagination(query: PinPaginationQueryDto): IResList<Pin> {
+    const data = await this.prisma.pin.findMany({
+      take: query.pageSize,
+      skip: (query.page - 1) * query.pageSize,
+      orderBy: {
+        createdAt: query.sortOrder,
+      },
+    })
 
     return {
+      count: data.length,
       data,
       message: PinMessages.GET_ALL_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
-      count: data.length,
     }
   }
 

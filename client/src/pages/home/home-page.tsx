@@ -1,11 +1,25 @@
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
 import { vars } from '@/configs/theme'
-import { Box, Container } from '@mantine/core'
+import { Button, Container } from '@mantine/core'
+import axios from 'axios'
 import { FC } from 'react'
-import classes from './home-page.module.css'
 
 export const HomePage: FC = () => {
+  const fetchPins = async () => {
+    const data = (await axios.get('http://localhost:3000/pin/get-all')).data
+    console.log(data)
+
+    const data2 = (
+      await axios.get('http://localhost:3000/pin/get-all', {
+        params: {
+          cursor: data.count,
+        },
+      })
+    ).data
+
+    console.log(data2)
+  }
   return (
     <section
       style={{
@@ -13,6 +27,7 @@ export const HomePage: FC = () => {
         paddingBottom: vars.spacing.xl,
       }}
     >
+      <Button onClick={fetchPins}>Fetch Pins</Button>
       <Container fluid>
         <PinLayout>
           <Pin size='small' />
@@ -43,13 +58,6 @@ export const HomePage: FC = () => {
           <Pin size='medium' />
           <Pin size='large' />
         </PinLayout>
-
-        <Box
-          className={classes.box}
-          w={100}
-          h={100}
-          bg={'red'}
-        ></Box>
 
         <PinLayout>
           <Pin size='small' />

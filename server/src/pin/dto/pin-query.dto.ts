@@ -1,3 +1,3 @@
-import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto'
+import { QueryDto } from 'src/common/dto/query.dto'
 
-export class PinQueryDto extends PaginationQueryDto {}
+export class PinQuery extends QueryDto {}
