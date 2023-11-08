@@ -5,5 +5,6 @@ import { PinService } from './pin.service'
 @Module({
   controllers: [PinController],
   providers: [PinService],
+  exports: [PinService],
 })
 export class PinModule {}

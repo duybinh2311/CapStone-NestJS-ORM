@@ -74,10 +74,17 @@ export class PinService {
     return pin
   }
 
-  async getByAuthor(authUser: AuthUserDto): Promise<Pin[]> {
-    return await this.prisma.pin.findMany({
-      where: { authorId: authUser.userId },
-    })
+  async getByAuthor(authUser: AuthUserDto): IResList<Pin> {
+    return {
+      count: await this.prisma.pin.count({
+        where: { authorId: authUser.userId },
+      }),
+      data: await this.prisma.pin.findMany({
+        where: { authorId: authUser.userId },
+      }),
+      message: PinMessages.GET_PINS_SUCCESSFULLY,
+      statusCode: HttpStatus.OK,
+    }
   }
 
   async update(id: number, updatePinDto: UpdatePinDto): IRes<Pin> {

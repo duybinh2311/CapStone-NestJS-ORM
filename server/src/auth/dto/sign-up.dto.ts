@@ -26,7 +26,12 @@ export class SignUpDto implements Partial<User> {
 }
 
 export class SignUpResDto {
+  @ApiProperty()
   email: string
+
+  @ApiProperty()
   fullName: string
+
+  @ApiProperty()
   age: number
 }

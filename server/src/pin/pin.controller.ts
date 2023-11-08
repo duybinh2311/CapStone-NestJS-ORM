@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
-import { ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { AuthorPinGuard } from '../auth/guards/author.guard'
@@ -8,6 +8,7 @@ import { UpdatePinDto } from './dto/update-pin.dto'
 import { PinService } from './pin.service'
 import { PinMessages } from './types/pin.messages'
 import { PinPaginationQueryDto, PinQuery } from './dto/pin-query.dto'
+import { PinEntity } from './entities/pin.entity'
 
 @ApiTags('Pin')
 @Controller('pin')
@@ -41,7 +42,11 @@ export class PinController {
   }
 
   @UseGuards(AuthorPinGuard)
-  @ApiResponse({ status: 200, description: PinMessages.UPDATE_SUCCESSFULLY })
+  @ApiResponse({
+    status: 200,
+    description: PinMessages.UPDATE_SUCCESSFULLY,
+    type: PinEntity,
+  })
   @ApiResponse({ status: 404, description: PinMessages.NOT_FOUND })
   @Patch('update/:id')
   update(@Param('id') id: string, @Body() updatePinDto: UpdatePinDto) {

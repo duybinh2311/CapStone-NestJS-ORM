@@ -1,14 +1,19 @@
-import { ConflictException, Injectable } from '@nestjs/common'
-import { User } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
+import { User } from '@prisma/client'
+import { ConflictException, Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
 import { UserMessages } from './types/user.messages'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
+import { PinService } from 'src/pin/pin.service'
+import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private pinService: PinService,
+  ) {}
 
   async checkEmailExists(email: string): Promise<void> {
     const emailExists = await this.prisma.user.findUnique({
@@ -39,6 +44,10 @@ export class UserService {
     return await this.prisma.user.findUnique({
       where: { email },
     })
+  }
+
+  getCreatedPins(authUser: AuthUserDto) {
+    return this.pinService.getByAuthor(authUser)
   }
 
   async update(id: number, userUpdate: UpdateUserDto): Promise<User> {
