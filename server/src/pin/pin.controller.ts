@@ -4,11 +4,10 @@ import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { AuthorPinGuard } from '../auth/guards/author.guard'
 import { CreatePinDto } from './dto/create-pin.dto'
-import { PinPaginationQueryDto } from './dto/pin-pagination-query.dto'
 import { UpdatePinDto } from './dto/update-pin.dto'
 import { PinService } from './pin.service'
 import { PinMessages } from './types/pin.messages'
-import { PinQuery } from './dto/pin-query.dto'
+import { PinPaginationQueryDto, PinQuery } from './dto/pin-query.dto'
 
 @ApiTags('Pin')
 @Controller('pin')

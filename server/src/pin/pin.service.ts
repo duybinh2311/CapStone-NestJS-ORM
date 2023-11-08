@@ -4,10 +4,9 @@ import { PrismaService } from 'nestjs-prisma'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { IRes, IResList } from 'src/common/types/app.types'
 import { CreatePinDto } from './dto/create-pin.dto'
-import { PinPaginationQueryDto } from './dto/pin-pagination-query.dto'
 import { UpdatePinDto } from './dto/update-pin.dto'
 import { PinMessages } from './types/pin.messages'
-import { PinQuery } from './dto/pin-query.dto'
+import { PinPaginationQueryDto, PinQuery } from './dto/pin-query.dto'
 
 @Injectable()
 export class PinService {
@@ -33,7 +32,7 @@ export class PinService {
       count: await this.prisma.pin.count(),
       data: await this.prisma.pin.findMany({
         orderBy: {
-          createdAt: query.sortOrder || 'asc',
+          [query.sortBy]: query.sortOrder,
         },
       }),
       message: PinMessages.GET_ALL_SUCCESSFULLY,

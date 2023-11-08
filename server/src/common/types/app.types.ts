@@ -11,12 +11,5 @@ interface IResponseListData<T> {
   statusCode: number
 }
 
-type IRes<T> = Promise<IResponseData<T>>
-type IResList<T> = Promise<IResponseListData<T>>
-
-enum SortOrder {
-  ASC = 'asc',
-  DESC = 'desc',
-}
-
-export { IRes, IResList, SortOrder }
+export type IRes<T> = Promise<IResponseData<T>>
+export type IResList<T> = Promise<IResponseListData<T>>
