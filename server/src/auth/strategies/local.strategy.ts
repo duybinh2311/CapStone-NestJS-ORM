@@ -16,7 +16,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(email: string, password: string): Promise<AuthUserDto> {
-    const user = await this.userService.findByEmail(email)
+    const user = await this.userService.getByEmail(email)
 
     if (!user) {
       throw new NotFoundException(AuthMessages.EMAIL_NOT_FOUND)

@@ -30,7 +30,7 @@ export class AuthorPinGuard implements CanActivate {
     const { user, params } = req
     const { id } = params
 
-    const pin = await this.pinService.findById(+id)
+    const pin = await this.pinService.getById(+id)
 
     return this.canAction(user, pin, req)
   }

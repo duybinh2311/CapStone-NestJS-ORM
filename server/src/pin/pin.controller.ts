@@ -21,18 +21,23 @@ export class PinController {
   }
 
   @Get('get-all')
-  findAll(@Query() query: PinQuery) {
-    return this.pinService.findAll(query)
+  getAll(@Query() query: PinQuery) {
+    return this.pinService.getAll(query)
   }
 
   @Get('get-pagination')
-  findAllPagination(@Query() query: PinPaginationQueryDto) {
-    return this.pinService.findAllPagination(query)
+  getPagination(@Query() query: PinPaginationQueryDto) {
+    return this.pinService.getPagination(query)
   }
 
   @Get('get-by-id/:id')
-  findOne(@Param('id') id: string) {
-    return this.pinService.findById(+id)
+  getById(@Param('id') id: string) {
+    return this.pinService.getById(+id)
+  }
+
+  @Get('get-by-author')
+  getByAuthor(@AuthUser() authUser: AuthUserDto) {
+    return this.pinService.getByAuthor(authUser)
   }
 
   @UseGuards(AuthorPinGuard)
@@ -47,7 +52,7 @@ export class PinController {
   @ApiResponse({ status: 200, description: PinMessages.DELETED_SUCCESSFULLY })
   @ApiResponse({ status: 404, description: PinMessages.NOT_FOUND })
   @Delete('delete/:id')
-  remove(@Param('id') id: string) {
-    return this.pinService.remove(+id)
+  delete(@Param('id') id: string) {
+    return this.pinService.delete(+id)
   }
 }

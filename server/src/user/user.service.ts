@@ -18,18 +18,6 @@ export class UserService {
     if (emailExists) throw new ConflictException(UserMessages.EMAIL_EXISTS)
   }
 
-  async findById(id: number): Promise<User> {
-    return await this.prisma.user.findUnique({
-      where: { id },
-    })
-  }
-
-  async findByEmail(email: string): Promise<User> {
-    return await this.prisma.user.findUnique({
-      where: { email },
-    })
-  }
-
   async create(createUserDto: CreateUserDto): Promise<User> {
     await this.checkEmailExists(createUserDto.email)
 
@@ -41,8 +29,20 @@ export class UserService {
     })
   }
 
+  async getById(id: number): Promise<User> {
+    return await this.prisma.user.findUnique({
+      where: { id },
+    })
+  }
+
+  async getByEmail(email: string): Promise<User> {
+    return await this.prisma.user.findUnique({
+      where: { email },
+    })
+  }
+
   async update(id: number, userUpdate: UpdateUserDto): Promise<User> {
-    const user = userUpdate.email && (await this.findByEmail(userUpdate.email))
+    const user = userUpdate.email && (await this.getByEmail(userUpdate.email))
 
     if (user && user.id !== id) throw new ConflictException(UserMessages.EMAIL_EXISTS)
 

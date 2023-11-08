@@ -27,20 +27,27 @@ export class PinService {
     }
   }
 
-  async findAll(query: PinQuery): IResList<Pin> {
+  async getAll(query: PinQuery, authorId?: number): IResList<Pin> {
+    const where = {}
+
+    if (authorId) {
+      Object.assign(where, { authorId })
+    }
+
     return {
-      count: await this.prisma.pin.count(),
+      count: await this.prisma.pin.count({ ...where }),
       data: await this.prisma.pin.findMany({
+        ...where,
         orderBy: {
           [query.sortBy]: query.sortOrder,
         },
       }),
-      message: PinMessages.GET_ALL_SUCCESSFULLY,
+      message: PinMessages.GET_PINS_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }
   }
 
-  async findAllPagination(query: PinPaginationQueryDto): IResList<Pin> {
+  async getPagination(query: PinPaginationQueryDto): IResList<Pin> {
     const data = await this.prisma.pin.findMany({
       take: query.pageSize,
       skip: (query.page - 1) * query.pageSize,
@@ -52,12 +59,12 @@ export class PinService {
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_ALL_SUCCESSFULLY,
+      message: PinMessages.GET_PINS_SUCCESSFULLY,
       statusCode: HttpStatus.OK,
     }
   }
 
-  async findById(id: number): Promise<Pin> {
+  async getById(id: number): Promise<Pin> {
     const pin = await this.prisma.pin.findUnique({
       where: { id },
     })
@@ -65,6 +72,12 @@ export class PinService {
     if (!pin) throw new NotFoundException(PinMessages.NOT_FOUND)
 
     return pin
+  }
+
+  async getByAuthor(authUser: AuthUserDto): Promise<Pin[]> {
+    return await this.prisma.pin.findMany({
+      where: { authorId: authUser.userId },
+    })
   }
 
   async update(id: number, updatePinDto: UpdatePinDto): IRes<Pin> {
@@ -80,11 +93,10 @@ export class PinService {
     }
   }
 
-  async remove(id: number): IRes<Pin> {
+  async delete(id: number): IRes<Pin> {
     await this.prisma.pin.delete({
       where: { id },
     })
-    console.log('red')
 
     return {
       data: null,

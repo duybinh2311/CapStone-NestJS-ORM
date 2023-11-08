@@ -3,7 +3,7 @@ export enum PinMessages {
   UPDATE_SUCCESSFULLY = 'Update pin successfully',
   NOT_FOUND = 'Pin not found',
   DELETED_SUCCESSFULLY = 'Pin deleted successfully',
-  GET_ALL_SUCCESSFULLY = 'Get all pins successfully',
+  GET_PINS_SUCCESSFULLY = 'Get pins successfully',
   FORBIDDEN_UPDATE = 'You are not allow to update this pin',
   FORBIDDEN_DELETE = 'You are not allow to delete this pin',
 }

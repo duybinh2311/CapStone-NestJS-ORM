@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   async getProfile(authUser: AuthUserDto): IRes<ProfileUserDto> {
-    const user = await this.userService.findById(authUser.userId)
+    const user = await this.userService.getById(authUser.userId)
 
     return {
       data: {
