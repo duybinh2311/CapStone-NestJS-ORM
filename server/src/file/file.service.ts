@@ -15,7 +15,7 @@ export class FileService {
         type: file.mimetype,
         size: file.size,
       },
-      message: FileMessage.UPLOAD_SUCCESSFULLY,
+      message: FileMessage.UPLOAD_SUCCESS,
     }
   }
 }

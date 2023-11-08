@@ -12,7 +12,7 @@ import { PinMessages } from './types/pin.messages'
 export class PinService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(authUser: AuthUserDto, createPinDto: CreatePinDto): IRes<Pin> {
+  async create(createPinDto: CreatePinDto, authUser: AuthUserDto): IRes<Pin> {
     const pin = await this.prisma.pin.create({
       data: {
         ...createPinDto,
@@ -22,7 +22,7 @@ export class PinService {
 
     return {
       data: pin,
-      message: PinMessages.UPLOAD_SUCCESSFULLY,
+      message: PinMessages.CREATE_SUCCESS,
     }
   }
 
@@ -36,7 +36,7 @@ export class PinService {
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_SUCCESSFULLY,
+      message: PinMessages.GET_SUCCESS,
     }
   }
 
@@ -52,7 +52,7 @@ export class PinService {
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_SUCCESSFULLY,
+      message: PinMessages.GET_SUCCESS,
     }
   }
 
@@ -65,7 +65,7 @@ export class PinService {
 
     return {
       data: pin,
-      message: PinMessages.GET_SUCCESSFULLY,
+      message: PinMessages.GET_SUCCESS,
     }
   }
 
@@ -77,7 +77,7 @@ export class PinService {
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_SUCCESSFULLY,
+      message: PinMessages.GET_SUCCESS,
     }
   }
 
@@ -89,7 +89,7 @@ export class PinService {
 
     return {
       data: pin,
-      message: PinMessages.UPDATE_SUCCESSFULLY,
+      message: PinMessages.UPDATE_SUCCESS,
     }
   }
 
@@ -100,7 +100,7 @@ export class PinService {
 
     return {
       data: null,
-      message: PinMessages.DELETED_SUCCESSFULLY,
+      message: PinMessages.DELETED_SUCCESS,
     }
   }
 }

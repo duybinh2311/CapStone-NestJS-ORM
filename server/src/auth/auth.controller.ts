@@ -17,7 +17,7 @@ export class AuthController {
 
   @SkipJwtAuth()
   @UseGuards(LocalAuthGuard)
-  @ApiResponse({ status: 200, description: AuthMessages.SIGN_IN_SUCCESSFULLY, type: SignInResDto })
+  @ApiResponse({ status: 200, description: AuthMessages.SIGN_IN_SUCCESS, type: SignInResDto })
   @ApiResponse({ status: 401, description: AuthMessages.PASSWORD_INCORRECT })
   @ApiResponse({ status: 404, description: AuthMessages.EMAIL_NOT_FOUND })
   @HttpCode(200)
@@ -27,20 +27,20 @@ export class AuthController {
   }
 
   @SkipJwtAuth()
-  @ApiResponse({ status: 201, description: AuthMessages.SIGN_UP_SUCCESSFULLY, type: SignUpResDto })
+  @ApiResponse({ status: 201, description: AuthMessages.SIGN_UP_SUCCESS, type: SignUpResDto })
   @ApiResponse({ status: 409, description: AuthMessages.EMAIL_EXISTS })
   @Post('sign-up')
   signUp(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto)
   }
 
-  @ApiResponse({ status: 200, description: AuthMessages.GET_PROFILE_SUCCESSFULLY, type: ProfileUserDto })
+  @ApiResponse({ status: 200, description: AuthMessages.GET_PROFILE_SUCCESS, type: ProfileUserDto })
   @Get('get-profile')
   getProfile(@AuthUser() authUser: AuthUserDto) {
     return this.authService.getProfile(authUser)
   }
 
-  @ApiResponse({ status: 200, description: AuthMessages.UPDATE_PROFILE_SUCCESSFULLY, type: ProfileUserDto })
+  @ApiResponse({ status: 200, description: AuthMessages.UPDATE_PROFILE_SUCCESS, type: ProfileUserDto })
   @ApiConflictResponse({ description: AuthMessages.EMAIL_EXISTS })
   @Patch('update-profile')
   updateProfile(@AuthUser() authUser: AuthUserDto, @Body() profileUserDto: ProfileUserDto) {

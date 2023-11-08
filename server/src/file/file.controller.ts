@@ -13,7 +13,7 @@ export class FileController {
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
   @ApiBody({ description: FileMessage.DESC_BODY, type: FileUploadDto })
-  @ApiResponse({ status: 201, description: FileMessage.UPLOAD_SUCCESSFULLY, type: FileUploadResDto })
+  @ApiResponse({ status: 201, description: FileMessage.UPLOAD_SUCCESS, type: FileUploadResDto })
   @ApiResponse({ status: 400, description: FileMessage.REQUIRED })
   @ApiResponse({ status: 413, description: FileMessage.LIMIT })
   @ApiResponse({ status: 415, description: FileMessage.UNSUPPORTED })

@@ -9,8 +9,8 @@ import { Request } from 'express'
 export class AuthorPinGuard implements CanActivate {
   constructor(private pinService: PinService) {}
 
-  private canAction = (user: AuthUserDto, pin: Pin, req: Request) => {
-    const allowAction = pin.authorId === user.userId
+  private canAction = (authUser: AuthUserDto, pin: Pin, req: Request) => {
+    const allowAction = pin.authorId === authUser.userId
 
     switch (req.method) {
       case 'PATCH':

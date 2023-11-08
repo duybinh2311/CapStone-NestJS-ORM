@@ -15,7 +15,7 @@ export class UserController {
     private readonly pinService: PinService,
   ) {}
 
-  @ApiResponse({ status: 200, description: PinMessages.GET_SUCCESSFULLY, type: [PinEntity] })
+  @ApiResponse({ status: 200, description: PinMessages.GET_SUCCESS, type: [PinEntity] })
   @Get('get-created-pins')
   getCreatedPins(@AuthUser() authUser: AuthUserDto) {
     return this.pinService.getByAuthor(authUser)

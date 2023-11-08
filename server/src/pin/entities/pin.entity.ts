@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Pin } from '@prisma/client'
+import { Comment, Pin } from '@prisma/client'
 
 export class PinEntity implements Pin {
   @ApiProperty()

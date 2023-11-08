@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards, Type } from '@nestjs/common'
 import { ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
@@ -15,32 +15,32 @@ import { PinMessages } from './types/pin.messages'
 export class PinController {
   constructor(private readonly pinService: PinService) {}
 
-  @ApiResponse({ status: 201, description: PinMessages.UPLOAD_SUCCESSFULLY, type: PinEntity })
+  @ApiResponse({ status: 201, description: PinMessages.CREATE_SUCCESS, type: PinEntity })
   @Post('create')
-  create(@AuthUser() authUser: AuthUserDto, @Body() createPinDto: CreatePinDto) {
-    return this.pinService.create(authUser, createPinDto)
+  create(@Body() createPinDto: CreatePinDto, @AuthUser() authUser: AuthUserDto) {
+    return this.pinService.create(createPinDto, authUser)
   }
 
-  @ApiResponse({ status: 200, description: PinMessages.GET_SUCCESSFULLY, type: [PinEntity] })
+  @ApiResponse({ status: 200, description: PinMessages.GET_SUCCESS, type: [PinEntity] })
   @Get('get-all')
   getAll(@Query() query: PinQuery) {
     return this.pinService.getAll(query)
   }
 
-  @ApiResponse({ status: 200, description: PinMessages.GET_SUCCESSFULLY, type: [PinEntity] })
+  @ApiResponse({ status: 200, description: PinMessages.GET_SUCCESS, type: [PinEntity] })
   @Get('get-pagination')
   getPagination(@Query() query: PinPaginationQueryDto) {
     return this.pinService.getPagination(query)
   }
 
-  @ApiResponse({ status: 200, description: PinMessages.GET_SUCCESSFULLY, type: PinEntity })
+  @ApiResponse({ status: 200, description: PinMessages.GET_SUCCESS, type: PinEntity })
   @Get('get-by-id/:id')
   getById(@Param('id') id: string) {
     return this.pinService.getById(+id)
   }
 
   @UseGuards(AuthorPinGuard)
-  @ApiResponse({ status: 200, description: PinMessages.UPDATE_SUCCESSFULLY, type: PinEntity })
+  @ApiResponse({ status: 200, description: PinMessages.UPDATE_SUCCESS, type: PinEntity })
   @ApiResponse({ status: 404, description: PinMessages.NOT_FOUND })
   @Patch('update/:id')
   update(@Param('id') id: string, @Body() updatePinDto: UpdatePinDto) {
@@ -48,7 +48,7 @@ export class PinController {
   }
 
   @UseGuards(AuthorPinGuard)
-  @ApiResponse({ status: 200, description: PinMessages.DELETED_SUCCESSFULLY })
+  @ApiResponse({ status: 200, description: PinMessages.DELETED_SUCCESS })
   @ApiResponse({ status: 404, description: PinMessages.NOT_FOUND })
   @Delete('delete/:id')
   delete(@Param('id') id: string) {

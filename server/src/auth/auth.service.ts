@@ -20,7 +20,7 @@ export class AuthService {
       data: {
         accessToken: await this.jwtService.signAsync(authUser),
       },
-      message: AuthMessages.SIGN_IN_SUCCESSFULLY,
+      message: AuthMessages.SIGN_IN_SUCCESS,
     }
   }
 
@@ -33,7 +33,7 @@ export class AuthService {
         fullName: user.fullName,
         age: user.age,
       },
-      message: AuthMessages.SIGN_UP_SUCCESSFULLY,
+      message: AuthMessages.SIGN_UP_SUCCESS,
     }
   }
 
@@ -47,12 +47,12 @@ export class AuthService {
         age: user.age,
         avatar: user.avatar,
       },
-      message: AuthMessages.GET_PROFILE_SUCCESSFULLY,
+      message: AuthMessages.GET_PROFILE_SUCCESS,
     }
   }
 
   async updateProfile(authUser: AuthUserDto, profileUserDto: ProfileUserDto): IRes<ProfileUserDto> {
-    const user = await this.userService.update(authUser.userId, profileUserDto)
+    const user = await this.userService.update(authUser, profileUserDto)
 
     return {
       data: {
@@ -61,7 +61,7 @@ export class AuthService {
         age: user.age,
         avatar: user.avatar,
       },
-      message: AuthMessages.UPDATE_PROFILE_SUCCESSFULLY,
+      message: AuthMessages.UPDATE_PROFILE_SUCCESS,
     }
   }
 }

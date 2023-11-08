@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { PrismaModule } from 'nestjs-prisma'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -9,11 +9,17 @@ import { APP_GUARD } from '@nestjs/core'
 import { JwtAuthGuard } from './auth/guards/jwt.guard'
 import { PinModule } from './pin/pin.module'
 import { FileModule } from './file/file.module'
+import { CommentModule } from './comment/comment.module'
 
 @Module({
   imports: [
     PrismaModule.forRoot({
       isGlobal: true,
+      prismaServiceOptions: {
+        prismaOptions: {
+          errorFormat: 'minimal',
+        },
+      },
     }),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -23,6 +29,7 @@ import { FileModule } from './file/file.module'
     AuthModule,
     PinModule,
     FileModule,
+    CommentModule,
   ],
   controllers: [AppController],
   providers: [
