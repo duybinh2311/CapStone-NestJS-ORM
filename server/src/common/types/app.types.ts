@@ -1,14 +1,12 @@
 interface IResponseData<T> {
   data: T
   message: string
-  statusCode: number
 }
 
 interface IResponseListData<T> {
   count: number
   data: T[]
   message: string
-  statusCode: number
 }
 
 export type IRes<T> = Promise<IResponseData<T>>

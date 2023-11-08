@@ -1,25 +1,26 @@
-import { HttpStatus, Injectable } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { IRes } from 'src/common/types/app.types'
 import { UserService } from 'src/user/user.service'
-import { AuthMessages } from './types/auth.messages'
 import { AuthUserDto } from './dto/auth-user.dto'
 import { ProfileUserDto } from './dto/profile-user'
 import { SignInResDto } from './dto/sign-in.dto'
 import { SignUpDto, SignUpResDto } from './dto/sign-up.dto'
+import { AuthMessages } from './types/auth.messages'
 
 @Injectable()
 export class AuthService {
   constructor(
-    private jwtService: JwtService,
-    private userService: UserService,
+    private readonly jwtService: JwtService,
+    private readonly userService: UserService,
   ) {}
 
-  async signIn(authUser: AuthUserDto): Promise<SignInResDto> {
+  async signIn(authUser: AuthUserDto): IRes<SignInResDto> {
     return {
-      token: await this.jwtService.signAsync(authUser),
+      data: {
+        accessToken: await this.jwtService.signAsync(authUser),
+      },
       message: AuthMessages.SIGN_IN_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
     }
   }
 
@@ -33,7 +34,6 @@ export class AuthService {
         age: user.age,
       },
       message: AuthMessages.SIGN_UP_SUCCESSFULLY,
-      statusCode: HttpStatus.CREATED,
     }
   }
 
@@ -48,11 +48,10 @@ export class AuthService {
         avatar: user.avatar,
       },
       message: AuthMessages.GET_PROFILE_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
     }
   }
 
-  async updateProfile(authUser: AuthUserDto, profileUserDto: ProfileUserDto) {
+  async updateProfile(authUser: AuthUserDto, profileUserDto: ProfileUserDto): IRes<ProfileUserDto> {
     const user = await this.userService.update(authUser.userId, profileUserDto)
 
     return {
@@ -63,7 +62,6 @@ export class AuthService {
         avatar: user.avatar,
       },
       message: AuthMessages.UPDATE_PROFILE_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
     }
   }
 }

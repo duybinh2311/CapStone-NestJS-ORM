@@ -16,11 +16,5 @@ export class SignInDto implements Partial<User> {
 
 export class SignInResDto {
   @ApiProperty()
-  token: string
-
-  @ApiProperty()
-  message: string
-
-  @ApiProperty()
-  statusCode: number
+  accessToken: string
 }

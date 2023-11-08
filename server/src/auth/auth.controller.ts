@@ -1,13 +1,5 @@
-import { Body, Controller, Get, Patch, Post, UseGuards } from '@nestjs/common'
-import {
-  ApiConflictResponse,
-  ApiCreatedResponse,
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiResponse,
-  ApiTags,
-  ApiUnauthorizedResponse,
-} from '@nestjs/swagger'
+import { Body, Controller, Get, HttpCode, Patch, Post, UseGuards } from '@nestjs/common'
+import { ApiConflictResponse, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 import { AuthUser } from './decorators/auth-user.decorator'
 import { SkipJwtAuth } from './decorators/skip-jwt.decorator'
@@ -25,29 +17,30 @@ export class AuthController {
 
   @SkipJwtAuth()
   @UseGuards(LocalAuthGuard)
-  @ApiOkResponse({ description: AuthMessages.SIGN_IN_SUCCESSFULLY, type: SignInResDto })
-  @ApiUnauthorizedResponse({ description: AuthMessages.PASSWORD_INCORRECT })
-  @ApiNotFoundResponse({ description: AuthMessages.EMAIL_NOT_FOUND })
+  @ApiResponse({ status: 200, description: AuthMessages.SIGN_IN_SUCCESSFULLY, type: SignInResDto })
+  @ApiResponse({ status: 401, description: AuthMessages.PASSWORD_INCORRECT })
+  @ApiResponse({ status: 404, description: AuthMessages.EMAIL_NOT_FOUND })
+  @HttpCode(200)
   @Post('sign-in')
   signIn(@AuthUser() authUser: AuthUserDto, @Body() _: SignInDto) {
     return this.authService.signIn(authUser)
   }
 
   @SkipJwtAuth()
-  @ApiCreatedResponse({ description: AuthMessages.SIGN_UP_SUCCESSFULLY, type: SignUpResDto })
-  @ApiConflictResponse({ description: AuthMessages.EMAIL_EXISTS })
+  @ApiResponse({ status: 201, description: AuthMessages.SIGN_UP_SUCCESSFULLY, type: SignUpResDto })
+  @ApiResponse({ status: 409, description: AuthMessages.EMAIL_EXISTS })
   @Post('sign-up')
   signUp(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto)
   }
 
-  @ApiOkResponse({ description: AuthMessages.GET_PROFILE_SUCCESSFULLY, type: ProfileUserDto })
+  @ApiResponse({ status: 200, description: AuthMessages.GET_PROFILE_SUCCESSFULLY, type: ProfileUserDto })
   @Get('get-profile')
   getProfile(@AuthUser() authUser: AuthUserDto) {
     return this.authService.getProfile(authUser)
   }
 
-  @ApiOkResponse({ status: 200, description: AuthMessages.UPDATE_PROFILE_SUCCESSFULLY, type: ProfileUserDto })
+  @ApiResponse({ status: 200, description: AuthMessages.UPDATE_PROFILE_SUCCESSFULLY, type: ProfileUserDto })
   @ApiConflictResponse({ description: AuthMessages.EMAIL_EXISTS })
   @Patch('update-profile')
   updateProfile(@AuthUser() authUser: AuthUserDto, @Body() profileUserDto: ProfileUserDto) {

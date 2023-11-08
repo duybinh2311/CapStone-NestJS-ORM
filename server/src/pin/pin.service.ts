@@ -1,12 +1,12 @@
-import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { Pin } from '@prisma/client'
 import { PrismaService } from 'nestjs-prisma'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { IRes, IResList } from 'src/common/types/app.types'
 import { CreatePinDto } from './dto/create-pin.dto'
+import { PinPaginationQueryDto, PinQuery } from './dto/pin-query.dto'
 import { UpdatePinDto } from './dto/update-pin.dto'
 import { PinMessages } from './types/pin.messages'
-import { PinPaginationQueryDto, PinQuery } from './dto/pin-query.dto'
 
 @Injectable()
 export class PinService {
@@ -23,27 +23,20 @@ export class PinService {
     return {
       data: pin,
       message: PinMessages.UPLOAD_SUCCESSFULLY,
-      statusCode: HttpStatus.CREATED,
     }
   }
 
-  async getAll(query: PinQuery, authorId?: number): IResList<Pin> {
-    const where = {}
-
-    if (authorId) {
-      Object.assign(where, { authorId })
-    }
+  async getAll(query: PinQuery): IResList<Pin> {
+    const data = await this.prisma.pin.findMany({
+      orderBy: {
+        [query.sortBy]: query.sortOrder,
+      },
+    })
 
     return {
-      count: await this.prisma.pin.count({ ...where }),
-      data: await this.prisma.pin.findMany({
-        ...where,
-        orderBy: {
-          [query.sortBy]: query.sortOrder,
-        },
-      }),
-      message: PinMessages.GET_PINS_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
+      count: data.length,
+      data,
+      message: PinMessages.GET_SUCCESSFULLY,
     }
   }
 
@@ -59,31 +52,32 @@ export class PinService {
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_PINS_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
+      message: PinMessages.GET_SUCCESSFULLY,
     }
   }
 
-  async getById(id: number): Promise<Pin> {
+  async getById(id: number): IRes<Pin> {
     const pin = await this.prisma.pin.findUnique({
       where: { id },
     })
 
     if (!pin) throw new NotFoundException(PinMessages.NOT_FOUND)
 
-    return pin
+    return {
+      data: pin,
+      message: PinMessages.GET_SUCCESSFULLY,
+    }
   }
 
   async getByAuthor(authUser: AuthUserDto): IResList<Pin> {
+    const data = await this.prisma.pin.findMany({
+      where: { authorId: authUser.userId },
+    })
+
     return {
-      count: await this.prisma.pin.count({
-        where: { authorId: authUser.userId },
-      }),
-      data: await this.prisma.pin.findMany({
-        where: { authorId: authUser.userId },
-      }),
-      message: PinMessages.GET_PINS_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
+      count: data.length,
+      data,
+      message: PinMessages.GET_SUCCESSFULLY,
     }
   }
 
@@ -96,7 +90,6 @@ export class PinService {
     return {
       data: pin,
       message: PinMessages.UPDATE_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
     }
   }
 
@@ -108,7 +101,6 @@ export class PinService {
     return {
       data: null,
       message: PinMessages.DELETED_SUCCESSFULLY,
-      statusCode: HttpStatus.OK,
     }
   }
 }
