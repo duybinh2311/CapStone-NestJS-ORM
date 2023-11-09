@@ -18,8 +18,8 @@ export class PinController {
   @ApiOperation({ summary: PinMessages.CREATE_SUMMARY })
   @ApiCreatedResponse({ description: PinMessages.CREATE_SUCCESS, type: PinEntity })
   @Post()
-  create(@Body() createPinDto: CreatePinDto, @AuthUser() authUser: AuthUserDto) {
-    return this.pinService.create(createPinDto, authUser)
+  create(@Body() dto: CreatePinDto, @AuthUser() authUser: AuthUserDto) {
+    return this.pinService.create(dto, authUser)
   }
 
   @ApiOperation({ summary: PinMessages.GET_ALL_SUMMARY })
@@ -47,8 +47,8 @@ export class PinController {
   @ApiOperation({ summary: PinMessages.UPDATE_SUMMARY })
   @ApiOkResponse({ description: PinMessages.UPDATE_SUCCESS, type: PinEntity })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePinDto: UpdatePinDto) {
-    return this.pinService.update(+id, updatePinDto)
+  update(@Param('id') id: string, @Body() dto: UpdatePinDto) {
+    return this.pinService.update(+id, dto)
   }
 
   @UseGuards(AuthorGuard)

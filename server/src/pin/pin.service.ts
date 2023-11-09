@@ -12,10 +12,10 @@ import { PinMessages } from './types/pin.messages'
 export class PinService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createPinDto: CreatePinDto, authUser: AuthUserDto): IRes<Pin> {
+  async create(dto: CreatePinDto, authUser: AuthUserDto): IRes<Pin> {
     const pin = await this.prisma.pin.create({
       data: {
-        ...createPinDto,
+        ...dto,
         authorId: authUser.userId,
       },
     })
@@ -81,10 +81,10 @@ export class PinService {
     }
   }
 
-  async update(id: number, updatePinDto: UpdatePinDto): IRes<Pin> {
+  async update(id: number, dto: UpdatePinDto): IRes<Pin> {
     const pin = await this.prisma.pin.update({
       where: { id },
-      data: updatePinDto,
+      data: dto,
     })
 
     return {

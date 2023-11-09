@@ -28,7 +28,7 @@ export class AuthController {
   @ApiOperation({ summary: AuthMessages.SIGN_UP_SUMMARY })
   @ApiCreatedResponse({ description: AuthMessages.SIGN_UP_SUCCESS, type: SignUpResDto })
   @Post('sign-up')
-  signUp(@Body() signUpDto: SignUpDto) {
-    return this.authService.signUp(signUpDto)
+  signUp(@Body() dto: SignUpDto) {
+    return this.authService.signUp(dto)
   }
 }

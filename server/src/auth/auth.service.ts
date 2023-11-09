@@ -23,8 +23,8 @@ export class AuthService {
     }
   }
 
-  async signUp(signUpDto: SignUpDto): IRes<SignUpResDto> {
-    const user = await this.userService.create(signUpDto)
+  async signUp(dto: SignUpDto): IRes<SignUpResDto> {
+    const user = await this.userService.create(dto)
 
     return {
       data: {

@@ -11,10 +11,10 @@ import { Comment } from '@prisma/client'
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createCommentDto: CreateCommentDto, authUser: AuthUserDto): IRes<Comment> {
+  async create(dto: CreateCommentDto, authUser: AuthUserDto): IRes<Comment> {
     const comment = await this.prisma.comment.create({
       data: {
-        ...createCommentDto,
+        ...dto,
         authorId: authUser.userId,
       },
     })
@@ -25,11 +25,11 @@ export class CommentService {
     }
   }
 
-  findAll() {
+  getAll() {
     return `This action returns all comment`
   }
 
-  findOne(id: number) {
+  getById(id: number) {
     return `This action returns a #${id} comment`
   }
 
@@ -37,7 +37,7 @@ export class CommentService {
     return `This action updates a #${id} comment`
   }
 
-  remove(id: number) {
+  delete(id: number) {
     return `This action removes a #${id} comment`
   }
 }

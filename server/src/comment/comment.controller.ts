@@ -16,35 +16,35 @@ export class CommentController {
   @ApiOperation({ summary: CommentMessages.CREATE_SUMMARY })
   @ApiCreatedResponse({ description: CommentMessages.CREATE_SUCCESS, type: CommentEntity })
   @Post()
-  create(@Body() createCommentDto: CreateCommentDto, @AuthUser() authUser: AuthUserDto) {
-    return this.commentService.create(createCommentDto, authUser)
+  create(@Body() dto: CreateCommentDto, @AuthUser() authUser: AuthUserDto) {
+    return this.commentService.create(dto, authUser)
   }
 
   @ApiOperation({ summary: CommentMessages.GET_ALL_SUMMARY })
   @ApiOkResponse({ description: CommentMessages.GET_ALL_SUCCESS, type: [CommentEntity] })
   @Get()
-  findAll() {
-    return this.commentService.findAll()
+  getAll() {
+    return this.commentService.getAll()
   }
 
   @ApiOperation({ summary: CommentMessages.GET_ID_SUMMARY })
   @ApiOkResponse({ description: CommentMessages.GET_ID_SUCCESS, type: CommentEntity })
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.commentService.findOne(+id)
+    return this.commentService.getById(+id)
   }
 
   @ApiOperation({ summary: CommentMessages.UPDATE_SUMMARY })
   @ApiOkResponse({ description: CommentMessages.UPDATE_SUCCESS, type: CommentEntity })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
-    return this.commentService.update(+id, updateCommentDto)
+  update(@Param('id') id: string, @Body() dto: UpdateCommentDto) {
+    return this.commentService.update(+id, dto)
   }
 
   @ApiOperation({ summary: CommentMessages.DELETE_SUMMARY })
   @ApiOkResponse({ description: CommentMessages.DELETE_SUCCESS })
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.commentService.remove(+id)
+    return this.commentService.delete(+id)
   }
 }

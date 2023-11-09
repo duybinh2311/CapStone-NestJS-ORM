@@ -21,13 +21,13 @@ export class UserService {
     if (emailExists) throw new ConflictException(UserMessages.EMAIL_EXISTS)
   }
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    await this.checkEmailExists(createUserDto.email)
+  async create(dto: CreateUserDto): Promise<User> {
+    await this.checkEmailExists(dto.email)
 
     return await this.prisma.user.create({
       data: {
-        ...createUserDto,
-        password: await bcrypt.hash(createUserDto.password, 10),
+        ...dto,
+        password: await bcrypt.hash(dto.password, 10),
       },
     })
   }
@@ -44,14 +44,14 @@ export class UserService {
     })
   }
 
-  async update(authUser: AuthUserDto, userUpdate: UpdateUserDto): Promise<User> {
-    const user = userUpdate.email && (await this.getByEmail(userUpdate.email))
+  async update(authUser: AuthUserDto, dto: UpdateUserDto): Promise<User> {
+    const user = dto.email && (await this.getByEmail(dto.email))
 
     if (user && user.id !== authUser.userId) throw new ConflictException(UserMessages.EMAIL_EXISTS)
 
     return await this.prisma.user.update({
       where: { id: authUser.userId },
-      data: userUpdate,
+      data: dto,
     })
   }
 
@@ -69,8 +69,8 @@ export class UserService {
     }
   }
 
-  async updateProfile(authUser: AuthUserDto, profileUserDto: ProfileUserDto): IRes<ProfileUserDto> {
-    const user = await this.update(authUser, profileUserDto)
+  async updateProfile(authUser: AuthUserDto, dto: ProfileUserDto): IRes<ProfileUserDto> {
+    const user = await this.update(authUser, dto)
 
     return {
       data: {

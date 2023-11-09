@@ -26,8 +26,8 @@ export class UserController {
   @ApiOperation({ summary: UserMessages.UPDATE_PROFILE_SUMMARY })
   @ApiOkResponse({ description: UserMessages.UPDATE_PROFILE_SUCCESS, type: ProfileUserDto })
   @Patch('profile')
-  updateProfile(@AuthUser() authUser: AuthUserDto, @Body() profileUserDto: ProfileUserDto) {
-    return this.userService.updateProfile(authUser, profileUserDto)
+  updateProfile(@AuthUser() authUser: AuthUserDto, @Body() dto: ProfileUserDto) {
+    return this.userService.updateProfile(authUser, dto)
   }
 
   @ApiOperation({ summary: UserMessages.GET_CREATED_PINS_SUMMARY })
