@@ -1,2 +1,2 @@
-export * from './comment-req.dto'
-export * from './comment-res.dto'
+export * from './_comment-req.dto'
+export * from './_comment-res.dto'

@@ -1,8 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
 import { IRes, IResList } from 'src/common/types/app.types'
-import { CreatePinDto, PinResDto, UpdatePinDto } from './dto'
-import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
+import { CreatePinDto, PinPaginationQueryDto, PinQueryDto, PinResDto, UpdatePinDto } from './dto'
 import { PinMessages } from './types/pin.messages'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 

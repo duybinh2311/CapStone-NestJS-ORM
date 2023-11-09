@@ -4,9 +4,9 @@ import { ConflictException, Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
 import { UserMessages } from './types/user.messages'
 import { IRes } from 'src/common/types/app.types'
-import { ProfileUserDto } from './dto/user-req.dto'
 import { SignUpDto } from 'src/auth/dto'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
+import { ProfileUserDto } from './dto'
 
 @Injectable()
 export class UserService {

@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
-import { SortOrderEnum } from 'src/common/dto/_query.dto'
 import { IRes, IResList } from 'src/common/types/app.types'
 import { CommentMessages } from './types/comment.messages'
 import { CreateCommentDto, CommentResDto, UpdateCommentDto } from './dto'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
+import { SortOrderEnum } from 'src/common/dto'
 
 @Injectable()
 export class CommentService {
