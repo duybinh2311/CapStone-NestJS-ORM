@@ -6,6 +6,8 @@ import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserMessages } from './types/user.messages'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
+import { IRes } from 'src/common/types/app.types'
+import { ProfileUserDto } from './dto/profile-user'
 
 @Injectable()
 export class UserService {
@@ -51,5 +53,33 @@ export class UserService {
       where: { id: authUser.userId },
       data: userUpdate,
     })
+  }
+
+  async getProfile(authUser: AuthUserDto): IRes<ProfileUserDto> {
+    const user = await this.getById(authUser.userId)
+
+    return {
+      data: {
+        email: user.email,
+        fullName: user.fullName,
+        age: user.age,
+        avatar: user.avatar,
+      },
+      message: UserMessages.GET_PROFILE_SUCCESS,
+    }
+  }
+
+  async updateProfile(authUser: AuthUserDto, profileUserDto: ProfileUserDto): IRes<ProfileUserDto> {
+    const user = await this.update(authUser, profileUserDto)
+
+    return {
+      data: {
+        email: user.email,
+        fullName: user.fullName,
+        age: user.age,
+        avatar: user.avatar,
+      },
+      message: UserMessages.UPDATE_PROFILE_SUCCESS,
+    }
   }
 }

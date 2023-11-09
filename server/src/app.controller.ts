@@ -1,5 +1,5 @@
 import { Controller, Get } from '@nestjs/common'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { AppService } from './app.service'
 import { SkipJwtAuth } from './auth/decorators/skip-jwt.decorator'
 
@@ -9,6 +9,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @SkipJwtAuth()
+  @ApiOperation({ summary: 'Ping server' })
   @Get('ping')
   ping(): { success: boolean; message: string } {
     return this.appService.ping()

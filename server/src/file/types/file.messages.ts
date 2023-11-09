@@ -1,7 +1,7 @@
 export enum FileMessage {
-  UPLOAD_SUCCESS = 'File Media Upload Successfully',
-  DESC_BODY = 'File Media Upload',
-  UNSUPPORTED = 'File Media Unsupported Media Type',
-  REQUIRED = 'File Media Required',
-  LIMIT = 'File Media Limit',
+  UPLOAD_SUCCESS = 'File media upload successfully',
+  UPLOAD_SUMMARY = 'Upload file media',
+  DESCRIPTION = 'Accept file media with type: image/*',
+  UNSUPPORTED = 'File media unsupported media type',
+  REQUIRED = 'File media required',
 }

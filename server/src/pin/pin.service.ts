@@ -36,7 +36,7 @@ export class PinService {
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_SUCCESS,
+      message: PinMessages.GET_ALL_SUCCESS,
     }
   }
 
@@ -52,7 +52,7 @@ export class PinService {
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_SUCCESS,
+      message: PinMessages.GET_PAGINATION_SUCCESS,
     }
   }
 
@@ -65,7 +65,7 @@ export class PinService {
 
     return {
       data: pin,
-      message: PinMessages.GET_SUCCESS,
+      message: PinMessages.GET_ID_SUCCESS,
     }
   }
 
@@ -77,7 +77,7 @@ export class PinService {
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_SUCCESS,
+      message: PinMessages.GET_AUTHOR_SUCCESS,
     }
   }
 
@@ -100,7 +100,7 @@ export class PinService {
 
     return {
       data: null,
-      message: PinMessages.DELETED_SUCCESS,
+      message: PinMessages.DELETE_SUCCESS,
     }
   }
 }

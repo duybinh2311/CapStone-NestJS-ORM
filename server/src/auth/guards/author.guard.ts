@@ -6,7 +6,7 @@ import { Pin } from '@prisma/client'
 import { Request } from 'express'
 
 @Injectable()
-export class AuthorPinGuard implements CanActivate {
+export class AuthorGuard implements CanActivate {
   constructor(private pinService: PinService) {}
 
   private canAction = (authUser: AuthUserDto, pin: Pin, req: Request) => {

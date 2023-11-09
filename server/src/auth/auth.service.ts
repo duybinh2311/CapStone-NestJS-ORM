@@ -3,7 +3,6 @@ import { JwtService } from '@nestjs/jwt'
 import { IRes } from 'src/common/types/app.types'
 import { UserService } from 'src/user/user.service'
 import { AuthUserDto } from './dto/auth-user.dto'
-import { ProfileUserDto } from './dto/profile-user'
 import { SignInResDto } from './dto/sign-in.dto'
 import { SignUpDto, SignUpResDto } from './dto/sign-up.dto'
 import { AuthMessages } from './types/auth.messages'
@@ -34,34 +33,6 @@ export class AuthService {
         age: user.age,
       },
       message: AuthMessages.SIGN_UP_SUCCESS,
-    }
-  }
-
-  async getProfile(authUser: AuthUserDto): IRes<ProfileUserDto> {
-    const user = await this.userService.getById(authUser.userId)
-
-    return {
-      data: {
-        email: user.email,
-        fullName: user.fullName,
-        age: user.age,
-        avatar: user.avatar,
-      },
-      message: AuthMessages.GET_PROFILE_SUCCESS,
-    }
-  }
-
-  async updateProfile(authUser: AuthUserDto, profileUserDto: ProfileUserDto): IRes<ProfileUserDto> {
-    const user = await this.userService.update(authUser, profileUserDto)
-
-    return {
-      data: {
-        email: user.email,
-        fullName: user.fullName,
-        age: user.age,
-        avatar: user.avatar,
-      },
-      message: AuthMessages.UPDATE_PROFILE_SUCCESS,
     }
   }
 }

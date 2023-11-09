@@ -18,7 +18,7 @@ import { FileMessage } from './types/file.messages'
         return callback(new UnsupportedMediaTypeException(FileMessage.UNSUPPORTED), false)
       },
       limits: {
-        fileSize: 10e6,
+        fileSize: 5e6,
       },
       storage: diskStorage({
         destination: process.cwd() + '/assets/images',
