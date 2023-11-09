@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
-import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { CommentService } from './comment.service'
 import { CommentMessages } from './types/comment.messages'
 import { CommentResDto, CreateCommentDto, UpdateCommentDto } from './dto'
@@ -14,7 +13,7 @@ export class CommentController {
   @ApiOperation({ summary: CommentMessages.CREATE_SUMMARY })
   @ApiCreatedResponse({ description: CommentMessages.CREATE_SUCCESS, type: CommentResDto })
   @Post()
-  create(@Body() dto: CreateCommentDto, @AuthUser() authUser: AuthUserDto) {
+  create(@Body() dto: CreateCommentDto, @AuthUser() authUser: AuthUser) {
     return this.commentService.create(dto, authUser)
   }
 

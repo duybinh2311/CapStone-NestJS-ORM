@@ -1,16 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
-import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { IRes, IResList } from 'src/common/types/app.types'
 import { CreatePinDto, PinResDto, UpdatePinDto } from './dto'
 import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
 import { PinMessages } from './types/pin.messages'
+import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 
 @Injectable()
 export class PinService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(dto: CreatePinDto, authUser: AuthUserDto): IRes<PinResDto> {
+  async create(dto: CreatePinDto, authUser: AuthUser): IRes<PinResDto> {
     const pin = await this.prisma.pin.create({
       data: {
         ...dto,
@@ -99,7 +99,7 @@ export class PinService {
     }
   }
 
-  async getByAuthor(authUser: AuthUserDto): IResList<PinResDto> {
+  async getByAuthor(authUser: AuthUser): IResList<PinResDto> {
     const data = await this.prisma.pin.findMany({
       where: { authorId: authUser.userId },
       include: {

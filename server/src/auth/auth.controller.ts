@@ -3,11 +3,9 @@ import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestj
 import { AuthService } from './auth.service'
 import { AuthUser } from './decorators/auth-user.decorator'
 import { SkipJwtAuth } from './decorators/skip-jwt.decorator'
-import { AuthUserDto } from './dto/auth-user.dto'
-import { SignInDto, SignInResDto } from './dto/sign-in.dto'
-import { SignUpDto, SignUpResDto } from './dto/sign-up.dto'
 import { LocalAuthGuard } from './guards/local.guard'
 import { AuthMessages } from './types/auth.messages'
+import { SignInResDto, SignInDto, SignUpResDto, SignUpDto } from './dto'
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -20,7 +18,7 @@ export class AuthController {
   @ApiOkResponse({ description: AuthMessages.SIGN_IN_SUCCESS, type: SignInResDto })
   @HttpCode(200)
   @Post('sign-in')
-  signIn(@AuthUser() authUser: AuthUserDto, @Body() _: SignInDto) {
+  signIn(@AuthUser() authUser: AuthUser, @Body() _: SignInDto) {
     return this.authService.signIn(authUser)
   }
 

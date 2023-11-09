@@ -2,12 +2,11 @@ import * as bcrypt from 'bcrypt'
 import { User } from '@prisma/client'
 import { ConflictException, Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
-import { CreateUserDto } from './dto/create-user.dto'
-import { UpdateUserDto } from './dto/update-user.dto'
 import { UserMessages } from './types/user.messages'
-import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { IRes } from 'src/common/types/app.types'
-import { ProfileUserDto } from './dto/profile-user'
+import { ProfileUserDto } from './dto/user-req.dto'
+import { SignUpDto } from 'src/auth/dto'
+import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 
 @Injectable()
 export class UserService {
@@ -21,7 +20,7 @@ export class UserService {
     if (emailExists) throw new ConflictException(UserMessages.EMAIL_EXISTS)
   }
 
-  async create(dto: CreateUserDto): Promise<User> {
+  async create(dto: SignUpDto): Promise<User> {
     await this.checkEmailExists(dto.email)
 
     return await this.prisma.user.create({
@@ -44,7 +43,7 @@ export class UserService {
     })
   }
 
-  async update(authUser: AuthUserDto, dto: UpdateUserDto): Promise<User> {
+  async update(authUser: AuthUser, dto: ProfileUserDto): Promise<User> {
     const user = dto.email && (await this.getByEmail(dto.email))
 
     if (user && user.id !== authUser.userId) throw new ConflictException(UserMessages.EMAIL_EXISTS)
@@ -55,7 +54,7 @@ export class UserService {
     })
   }
 
-  async getProfile(authUser: AuthUserDto): IRes<ProfileUserDto> {
+  async getProfile(authUser: AuthUser): IRes<ProfileUserDto> {
     const user = await this.getById(authUser.userId)
 
     return {
@@ -69,7 +68,7 @@ export class UserService {
     }
   }
 
-  async updateProfile(authUser: AuthUserDto, dto: ProfileUserDto): IRes<ProfileUserDto> {
+  async updateProfile(authUser: AuthUser, dto: ProfileUserDto): IRes<ProfileUserDto> {
     const user = await this.update(authUser, dto)
 
     return {

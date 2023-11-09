@@ -1,8 +1,8 @@
-import { NestFactory } from '@nestjs/core'
-import { AppModule } from './app.module'
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { Logger, ValidationPipe } from '@nestjs/common'
+import { NestFactory } from '@nestjs/core'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import * as express from 'express'
+import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -30,8 +30,8 @@ async function bootstrap() {
   const port = process.env.PORT || 4000
   await app.listen(port)
 
-  Logger.log(`Environment: ${process.env.NODE_ENV}`)
-  Logger.log(`Server running on http://localhost:${port}`)
-  Logger.log(`Swagger running on http://localhost:${port}/docs`)
+  Logger.debug(`Environment: ${process.env.NODE_ENV}`)
+  Logger.debug(`Server running on http://localhost:${port}`)
+  Logger.debug(`Swagger running on http://localhost:${port}/docs`)
 }
 bootstrap()

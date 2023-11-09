@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt'
 import { Strategy } from 'passport-local'
 import { UserService } from 'src/user/user.service'
 import { AuthMessages } from '../types/auth.messages'
-import { AuthUserDto } from '../dto/auth-user.dto'
+import { AuthUser } from '../decorators/auth-user.decorator'
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -15,7 +15,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  async validate(email: string, password: string): Promise<AuthUserDto> {
+  async validate(email: string, password: string): Promise<AuthUser> {
     const user = await this.userService.getByEmail(email)
 
     if (!user) {

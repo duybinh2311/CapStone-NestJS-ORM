@@ -1,15 +1,15 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common'
 import { PinService } from '../../pin/pin.service'
 import { PinMessages } from '../../pin/types/pin.messages'
-import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { Pin } from '@prisma/client'
 import { Request } from 'express'
+import { AuthUser } from '../decorators/auth-user.decorator'
 
 @Injectable()
 export class AuthorGuard implements CanActivate {
   constructor(private pinService: PinService) {}
 
-  private canAction = (authUser: AuthUserDto, pin: Pin, req: Request) => {
+  private canAction = (authUser: AuthUser, pin: Pin, req: Request) => {
     const allowAction = pin.authorId === authUser.userId
 
     switch (req.method) {

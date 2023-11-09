@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
-import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { AuthorGuard } from '../auth/guards/author.guard'
 import { CreatePinDto, PinResDto, UpdatePinDto } from './dto'
 import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
@@ -16,7 +15,7 @@ export class PinController {
   @ApiOperation({ summary: PinMessages.CREATE_SUMMARY })
   @ApiCreatedResponse({ description: PinMessages.CREATE_SUCCESS, type: PinResDto })
   @Post()
-  create(@Body() dto: CreatePinDto, @AuthUser() authUser: AuthUserDto) {
+  create(@Body() dto: CreatePinDto, @AuthUser() authUser: AuthUser) {
     return this.pinService.create(dto, authUser)
   }
 

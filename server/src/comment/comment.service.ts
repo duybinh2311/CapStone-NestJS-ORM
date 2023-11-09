@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
-import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
-import { SortOrderEnum } from 'src/common/dto/query.dto'
+import { SortOrderEnum } from 'src/common/dto/_query.dto'
 import { IRes, IResList } from 'src/common/types/app.types'
 import { CommentMessages } from './types/comment.messages'
 import { CreateCommentDto, CommentResDto, UpdateCommentDto } from './dto'
+import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 
 @Injectable()
 export class CommentService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(dto: CreateCommentDto, authUser: AuthUserDto): IRes<CommentResDto> {
+  async create(dto: CreateCommentDto, authUser: AuthUser): IRes<CommentResDto> {
     const comment = await this.prisma.comment.create({
       data: {
         ...dto,

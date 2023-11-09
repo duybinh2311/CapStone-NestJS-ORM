@@ -2,10 +2,9 @@ import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { IRes } from 'src/common/types/app.types'
 import { UserService } from 'src/user/user.service'
-import { AuthUserDto } from './dto/auth-user.dto'
-import { SignInResDto } from './dto/sign-in.dto'
-import { SignUpDto, SignUpResDto } from './dto/sign-up.dto'
 import { AuthMessages } from './types/auth.messages'
+import { SignInResDto, SignUpDto, SignUpResDto } from './dto'
+import { AuthUser } from './decorators/auth-user.decorator'
 
 @Injectable()
 export class AuthService {
@@ -14,7 +13,7 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  async signIn(authUser: AuthUserDto): IRes<SignInResDto> {
+  async signIn(authUser: AuthUser): IRes<SignInResDto> {
     return {
       data: {
         accessToken: await this.jwtService.signAsync(authUser),
