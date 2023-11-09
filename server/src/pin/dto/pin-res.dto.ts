@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Comment, Pin } from '@prisma/client'
+import { Pin } from '@prisma/client'
+import { AuthorDto } from 'src/common/dto'
 
-export class PinEntity implements Pin {
+export class PinResDto implements Pin {
   @ApiProperty()
   id: number
 
@@ -22,4 +23,7 @@ export class PinEntity implements Pin {
 
   @ApiProperty()
   updatedAt: Date
+
+  @ApiProperty()
+  author: AuthorDto
 }

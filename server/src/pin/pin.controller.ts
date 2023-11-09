@@ -3,10 +3,8 @@ import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestj
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { AuthorGuard } from '../auth/guards/author.guard'
-import { CreatePinDto } from './dto/create-pin.dto'
-import { PinPaginationQueryDto, PinQuery } from './dto/pin-query.dto'
-import { UpdatePinDto } from './dto/update-pin.dto'
-import { PinEntity } from './entities/pin.entity'
+import { CreatePinDto, PinResDto, UpdatePinDto } from './dto'
+import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
 import { PinService } from './pin.service'
 import { PinMessages } from './types/pin.messages'
 
@@ -16,28 +14,28 @@ export class PinController {
   constructor(private readonly pinService: PinService) {}
 
   @ApiOperation({ summary: PinMessages.CREATE_SUMMARY })
-  @ApiCreatedResponse({ description: PinMessages.CREATE_SUCCESS, type: PinEntity })
+  @ApiCreatedResponse({ description: PinMessages.CREATE_SUCCESS, type: PinResDto })
   @Post()
   create(@Body() dto: CreatePinDto, @AuthUser() authUser: AuthUserDto) {
     return this.pinService.create(dto, authUser)
   }
 
   @ApiOperation({ summary: PinMessages.GET_ALL_SUMMARY })
-  @ApiOkResponse({ description: PinMessages.GET_ALL_SUCCESS, type: [PinEntity] })
+  @ApiOkResponse({ description: PinMessages.GET_ALL_SUCCESS, type: [PinResDto] })
   @Get()
-  getAll(@Query() query: PinQuery) {
+  getAll(@Query() query: PinQueryDto) {
     return this.pinService.getAll(query)
   }
 
   @ApiOperation({ summary: PinMessages.GET_PAGINATION_SUMMARY })
-  @ApiOkResponse({ description: PinMessages.GET_PAGINATION_SUCCESS, type: [PinEntity] })
+  @ApiOkResponse({ description: PinMessages.GET_PAGINATION_SUCCESS, type: [PinResDto] })
   @Get('pagination')
   getPagination(@Query() query: PinPaginationQueryDto) {
     return this.pinService.getPagination(query)
   }
 
   @ApiOperation({ summary: PinMessages.GET_ID_SUMMARY })
-  @ApiOkResponse({ description: PinMessages.GET_ID_SUCCESS, type: PinEntity })
+  @ApiOkResponse({ description: PinMessages.GET_ID_SUCCESS, type: PinResDto })
   @Get(':id')
   getById(@Param('id') id: string) {
     return this.pinService.getById(+id)
@@ -45,7 +43,7 @@ export class PinController {
 
   @UseGuards(AuthorGuard)
   @ApiOperation({ summary: PinMessages.UPDATE_SUMMARY })
-  @ApiOkResponse({ description: PinMessages.UPDATE_SUCCESS, type: PinEntity })
+  @ApiOkResponse({ description: PinMessages.UPDATE_SUCCESS, type: PinResDto })
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdatePinDto) {
     return this.pinService.update(+id, dto)

@@ -1,22 +1,28 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { Pin } from '@prisma/client'
 import { PrismaService } from 'nestjs-prisma'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { IRes, IResList } from 'src/common/types/app.types'
-import { CreatePinDto } from './dto/create-pin.dto'
-import { PinPaginationQueryDto, PinQuery } from './dto/pin-query.dto'
-import { UpdatePinDto } from './dto/update-pin.dto'
+import { CreatePinDto, PinResDto, UpdatePinDto } from './dto'
+import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
 import { PinMessages } from './types/pin.messages'
 
 @Injectable()
 export class PinService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(dto: CreatePinDto, authUser: AuthUserDto): IRes<Pin> {
+  async create(dto: CreatePinDto, authUser: AuthUserDto): IRes<PinResDto> {
     const pin = await this.prisma.pin.create({
       data: {
         ...dto,
         authorId: authUser.userId,
+      },
+      include: {
+        author: {
+          select: {
+            fullName: true,
+            avatar: true,
+          },
+        },
       },
     })
 
@@ -26,10 +32,18 @@ export class PinService {
     }
   }
 
-  async getAll(query: PinQuery): IResList<Pin> {
+  async getAll(query: PinQueryDto): IResList<PinResDto> {
     const data = await this.prisma.pin.findMany({
       orderBy: {
         [query.sortBy]: query.sortOrder,
+      },
+      include: {
+        author: {
+          select: {
+            fullName: true,
+            avatar: true,
+          },
+        },
       },
     })
 
@@ -40,12 +54,20 @@ export class PinService {
     }
   }
 
-  async getPagination(query: PinPaginationQueryDto): IResList<Pin> {
+  async getPagination(query: PinPaginationQueryDto): IResList<PinResDto> {
     const data = await this.prisma.pin.findMany({
       take: query.pageSize,
       skip: (query.page - 1) * query.pageSize,
       orderBy: {
         createdAt: query.sortOrder,
+      },
+      include: {
+        author: {
+          select: {
+            fullName: true,
+            avatar: true,
+          },
+        },
       },
     })
 
@@ -56,9 +78,17 @@ export class PinService {
     }
   }
 
-  async getById(id: number): IRes<Pin> {
+  async getById(id: number): IRes<PinResDto> {
     const pin = await this.prisma.pin.findUnique({
       where: { id },
+      include: {
+        author: {
+          select: {
+            fullName: true,
+            avatar: true,
+          },
+        },
+      },
     })
 
     if (!pin) throw new NotFoundException(PinMessages.NOT_FOUND)
@@ -69,9 +99,17 @@ export class PinService {
     }
   }
 
-  async getByAuthor(authUser: AuthUserDto): IResList<Pin> {
+  async getByAuthor(authUser: AuthUserDto): IResList<PinResDto> {
     const data = await this.prisma.pin.findMany({
       where: { authorId: authUser.userId },
+      include: {
+        author: {
+          select: {
+            fullName: true,
+            avatar: true,
+          },
+        },
+      },
     })
 
     return {
@@ -81,10 +119,18 @@ export class PinService {
     }
   }
 
-  async update(id: number, dto: UpdatePinDto): IRes<Pin> {
+  async update(id: number, dto: UpdatePinDto): IRes<PinResDto> {
     const pin = await this.prisma.pin.update({
       where: { id },
       data: dto,
+      include: {
+        author: {
+          select: {
+            fullName: true,
+            avatar: true,
+          },
+        },
+      },
     })
 
     return {
@@ -93,7 +139,7 @@ export class PinService {
     }
   }
 
-  async delete(id: number): IRes<Pin> {
+  async delete(id: number): IRes<PinResDto> {
     await this.prisma.pin.delete({
       where: { id },
     })

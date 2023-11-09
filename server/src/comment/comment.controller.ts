@@ -3,10 +3,8 @@ import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestj
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { AuthUserDto } from 'src/auth/dto/auth-user.dto'
 import { CommentService } from './comment.service'
-import { CreateCommentDto } from './dto/create-comment.dto'
-import { UpdateCommentDto } from './dto/update-comment.dto'
-import { CommentEntity } from './entities/comment.entity'
 import { CommentMessages } from './types/comment.messages'
+import { CommentResDto, CreateCommentDto, UpdateCommentDto } from './dto'
 
 @ApiTags('Comment')
 @Controller('comment')
@@ -14,28 +12,21 @@ export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
   @ApiOperation({ summary: CommentMessages.CREATE_SUMMARY })
-  @ApiCreatedResponse({ description: CommentMessages.CREATE_SUCCESS, type: CommentEntity })
+  @ApiCreatedResponse({ description: CommentMessages.CREATE_SUCCESS, type: CommentResDto })
   @Post()
   create(@Body() dto: CreateCommentDto, @AuthUser() authUser: AuthUserDto) {
     return this.commentService.create(dto, authUser)
   }
 
-  @ApiOperation({ summary: CommentMessages.GET_ALL_SUMMARY })
-  @ApiOkResponse({ description: CommentMessages.GET_ALL_SUCCESS, type: [CommentEntity] })
-  @Get()
-  getAll() {
-    return this.commentService.getAll()
-  }
-
-  @ApiOperation({ summary: CommentMessages.GET_ID_SUMMARY })
-  @ApiOkResponse({ description: CommentMessages.GET_ID_SUCCESS, type: CommentEntity })
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.commentService.getById(+id)
+  @ApiOperation({ summary: CommentMessages.GET_PIN_ID_SUMMARY })
+  @ApiOkResponse({ description: CommentMessages.GET_PIN_ID_SUCCESS, type: [CommentResDto] })
+  @Get(':pinId')
+  getByPinId(@Param('pinId') pinId: string) {
+    return this.commentService.getByPinId(+pinId)
   }
 
   @ApiOperation({ summary: CommentMessages.UPDATE_SUMMARY })
-  @ApiOkResponse({ description: CommentMessages.UPDATE_SUCCESS, type: CommentEntity })
+  @ApiOkResponse({ description: CommentMessages.UPDATE_SUCCESS, type: CommentResDto })
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdateCommentDto) {
     return this.commentService.update(+id, dto)

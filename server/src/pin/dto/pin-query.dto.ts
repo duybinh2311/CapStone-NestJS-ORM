@@ -8,7 +8,7 @@ enum SortByEnum {
   title = 'title',
 }
 
-export class PinQuery extends QueryDto {
+export class PinQueryDto extends QueryDto {
   @ApiProperty({ required: false, enum: SortByEnum })
   @IsOptional()
   @IsEnum(SortByEnum)
