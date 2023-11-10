@@ -1,8 +1,11 @@
+import { diskStorage } from 'multer'
 import * as path from 'path'
+
 import { Module, UnsupportedMediaTypeException } from '@nestjs/common'
 import { MulterModule } from '@nestjs/platform-express'
-import { diskStorage } from 'multer'
+
 import { StringUtils } from 'src/utils/string.utils'
+
 import { FileController } from './file.controller'
 import { FileService } from './file.service'
 import { FileMessage } from './types/file.messages'

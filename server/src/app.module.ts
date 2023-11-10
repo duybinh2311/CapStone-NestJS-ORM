@@ -1,15 +1,17 @@
-import { Module } from '@nestjs/common'
-import { ConfigModule, ConfigService } from '@nestjs/config'
 import { PrismaModule } from 'nestjs-prisma'
+
+import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
+import { APP_GUARD } from '@nestjs/core'
+
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
-import { UserModule } from './user/user.module'
-import { APP_GUARD } from '@nestjs/core'
 import { JwtAuthGuard } from './auth/guards/jwt.guard'
-import { PinModule } from './pin/pin.module'
-import { FileModule } from './file/file.module'
 import { CommentModule } from './comment/comment.module'
+import { FileModule } from './file/file.module'
+import { PinModule } from './pin/pin.module'
+import { UserModule } from './user/user.module'
 
 @Module({
   imports: [

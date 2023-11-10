@@ -1,7 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
-import { FileMessage } from './types/file.messages'
+
 import { IRes } from 'src/common/types/app.types'
-import { FileUploadResDto } from './dto'
+
+import { FileUploadResDto } from './dto/file-res.dto'
+import { FileMessage } from './types/file.messages'
 
 @Injectable()
 export class FileService {

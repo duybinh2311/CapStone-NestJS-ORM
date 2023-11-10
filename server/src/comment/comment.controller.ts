@@ -1,9 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
+
 import { CommentService } from './comment.service'
+import { CreateCommentDto, UpdateCommentDto } from './dto/comment-req.dto'
+import { CommentResDto } from './dto/comment-res.dto'
 import { CommentMessages } from './types/comment.messages'
-import { CommentResDto, CreateCommentDto, UpdateCommentDto } from './dto'
 
 @ApiTags('Comment')
 @Controller('comment')

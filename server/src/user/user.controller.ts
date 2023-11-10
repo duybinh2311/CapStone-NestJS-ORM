@@ -1,11 +1,13 @@
 import { Body, Controller, Get, Patch } from '@nestjs/common'
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+
+import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
+import { PinResDto } from 'src/pin/dto/pin-res.dto'
 import { PinService } from 'src/pin/pin.service'
+
+import { ProfileUserDto } from './dto/user-req.dto'
 import { UserMessages } from './types/user.messages'
 import { UserService } from './user.service'
-import { PinResDto } from 'src/pin/dto'
-import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
-import { ProfileUserDto } from './dto'
 
 @ApiTags('User')
 @Controller('user')

@@ -1,8 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
+
 import { AuthorGuard } from '../auth/guards/author.guard'
-import { CreatePinDto, PinPaginationQueryDto, PinQueryDto, PinResDto, UpdatePinDto } from './dto'
+import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
+import { CreatePinDto, UpdatePinDto } from './dto/pin-req.dto'
+import { PinResDto } from './dto/pin-res.dto'
 import { PinService } from './pin.service'
 import { PinMessages } from './types/pin.messages'
 

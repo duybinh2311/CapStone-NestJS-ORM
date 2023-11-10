@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+
 import { IRes } from 'src/common/types/app.types'
 import { UserService } from 'src/user/user.service'
-import { AuthMessages } from './types/auth.messages'
-import { SignInResDto, SignUpDto, SignUpResDto } from './dto'
+
 import { AuthUser } from './decorators/auth-user.decorator'
+import { SignUpDto } from './dto/auth-req.dto'
+import { SignInResDto, SignUpResDto } from './dto/auth-res.dto'
+import { AuthMessages } from './types/auth.messages'
 
 @Injectable()
 export class AuthService {

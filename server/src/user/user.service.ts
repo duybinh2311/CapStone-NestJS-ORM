@@ -1,12 +1,15 @@
-import * as bcrypt from 'bcrypt'
 import { User } from '@prisma/client'
-import { ConflictException, Injectable } from '@nestjs/common'
+import * as bcrypt from 'bcrypt'
 import { PrismaService } from 'nestjs-prisma'
-import { UserMessages } from './types/user.messages'
-import { IRes } from 'src/common/types/app.types'
-import { SignUpDto } from 'src/auth/dto'
+
+import { ConflictException, Injectable } from '@nestjs/common'
+
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
-import { ProfileUserDto } from './dto'
+import { SignUpDto } from 'src/auth/dto/auth-req.dto'
+import { IRes } from 'src/common/types/app.types'
+
+import { ProfileUserDto } from './dto/user-req.dto'
+import { UserMessages } from './types/user.messages'
 
 @Injectable()
 export class UserService {
