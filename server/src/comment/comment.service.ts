@@ -1,6 +1,6 @@
-import { PrismaService } from 'nestjs-prisma'
+import { Injectable, NotFoundException } from '@nestjs/common'
 
-import { Injectable } from '@nestjs/common'
+import { PrismaService } from 'nestjs-prisma'
 
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { SortOrderEnum } from 'src/common/dto/app-query.dto'
@@ -61,8 +61,47 @@ export class CommentService {
     }
   }
 
-  update(id: number, updateCommentDto: UpdateCommentDto) {
-    return `This action updates a #${id} comment`
+  async getById(id: number): IRes<CommentResDto> {
+    const comment = await this.prisma.comment.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        author: {
+          select: {
+            fullName: true,
+            avatar: true,
+          },
+        },
+      },
+    })
+
+    if (!comment) throw new NotFoundException(CommentMessages.NOT_FOUND)
+
+    return {
+      data: comment,
+      message: CommentMessages.GET_ID_SUCCESS,
+    }
+  }
+
+  async update(id: number, updateCommentDto: UpdateCommentDto): IRes<CommentResDto> {
+    const comment = await this.prisma.comment.update({
+      where: { id },
+      data: updateCommentDto,
+      include: {
+        author: {
+          select: {
+            fullName: true,
+            avatar: true,
+          },
+        },
+      },
+    })
+
+    return {
+      data: comment,
+      message: CommentMessages.UPDATE_SUCCESS,
+    }
   }
 
   delete(id: number) {

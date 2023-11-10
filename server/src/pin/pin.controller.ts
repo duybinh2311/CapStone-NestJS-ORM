@@ -3,10 +3,10 @@ import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestj
 
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 
-import { AuthorGuard } from '../auth/guards/author.guard'
 import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
 import { CreatePinDto, UpdatePinDto } from './dto/pin-req.dto'
 import { PinResDto } from './dto/pin-res.dto'
+import { AuthorPinGuard } from './guards/author-pin.guard'
 import { PinService } from './pin.service'
 import { PinMessages } from './types/pin.messages'
 
@@ -43,7 +43,7 @@ export class PinController {
     return this.pinService.getById(+id)
   }
 
-  @UseGuards(AuthorGuard)
+  @UseGuards(AuthorPinGuard)
   @ApiOperation({ summary: PinMessages.UPDATE_SUMMARY })
   @ApiOkResponse({ description: PinMessages.UPDATE_SUCCESS, type: PinResDto })
   @Patch(':id')
@@ -51,7 +51,7 @@ export class PinController {
     return this.pinService.update(+id, dto)
   }
 
-  @UseGuards(AuthorGuard)
+  @UseGuards(AuthorPinGuard)
   @ApiOperation({ summary: PinMessages.DELETE_SUMMARY })
   @ApiOkResponse({ description: PinMessages.DELETE_SUCCESS })
   @Delete(':id')

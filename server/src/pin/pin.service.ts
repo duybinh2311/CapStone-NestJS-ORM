@@ -1,6 +1,6 @@
-import { PrismaService } from 'nestjs-prisma'
-
 import { Injectable, NotFoundException } from '@nestjs/common'
+
+import { PrismaService } from 'nestjs-prisma'
 
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { IRes, IResList } from 'src/common/types/app.types'

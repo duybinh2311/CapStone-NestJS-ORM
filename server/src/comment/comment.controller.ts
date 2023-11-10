@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
@@ -6,6 +6,7 @@ import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { CommentService } from './comment.service'
 import { CreateCommentDto, UpdateCommentDto } from './dto/comment-req.dto'
 import { CommentResDto } from './dto/comment-res.dto'
+import { AuthorCommentGuard } from './guards/author-comment.guard'
 import { CommentMessages } from './types/comment.messages'
 
 @ApiTags('Comment')
@@ -27,6 +28,7 @@ export class CommentController {
     return this.commentService.getByPinId(+pinId)
   }
 
+  @UseGuards(AuthorCommentGuard)
   @ApiOperation({ summary: CommentMessages.UPDATE_SUMMARY })
   @ApiOkResponse({ description: CommentMessages.UPDATE_SUCCESS, type: CommentResDto })
   @Patch(':id')
@@ -34,10 +36,11 @@ export class CommentController {
     return this.commentService.update(+id, dto)
   }
 
+  @UseGuards(AuthorCommentGuard)
   @ApiOperation({ summary: CommentMessages.DELETE_SUMMARY })
   @ApiOkResponse({ description: CommentMessages.DELETE_SUCCESS })
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  delete(@Param('id') id: string) {
     return this.commentService.delete(+id)
   }
 }

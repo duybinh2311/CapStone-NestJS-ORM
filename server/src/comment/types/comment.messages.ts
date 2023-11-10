@@ -1,10 +1,14 @@
 export enum CommentMessages {
   CREATE_SUCCESS = 'Comment created successfully',
+  GET_PIN_ID_SUCCESS = 'Get all comments by Pin ID successfully',
+  GET_ID_SUCCESS = 'Get comment by ID successfully',
   UPDATE_SUCCESS = 'Comment updated successfully',
   DELETE_SUCCESS = 'Comment deleted successfully',
-  GET_PIN_ID_SUCCESS = 'Get all comments by Pin ID successfully',
   CREATE_SUMMARY = 'Create comment',
+  GET_PIN_ID_SUMMARY = 'Get all comments by Pin ID',
   UPDATE_SUMMARY = 'Update comment',
   DELETE_SUMMARY = 'Delete comment',
-  GET_PIN_ID_SUMMARY = 'Get all comments by Pin ID',
+  NOT_FOUND = 'Comment not found',
+  FORBIDDEN_UPDATE = 'You are not allow to update this comment',
+  FORBIDDEN_DELETE = 'You are not allow to delete this comment',
 }
