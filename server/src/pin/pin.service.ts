@@ -143,7 +143,7 @@ export class PinService {
     }
   }
 
-  async delete(id: number): IRes<PinResDto> {
+  async delete(id: number): IRes<null> {
     await this.prisma.pin.delete({
       where: { id },
     })

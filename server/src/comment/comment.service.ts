@@ -104,7 +104,14 @@ export class CommentService {
     }
   }
 
-  delete(id: number) {
-    return `This action removes a #${id} comment`
+  async delete(id: number): IRes<null> {
+    await this.prisma.comment.delete({
+      where: { id },
+    })
+
+    return {
+      data: null,
+      message: CommentMessages.DELETE_SUCCESS,
+    }
   }
 }
