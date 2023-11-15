@@ -1,28 +1,10 @@
-import { Comment } from '@prisma/client'
-
 import { ApiProperty } from '@nestjs/swagger'
 
 import { AuthorDto } from 'src/common/dto/app-req.dto'
 
-export class CommentResDto implements Comment {
-  @ApiProperty()
-  id: number
+import { CommentEntity } from '../entities/comment.entity'
 
-  @ApiProperty()
-  content: string
-
-  @ApiProperty()
-  authorId: number
-
-  @ApiProperty()
-  pinId: number
-
-  @ApiProperty()
-  createdAt: Date
-
-  @ApiProperty()
-  updatedAt: Date
-
+export class CommentResDto extends CommentEntity {
   @ApiProperty()
   author: AuthorDto
 }

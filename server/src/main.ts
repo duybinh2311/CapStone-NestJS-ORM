@@ -32,8 +32,8 @@ async function bootstrap() {
   const port = process.env.PORT || 4000
   await app.listen(port)
 
-  Logger.debug(`Environment: ${process.env.NODE_ENV}`)
-  Logger.debug(`Server running on http://localhost:${port}`)
-  Logger.debug(`Swagger running on http://localhost:${port}/docs`)
+  Logger.verbose(`Environment: ${process.env.NODE_ENV}`)
+  Logger.verbose(`Server running on http://localhost:${port}`)
+  Logger.verbose(`Swagger running on http://localhost:${port}/docs`)
 }
 bootstrap()

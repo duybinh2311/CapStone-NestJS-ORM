@@ -3,9 +3,9 @@ import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@
 import { Request } from 'express'
 
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
+import { CommentService } from 'src/comment/comment.service'
+import { CommentEntity } from 'src/comment/entities/comment.entity'
 
-import { CommentService } from '../comment.service'
-import { CommentResDto } from '../dto/comment-res.dto'
 import { CommentMessages } from '../types/comment.messages'
 
 @Injectable()
@@ -23,7 +23,7 @@ export class AuthorCommentGuard implements CanActivate {
     return this.canAction(user, comment, req)
   }
 
-  private canAction(authUser: AuthUser, comment: CommentResDto, req: Request) {
+  private canAction(authUser: AuthUser, comment: CommentEntity, req: Request) {
     const allowAction = comment.authorId === authUser.userId
 
     switch (req.method) {

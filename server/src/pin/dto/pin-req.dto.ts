@@ -1,10 +1,10 @@
-import { Pin } from '@prisma/client'
-
 import { ApiProperty } from '@nestjs/swagger'
 
 import { IsOptional, IsString } from 'class-validator'
 
-export class CreatePinDto implements Partial<Pin> {
+import { PinEntity } from '../entities/pin.entity'
+
+export class CreatePinDto implements Partial<PinEntity> {
   @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
@@ -20,7 +20,7 @@ export class CreatePinDto implements Partial<Pin> {
   path: string
 }
 
-export class UpdatePinDto implements Partial<Pin> {
+export class UpdatePinDto implements Partial<PinEntity> {
   @ApiProperty({ required: false })
   @IsString()
   @IsOptional()

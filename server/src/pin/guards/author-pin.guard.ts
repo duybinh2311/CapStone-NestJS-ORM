@@ -1,11 +1,12 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from '@nestjs/common'
 
-import { Pin } from '@prisma/client'
 import { Request } from 'express'
 
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
-import { PinService } from 'src/pin/pin.service'
-import { PinMessages } from 'src/pin/types/pin.messages'
+
+import { PinEntity } from '../entities/pin.entity'
+import { PinService } from '../pin.service'
+import { PinMessages } from '../types/pin.messages'
 
 @Injectable()
 export class AuthorPinGuard implements CanActivate {
@@ -22,7 +23,7 @@ export class AuthorPinGuard implements CanActivate {
     return this.canAction(user, pin, req)
   }
 
-  private canAction(authUser: AuthUser, pin: Pin, req: Request) {
+  private canAction(authUser: AuthUser, pin: PinEntity, req: Request) {
     const allowAction = pin.authorId === authUser.userId
 
     switch (req.method) {
