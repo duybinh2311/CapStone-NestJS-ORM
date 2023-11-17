@@ -4,8 +4,8 @@ import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestj
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 
 import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
-import { CreatePinDto, UpdatePinDto } from './dto/pin-req.dto'
-import { PinResDto } from './dto/pin-res.dto'
+import { CreatePinDto, SavePinDto, UpdatePinDto } from './dto/pin-req.dto'
+import { PinResDto, SavePinResDto } from './dto/pin-res.dto'
 import { AuthorPinGuard } from './guards/author-pin.guard'
 import { PinService } from './pin.service'
 import { PinMessages } from './types/pin.messages'
@@ -17,9 +17,16 @@ export class PinController {
 
   @ApiOperation({ summary: PinMessages.CREATE_SUMMARY })
   @ApiCreatedResponse({ description: PinMessages.CREATE_SUCCESS, type: PinResDto })
-  @Post()
+  @Post('create')
   create(@Body() dto: CreatePinDto, @AuthUser() authUser: AuthUser) {
     return this.pinService.create(dto, authUser)
+  }
+
+  @ApiOperation({ summary: PinMessages.SAVE_SUMMARY })
+  @ApiCreatedResponse({ description: PinMessages.SAVE_SUCCESS, type: SavePinResDto })
+  @Post('save/:id')
+  save(@Param('id') id: string, @AuthUser() authUser: AuthUser) {
+    return this.pinService.save(+id, authUser)
   }
 
   @ApiOperation({ summary: PinMessages.GET_ALL_SUMMARY })

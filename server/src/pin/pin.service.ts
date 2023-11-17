@@ -1,4 +1,4 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 
 import { PrismaService } from 'nestjs-prisma'
 
@@ -7,7 +7,7 @@ import { IRes, IResList } from 'src/common/types/app.types'
 
 import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
 import { CreatePinDto, UpdatePinDto } from './dto/pin-req.dto'
-import { PinResDto } from './dto/pin-res.dto'
+import { PinResDto, SavePinResDto } from './dto/pin-res.dto'
 import { PinMessages } from './types/pin.messages'
 
 @Injectable()
@@ -33,6 +33,42 @@ export class PinService {
     return {
       data: pin,
       message: PinMessages.CREATE_SUCCESS,
+    }
+  }
+
+  async save(id: number, authUser: AuthUser): IRes<any> {
+    const pin = (await this.getById(id)).data
+
+    // const savedPin = await this.prisma.saved.findUnique({
+    //   where: {
+    //     userId_pinId: {
+    //       userId: authUser.userId,
+    //       pinId: pin.id,
+    //     },
+    //   },
+    // })
+
+    // if (savedPin) {
+    //   await this.prisma.saved.delete({
+    //     where: {
+    //       userId_pinId: {
+    //         userId: authUser.userId,
+    //         pinId: pin.id,
+    //       },
+    //     },
+    //   })
+
+    //   return {
+    //     data: null,
+    //     message: PinMessages.UNSAVE_SUCCESS,
+    //   }
+    // }
+
+    const savePin = await this.prisma.saved.findMany()
+
+    return {
+      data: savePin,
+      message: PinMessages.SAVE_SUCCESS,
     }
   }
 

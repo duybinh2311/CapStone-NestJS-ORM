@@ -84,10 +84,10 @@ export class CommentService {
     }
   }
 
-  async update(id: number, updateCommentDto: UpdateCommentDto): IRes<CommentResDto> {
+  async update(id: number, dto: UpdateCommentDto): IRes<CommentResDto> {
     const comment = await this.prisma.comment.update({
       where: { id },
-      data: updateCommentDto,
+      data: dto,
       include: {
         author: {
           select: {

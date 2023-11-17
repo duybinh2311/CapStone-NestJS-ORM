@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common'
-import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
 
 import { AuthService } from './auth.service'
 import { AuthUser } from './decorators/auth-user.decorator'
@@ -13,6 +13,7 @@ import { AuthMessages } from './types/auth.messages'
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
+  
 
   @SkipJwtAuth()
   @UseGuards(LocalAuthGuard)

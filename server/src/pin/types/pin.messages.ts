@@ -1,5 +1,7 @@
 export enum PinMessages {
   CREATE_SUCCESS = 'Pin created successfully',
+  SAVE_SUCCESS = 'Pin saved successfully',
+  UNSAVE_SUCCESS = 'Pin unsaved successfully',
   GET_ALL_SUCCESS = 'Get all pins successfully',
   GET_PAGINATION_SUCCESS = 'Get all pins with pagination successfully',
   GET_ID_SUCCESS = 'Get pin by ID successfully',
@@ -7,6 +9,7 @@ export enum PinMessages {
   UPDATE_SUCCESS = 'Pin updated successfully',
   DELETE_SUCCESS = 'Pin deleted successfully',
   CREATE_SUMMARY = 'Create pin',
+  SAVE_SUMMARY = 'Save pin',
   GET_ALL_SUMMARY = 'Get all pins',
   GET_PAGINATION_SUMMARY = 'Get all pins with pagination',
   GET_ID_SUMMARY = 'Get pin by ID',
