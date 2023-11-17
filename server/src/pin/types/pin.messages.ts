@@ -15,7 +15,8 @@ export enum PinMessages {
   GET_ID_SUCCESS = 'Get pin by ID successfully',
   GET_ID_SUMMARY = 'Get pin by ID',
 
-  GET_AUTHOR_SUCCESS = 'Get all pins by author successfully',
+  GET_CREATED_PINS_SUCCESS = 'Get all created pins by user successfully',
+  GET_SAVED_PINS_SUCCESS = 'Get all saved pins by user successfully',
 
   UPDATE_SUCCESS = 'Pin updated successfully',
   UPDATE_SUMMARY = 'Update pin',

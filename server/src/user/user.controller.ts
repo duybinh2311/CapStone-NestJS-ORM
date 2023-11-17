@@ -35,6 +35,13 @@ export class UserController {
   @ApiOkResponse({ description: UserMessages.GET_CREATED_PINS_SUCCESS, type: [PinResDto] })
   @Get('created-pins')
   getCreatedPins(@AuthUser() authUser: AuthUser) {
-    return this.pinService.getByAuthor(authUser)
+    return this.pinService.getCreatedPins(authUser)
+  }
+
+  @ApiOperation({ summary: UserMessages.GET_SAVED_PINS_SUMMARY })
+  @ApiOkResponse({ description: UserMessages.GET_SAVED_PINS_SUCCESS, type: [PinResDto] })
+  @Get('saved-pins')
+  getSavedPins(@AuthUser() authUser: AuthUser) {
+    return this.pinService.getSavedPins(authUser)
   }
 }

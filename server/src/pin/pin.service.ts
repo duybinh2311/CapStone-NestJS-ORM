@@ -5,6 +5,7 @@ import { PrismaService } from 'nestjs-prisma'
 
 import { async } from 'rxjs'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
+import { SortOrderEnum } from 'src/common/dto/app-query.dto'
 import { IRes, IResList } from 'src/common/types/app.types'
 
 import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
@@ -146,7 +147,7 @@ export class PinService {
     }
   }
 
-  async getByAuthor(authUser: AuthUser): IResList<PinResDto> {
+  async getCreatedPins(authUser: AuthUser): IResList<PinResDto> {
     const data = await this.prisma.pin.findMany({
       where: { authorId: authUser.userId },
       include: {
@@ -157,12 +158,41 @@ export class PinService {
           },
         },
       },
+      orderBy: {
+        createdAt: SortOrderEnum.DESC,
+      },
     })
 
     return {
       count: data.length,
       data,
-      message: PinMessages.GET_AUTHOR_SUCCESS,
+      message: PinMessages.GET_CREATED_PINS_SUCCESS,
+    }
+  }
+
+  async getSavedPins(authUser: AuthUser): IResList<PinResDto> {
+    const data = await this.prisma.saved.findMany({
+      where: {
+        userId: authUser.userId,
+      },
+      include: {
+        pin: true,
+        user: {
+          select: {
+            avatar: true,
+            fullName: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: SortOrderEnum.DESC,
+      },
+    })
+
+    return {
+      count: data.length,
+      data: data.map((saved) => ({ ...saved.pin, author: saved.user })),
+      message: PinMessages.GET_SAVED_PINS_SUCCESS,
     }
   }
 
