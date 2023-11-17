@@ -1,7 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 
+import { query } from 'express'
 import { PrismaService } from 'nestjs-prisma'
 
+import { async } from 'rxjs'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { IRes, IResList } from 'src/common/types/app.types'
 
@@ -36,35 +38,40 @@ export class PinService {
     }
   }
 
-  async save(id: number, authUser: AuthUser): IRes<any> {
+  async save(id: number, authUser: AuthUser): IRes<SavePinResDto> {
     const pin = (await this.getById(id)).data
 
-    // const savedPin = await this.prisma.saved.findUnique({
-    //   where: {
-    //     userId_pinId: {
-    //       userId: authUser.userId,
-    //       pinId: pin.id,
-    //     },
-    //   },
-    // })
+    const savedPin = await this.prisma.saved.findUnique({
+      where: {
+        userId_pinId: {
+          userId: authUser.userId,
+          pinId: pin.id,
+        },
+      },
+    })
 
-    // if (savedPin) {
-    //   await this.prisma.saved.delete({
-    //     where: {
-    //       userId_pinId: {
-    //         userId: authUser.userId,
-    //         pinId: pin.id,
-    //       },
-    //     },
-    //   })
+    if (savedPin) {
+      await this.prisma.saved.delete({
+        where: {
+          userId_pinId: {
+            userId: authUser.userId,
+            pinId: pin.id,
+          },
+        },
+      })
 
-    //   return {
-    //     data: null,
-    //     message: PinMessages.UNSAVE_SUCCESS,
-    //   }
-    // }
+      return {
+        data: null,
+        message: PinMessages.UNSAVE_SUCCESS,
+      }
+    }
 
-    const savePin = await this.prisma.saved.findMany()
+    const savePin = await this.prisma.saved.create({
+      data: {
+        userId: authUser.userId,
+        pinId: pin.id,
+      },
+    })
 
     return {
       data: savePin,
