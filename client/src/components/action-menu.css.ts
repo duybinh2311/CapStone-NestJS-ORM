@@ -1,4 +1,4 @@
-import { vars } from '@/configs/theme'
+import { vars } from '@/app/theme'
 import { rgba } from '@mantine/core'
 import { style } from '@vanilla-extract/css'
 
@@ -8,5 +8,4 @@ export const actionMenuStyle = {
       backgroundColor: rgba(vars.colors.dark[0], 0.1),
     },
   }),
-  
 }

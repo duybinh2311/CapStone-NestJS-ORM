@@ -1,6 +1,6 @@
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
-import { vars } from '@/configs/theme'
+import { vars } from '@/app/theme'
 import { Box, Container, Image, ScrollArea, SimpleGrid, Text } from '@mantine/core'
 import { FC } from 'react'
 import { PinActionMenu } from './components/pin-action-menu'
@@ -33,7 +33,7 @@ export const PinPage: FC = () => {
                 src={'https://i.pinimg.com/564x/e6/22/ce/e622ce555bcb0ac835a98027868934f3.jpg'}
               />
             </Box>
-            
+
             <Box>
               <Box id='pin-description'>
                 <PinActionMenu />

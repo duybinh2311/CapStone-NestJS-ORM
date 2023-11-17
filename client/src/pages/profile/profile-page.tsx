@@ -1,6 +1,6 @@
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
-import { vars } from '@/configs/theme'
+import { vars } from '@/app/theme'
 import AppRoutes from '@/routes/routes'
 import { Avatar, Box, Button, Container, Group, Stack, Tabs, Text, Title } from '@mantine/core'
 import { FC } from 'react'
