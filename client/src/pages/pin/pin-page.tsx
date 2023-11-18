@@ -1,6 +1,6 @@
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
-import { vars } from '@/app/theme'
+import { vars } from '@/app/configs/app.theme'
 import { Box, Container, Image, ScrollArea, SimpleGrid, Text } from '@mantine/core'
 import { FC } from 'react'
 import { PinActionMenu } from './components/pin-action-menu'

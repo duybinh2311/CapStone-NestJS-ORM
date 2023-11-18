@@ -19,10 +19,9 @@ export const AppHeader: FC<AppHeaderProps> = () => {
       <header
         style={{
           zIndex: 10,
-          width: '100vw',
           padding: `${theme.spacing.md} 0`,
           boxShadow: theme.shadows.sm,
-          backgroundColor: 'blue',
+          backgroundColor: 'white',
         }}
       >
         <Container fluid>

@@ -1,6 +1,6 @@
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
-import { vars } from '@/app/theme'
+import { vars } from '@/app/configs/app.theme'
 import { Container } from '@mantine/core'
 import { FC } from 'react'
 
@@ -13,36 +13,6 @@ export const HomePage: FC = () => {
       }}
     >
       <Container fluid>
-        <PinLayout>
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-        </PinLayout>
-
         <PinLayout>
           <Pin size='small' />
           <Pin size='medium' />

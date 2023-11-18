@@ -1,4 +1,4 @@
-import { vars } from '@/app/theme'
+import { vars } from '@/app/configs/app.theme'
 import { ActionIcon, Avatar, Box, Group, Stack, Text, Textarea, rgba } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useClickOutside } from '@mantine/hooks'

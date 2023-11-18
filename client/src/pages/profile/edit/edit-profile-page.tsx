@@ -1,4 +1,4 @@
-import { vars } from '@/app/theme'
+import { vars } from '@/app/configs/app.theme'
 import { Avatar, Box, Button, Container, Group, Stack, Text, TextInput, Textarea, Title } from '@mantine/core'
 import { FC } from 'react'
 

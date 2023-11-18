@@ -1,4 +1,4 @@
-import { StorageUtils } from '@/utils/shared/storage.utils'
+import { StorageUtils } from '@/utils/storage.utils'
 import { AuthEnum } from './auth.types'
 import { jwtDecode } from 'jwt-decode'
 

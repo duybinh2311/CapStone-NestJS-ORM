@@ -1,4 +1,4 @@
-import { vars } from '@/app/theme'
+import { vars } from '@/app/configs/app.theme'
 import {
   ActionIcon,
   Avatar,
