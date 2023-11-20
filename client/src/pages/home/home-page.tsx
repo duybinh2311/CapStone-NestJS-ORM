@@ -1,8 +1,10 @@
+import { FC } from 'react'
+
+import { Container } from '@mantine/core'
+
+import { vars } from '@/app/configs/app.theme'
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
-import { vars } from '@/app/configs/app.theme'
-import { Container } from '@mantine/core'
-import { FC } from 'react'
 
 export const HomePage: FC = () => {
   return (

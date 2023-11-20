@@ -1,9 +1,11 @@
+import { FC } from 'react'
+import Sticky from 'react-stickynode'
+
+import { Container, Group, useMantineTheme } from '@mantine/core'
+
 import { ActionMenu } from '@/components/action-menu'
 import { AppLogo } from '@/components/app-logo'
 import { UserMenu } from '@/components/user-menu'
-import { Container, Group, useMantineTheme } from '@mantine/core'
-import { FC } from 'react'
-import Sticky from 'react-stickynode'
 
 interface AppHeaderProps {}
 

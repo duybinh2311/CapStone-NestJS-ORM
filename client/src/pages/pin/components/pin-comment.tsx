@@ -1,6 +1,8 @@
-import { ActionIcon, Avatar, Group, Stack, Text } from '@mantine/core'
-import { IconDots, IconHeart } from '@tabler/icons-react'
 import { FC } from 'react'
+
+import { ActionIcon, Avatar, Group, Stack, Text } from '@mantine/core'
+
+import { IconDots, IconHeart } from '@tabler/icons-react'
 
 interface PinCommentProps {}
 

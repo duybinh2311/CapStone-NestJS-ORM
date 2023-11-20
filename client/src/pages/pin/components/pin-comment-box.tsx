@@ -1,10 +1,13 @@
-import { vars } from '@/app/configs/app.theme'
+import { FC, useEffect, useState } from 'react'
+
 import { ActionIcon, Avatar, Box, Group, Stack, Text, Textarea, rgba } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useClickOutside } from '@mantine/hooks'
+
 import { IconHeart } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
-import { FC, useEffect, useState } from 'react'
+
+import { vars } from '@/app/configs/app.theme'
 
 interface PinCommentBoxProps {}
 

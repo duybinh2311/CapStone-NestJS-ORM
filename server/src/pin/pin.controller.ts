@@ -4,7 +4,7 @@ import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestj
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 
 import { PinPaginationQueryDto, PinQueryDto } from './dto/pin-query.dto'
-import { CreatePinDto, SavePinDto, UpdatePinDto } from './dto/pin-req.dto'
+import { CreatePinDto, UpdatePinDto } from './dto/pin-req.dto'
 import { PinResDto, SavePinResDto } from './dto/pin-res.dto'
 import { AuthorPinGuard } from './guards/author-pin.guard'
 import { PinService } from './pin.service'

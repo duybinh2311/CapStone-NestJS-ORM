@@ -1,6 +1,8 @@
-import { vars } from '@/app/configs/app.theme'
 import { rgba } from '@mantine/core'
+
 import { style } from '@vanilla-extract/css'
+
+import { vars } from '@/app/configs/app.theme'
 
 export const actionMenuStyle = {
   menuItem: style({

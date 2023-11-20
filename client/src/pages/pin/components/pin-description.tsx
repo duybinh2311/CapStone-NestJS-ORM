@@ -1,6 +1,9 @@
-import { ActionIcon, Anchor, Avatar, Button, Group, Stack, Text, Title } from '@mantine/core'
-import { IconChevronDown } from '@tabler/icons-react'
 import { FC, useState } from 'react'
+
+import { ActionIcon, Anchor, Avatar, Button, Group, Stack, Text, Title } from '@mantine/core'
+
+import { IconChevronDown } from '@tabler/icons-react'
+
 import { PinComment } from './pin-comment'
 
 interface PinDescriptionProps {}
@@ -8,7 +11,7 @@ interface PinDescriptionProps {}
 export const PinDescription: FC<PinDescriptionProps> = (props) => {
   /* Local State */
   const [showComment, setShowComment] = useState<boolean>(false)
-  
+
   return (
     <Stack
       py={'md'}

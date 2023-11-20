@@ -1,5 +1,7 @@
-import { Container } from '@mantine/core'
 import { FC } from 'react'
+
+import { Container } from '@mantine/core'
+
 import { FormUpload } from './component/form-upload'
 
 export const UploadPage: FC = () => {

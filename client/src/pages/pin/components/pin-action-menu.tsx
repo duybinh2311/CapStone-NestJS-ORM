@@ -1,7 +1,10 @@
-import { ActionIcon, Button, Group } from '@mantine/core'
-import { IconDots, IconShare, IconUpload } from '@tabler/icons-react'
 import { FC } from 'react'
 import Sticky from 'react-stickynode'
+
+import { ActionIcon, Button, Group } from '@mantine/core'
+
+import { IconDots, IconShare, IconUpload } from '@tabler/icons-react'
+
 import { pinActionMenuStyle } from './pin-action-menu.css'
 
 interface PinActionMenuProps {}

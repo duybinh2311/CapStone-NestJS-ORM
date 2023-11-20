@@ -1,11 +1,15 @@
-import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
-import { isNotEmpty, useForm } from '@mantine/form'
 import { FC } from 'react'
 
-interface FormLoginProps {}
+import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
+import { isNotEmpty, useForm } from '@mantine/form'
 
-export const FormLogin: FC<FormLoginProps> = (props) => {
+import { useAccount } from '@/app/providers/app.provider'
+
+interface FormSignInProps {}
+
+export const FormSignIn: FC<FormSignInProps> = (props) => {
   /* Hook Init */
+  const { signIn } = useAccount()
   const form = useForm({
     initialValues: {
       email: '',
@@ -16,11 +20,9 @@ export const FormLogin: FC<FormLoginProps> = (props) => {
       password: isNotEmpty('Password is required'),
     },
   })
-  
+
   /* Logic */
-  const submit = form.onSubmit((values) => {
-    console.log(values)
-  })
+  const submit = form.onSubmit((values) => signIn(values))
 
   return (
     <form onSubmit={submit}>

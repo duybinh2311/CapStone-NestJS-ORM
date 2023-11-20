@@ -1,5 +1,6 @@
-import { vars } from '@/app/configs/app.theme'
 import { style } from '@vanilla-extract/css'
+
+import { vars } from '@/app/configs/app.theme'
 
 export const pinActionMenuStyle = {
   pinActionMenu: style({

@@ -1,30 +1,14 @@
-import { AuthModule } from '@/modules/auth/auth.module'
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios from 'axios'
 
-const URL_MAIN_API = 'http://localhost:3000'
+import { AxiosModule } from './axios.module'
 
 const http = axios.create({
-  baseURL: URL_MAIN_API,
-  timeout: 30000,
-  // headers: {
-  //   'Content-Type': 'application/json',
-  // },
+  baseURL: AxiosModule.URL_MAIN_API,
+  timeout: AxiosModule.timeout,
 })
 
-http.interceptors.request.use((config) => {
-  const token = AuthModule.getToken()
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
-  }
+http.interceptors.request.use(AxiosModule.requestHandler, AxiosModule.requestErrorHandler)
 
-  return config
-})
+http.interceptors.response.use(AxiosModule.responseHandler, AxiosModule.responseErrorHandler)
 
-http.interceptors.response.use(
-  (response: AxiosResponse) => {
-    return response.data
-  },
-  (error: AxiosError) => {
-    return Promise.reject(error)
-  }
-)
+export default http

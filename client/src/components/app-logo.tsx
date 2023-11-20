@@ -1,5 +1,6 @@
-import { Box, BoxProps, Image } from '@mantine/core'
 import { FC } from 'react'
+
+import { Box, BoxProps, Image } from '@mantine/core'
 
 interface AppLogoProps extends BoxProps {}
 

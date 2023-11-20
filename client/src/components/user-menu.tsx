@@ -1,8 +1,10 @@
-import { onModalLogin } from '@/modals/modal-login'
-import { onModalSignup } from '@/modals/modal-signup'
-import { Button, Group } from '@mantine/core'
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { Button, Group } from '@mantine/core'
+
+import { onModalSignIn } from '@/modals/sign-in.modal'
+import { onModalSignUp } from '@/modals/sign-up.modal'
 
 interface UserMenuProps {}
 
@@ -143,14 +145,14 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         <Button
           radius={'xl'}
           color='red'
-          onClick={onModalLogin}
+          onClick={onModalSignIn}
         >
           Log in
         </Button>
         <Button
           radius={'xl'}
           variant='light'
-          onClick={onModalSignup}
+          onClick={onModalSignUp}
         >
           Sign up
         </Button>

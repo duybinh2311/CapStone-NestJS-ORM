@@ -1,6 +1,9 @@
-import { Box } from '@mantine/core'
-import clsx from 'clsx'
 import { FC } from 'react'
+
+import { Box } from '@mantine/core'
+
+import clsx from 'clsx'
+
 import { pinStyle } from './pin.css'
 
 interface PinProps {

@@ -1,10 +1,12 @@
-import { AppLogo } from '@/components/app-logo'
-import { FormLogin } from '@/components/form-login'
 import { Title } from '@mantine/core'
 import { modals } from '@mantine/modals'
+
+import { AppLogo } from '@/components/app-logo'
+import { FormSignUp } from '@/components/form-sign-up'
+
 import { modalStyle } from './modal.css'
 
-export const onModalLogin = () => {
+export const onModalSignUp = () => {
   return modals.open({
     title: <AppLogo />,
     children: (
@@ -16,7 +18,7 @@ export const onModalLogin = () => {
         >
           Welcome to Pinterest
         </Title>
-        <FormLogin />
+        <FormSignUp />
       </>
     ),
     centered: true,

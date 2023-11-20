@@ -1,4 +1,5 @@
-import { vars } from '@/app/configs/app.theme'
+import { FC } from 'react'
+
 import {
   ActionIcon,
   Avatar,
@@ -14,9 +15,12 @@ import {
   ThemeIcon,
 } from '@mantine/core'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
+
 import { IconArrowUp, IconDots } from '@tabler/icons-react'
 import clsx from 'clsx'
-import { FC } from 'react'
+
+import { vars } from '@/app/configs/app.theme'
+
 import { formUploadStyle } from './form-upload.css'
 
 interface FormUploadProps {}

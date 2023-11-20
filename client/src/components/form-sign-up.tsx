@@ -1,10 +1,11 @@
-import { Button, NumberInput, PasswordInput, Stack, TextInput } from '@mantine/core'
-import { isEmail, isInRange, isNotEmpty, useForm } from '@mantine/form'
 import { FC } from 'react'
 
-interface FormSignupProps {}
+import { Button, NumberInput, PasswordInput, Stack, TextInput } from '@mantine/core'
+import { isEmail, isInRange, isNotEmpty, useForm } from '@mantine/form'
 
-export const FormSignup: FC<FormSignupProps> = (props) => {
+interface FormSignUpProps {}
+
+export const FormSignUp: FC<FormSignUpProps> = (props) => {
   /* Hook Init */
   const form = useForm({
     initialValues: {
