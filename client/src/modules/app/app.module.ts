@@ -5,7 +5,6 @@ import { ParamsOnPromise } from './app.types'
 export class AppModule {
   static onSuccess(message: string) {
     notifications.show({
-      color: 'green',
       title: 'Success',
       message,
     })
