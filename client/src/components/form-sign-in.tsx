@@ -3,13 +3,13 @@ import { FC } from 'react'
 import { Button, PasswordInput, Stack, TextInput } from '@mantine/core'
 import { isNotEmpty, useForm } from '@mantine/form'
 
-import { useAccount } from '@/app/providers/app.provider'
+import { useAuth } from '@/modules/auth/auth.provider'
 
 interface FormSignInProps {}
 
 export const FormSignIn: FC<FormSignInProps> = (props) => {
   /* Hook Init */
-  const { signIn } = useAccount()
+  const { signIn } = useAuth()
   const form = useForm({
     initialValues: {
       email: '',

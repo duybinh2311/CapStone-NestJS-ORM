@@ -3,6 +3,22 @@ import { notifications } from '@mantine/notifications'
 import { ParamsOnPromise } from './app.types'
 
 export class AppModule {
+  static onSuccess(message: string) {
+    notifications.show({
+      color: 'green',
+      title: 'Success',
+      message,
+    })
+  }
+
+  static onError(message: string) {
+    notifications.show({
+      color: 'red',
+      title: 'Error',
+      message,
+    })
+  }
+
   static onPromise<T>(params: ParamsOnPromise<T>) {
     const loadingNoti = notifications.show({
       loading: true,
@@ -16,6 +32,7 @@ export class AppModule {
         notifications.update({
           id: loadingNoti,
           loading: false,
+          color: 'green',
           title: 'Success',
           message: params.messages?.success || res?.message || 'Success',
         })

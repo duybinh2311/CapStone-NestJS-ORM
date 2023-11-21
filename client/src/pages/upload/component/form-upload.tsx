@@ -19,7 +19,7 @@ import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
 import { IconArrowUp, IconDots } from '@tabler/icons-react'
 import clsx from 'clsx'
 
-import { vars } from '@/app/configs/app.theme'
+import { vars } from '@/theme'
 
 import { formUploadStyle } from './form-upload.css'
 

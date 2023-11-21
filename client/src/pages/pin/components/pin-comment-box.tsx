@@ -7,7 +7,7 @@ import { useClickOutside } from '@mantine/hooks'
 import { IconHeart } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
-import { vars } from '@/app/configs/app.theme'
+import { vars } from '@/theme'
 
 interface PinCommentBoxProps {}
 

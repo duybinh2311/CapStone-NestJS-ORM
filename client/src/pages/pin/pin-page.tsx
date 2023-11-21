@@ -2,9 +2,9 @@ import { FC } from 'react'
 
 import { Box, Container, Image, ScrollArea, SimpleGrid, Text } from '@mantine/core'
 
-import { vars } from '@/app/configs/app.theme'
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
+import { vars } from '@/theme'
 
 import { PinActionMenu } from './components/pin-action-menu'
 import { PinCommentBox } from './components/pin-comment-box'

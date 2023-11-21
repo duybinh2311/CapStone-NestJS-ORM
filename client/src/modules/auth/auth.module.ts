@@ -1,7 +1,7 @@
 import { jwtDecode } from 'jwt-decode'
 
-import http from '@/app/services/axios/axios.config'
-import { IRes } from '@/app/types/app.types'
+import http from '@/services/axios/axios.config'
+import { IRes } from '@/types'
 import { StorageUtils } from '@/utils/storage.utils'
 
 import { AuthEnum, SignInDto, SignInResDto, SignUpDto, SignUpResDto } from './auth.types'

@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom'
 
 import { Avatar, Box, Button, Container, Group, Stack, Tabs, Text, Title } from '@mantine/core'
 
-import { vars } from '@/app/configs/app.theme'
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
 import AppRoutes from '@/routes/routes'
+import { vars } from '@/theme'
 
 import { profilePageStyle } from './profile-page.css'
 

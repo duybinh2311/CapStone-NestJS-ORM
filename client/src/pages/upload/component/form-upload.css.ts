@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css'
 
-import { vars } from '@/app/configs/app.theme'
+import { vars } from '@/theme'
 
 export const formUploadStyle = {
   textInput: style({

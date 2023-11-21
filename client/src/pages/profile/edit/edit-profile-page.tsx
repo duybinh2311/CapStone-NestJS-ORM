@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Avatar, Box, Button, Container, Group, Stack, Text, TextInput, Textarea, Title } from '@mantine/core'
 
-import { vars } from '@/app/configs/app.theme'
+import { vars } from '@/theme'
 
 export const EditProfilePage: FC = () => {
   return (
