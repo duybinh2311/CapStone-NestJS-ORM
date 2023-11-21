@@ -1,15 +1,16 @@
-import { createContext, useContext, FC, PropsWithChildren, useState } from 'react'
+import { FC, PropsWithChildren, createContext, useContext, useState } from 'react'
 
 import { modals } from '@mantine/modals'
 
+import { onModalSignIn } from '@/modals/sign-in.modal'
 import { IResponseData } from '@/types'
 
 import { AppModule } from '../app/app.module'
 import { ProfileUserDto } from '../user/user.types'
 import { AuthModule } from './auth.module'
-import { AuthContext, SignInDto, SignInResDto, SignUpDto, SignUpResDto } from './auth.types'
+import { AuthContext, SignInFunc, SignInResDto, SignUpFunc, SignUpResDto } from './auth.types'
 
-export const authContext = createContext<AuthContext>({} as AuthContext)
+export const authContext = createContext({} as AuthContext<ProfileUserDto>)
 export const useAuth = () => useContext(authContext)
 
 export const AuthProvider: FC<PropsWithChildren> = (props) => {
@@ -17,7 +18,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
   const [profile, setProfile] = useState<ProfileUserDto | null>(null)
 
   /* Logic */
-  const signIn = (payload: SignInDto) => {
+  const signIn: SignInFunc = (payload) => {
     AppModule.onPromise<IResponseData<SignInResDto>>({
       promise: AuthModule.signIn(payload),
       action: {
@@ -29,12 +30,13 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
     })
   }
 
-  const signUp = (payload: SignUpDto) => {
+  const signUp: SignUpFunc = (payload) => {
     AppModule.onPromise<IResponseData<SignUpResDto>>({
       promise: AuthModule.signUp(payload),
       action: {
         success() {
           modals.closeAll()
+          onModalSignIn()
         },
       },
     })
@@ -45,7 +47,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
     setProfile(null)
   }
 
-  const context: AuthContext = {
+  const context: AuthContext<ProfileUserDto> = {
     profile,
     signIn,
     signUp,

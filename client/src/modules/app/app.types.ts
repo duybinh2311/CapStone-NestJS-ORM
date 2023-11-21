@@ -1,3 +1,5 @@
+import { IResError } from '@/types'
+
 export interface ParamsOnPromise<T> {
   promise: Promise<any>
   messages?: {
@@ -6,6 +8,6 @@ export interface ParamsOnPromise<T> {
   }
   action?: {
     success?: (res: T) => void
-    error?: () => void
+    error?: (err: IResError) => void
   }
 }

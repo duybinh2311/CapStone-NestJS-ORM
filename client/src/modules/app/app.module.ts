@@ -37,7 +37,7 @@ export class AppModule {
         })
       })
       .catch((err) => {
-        params.action?.error?.()
+        params.action?.error?.(err)
         notifications.update({
           id: loadingNoti,
           loading: false,

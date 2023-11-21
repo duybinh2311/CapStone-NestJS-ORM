@@ -3,11 +3,16 @@ import { FC } from 'react'
 import { Button, NumberInput, PasswordInput, Stack, TextInput } from '@mantine/core'
 import { isEmail, isInRange, isNotEmpty, useForm } from '@mantine/form'
 
+import { useAuth } from '@/modules/auth/auth.provider'
+import { SignUpDto } from '@/modules/auth/auth.types'
+
 interface FormSignUpProps {}
 
 export const FormSignUp: FC<FormSignUpProps> = (props) => {
   /* Hook Init */
-  const form = useForm({
+  const { signUp } = useAuth()
+
+  const form = useForm<SignUpDto>({
     initialValues: {
       email: '',
       password: '',
@@ -30,9 +35,7 @@ export const FormSignUp: FC<FormSignUpProps> = (props) => {
   })
 
   /* Logic */
-  const submit = form.onSubmit((values) => {
-    console.log(values)
-  })
+  const submit = form.onSubmit((values) => signUp(values))
 
   return (
     <form onSubmit={submit}>

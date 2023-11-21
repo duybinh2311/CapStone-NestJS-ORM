@@ -1,5 +1,3 @@
-import { ProfileUserDto } from '../user/user.types'
-
 export enum AuthEnum {
   ACCESS_TOKEN = 'accessToken',
 }
@@ -26,9 +24,13 @@ export interface SignUpResDto {
   age: number
 }
 
-export interface AuthContext {
-  profile: ProfileUserDto | null
-  signIn: (payload: SignInDto) => void
-  signUp: (payload: SignUpDto) => void
-  signOut: () => void
+export type SignInFunc = (payload: SignInDto) => void
+export type SignUpFunc = (payload: SignUpDto) => void
+export type SignOutFunc = () => void
+
+export interface AuthContext<T> {
+  profile: T | null
+  signIn: SignInFunc
+  signUp: SignUpFunc
+  signOut: SignOutFunc
 }
