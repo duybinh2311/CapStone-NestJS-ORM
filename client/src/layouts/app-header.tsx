@@ -5,11 +5,15 @@ import { Container, Group, useMantineTheme } from '@mantine/core'
 
 import { ActionMenu } from '@/components/action-menu'
 import { AppLogo } from '@/components/app-logo'
+import { AuthButton } from '@/components/auth-button'
 import { UserMenu } from '@/components/user-menu'
+import { useAuth } from '@/modules/auth/auth.provider'
 
 interface AppHeaderProps {}
 
 export const AppHeader: FC<AppHeaderProps> = () => {
+  /* App State */
+  const { profile } = useAuth()
   /* Hook Init */
   const theme = useMantineTheme()
 
@@ -32,7 +36,7 @@ export const AppHeader: FC<AppHeaderProps> = () => {
 
             <ActionMenu />
 
-            <UserMenu />
+            {profile ? <UserMenu profile={profile} /> : <AuthButton />}
           </Group>
         </Container>
       </header>

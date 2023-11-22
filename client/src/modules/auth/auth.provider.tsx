@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, createContext, useContext, useState } from 'react'
+import { FC, PropsWithChildren, createContext, useContext, useEffect, useState } from 'react'
 
 import { modals } from '@mantine/modals'
 
@@ -6,6 +6,7 @@ import { onModalSignIn } from '@/modals/sign-in.modal'
 import { IResponseData } from '@/types'
 
 import { AppModule } from '../app/app.module'
+import { UserModule } from '../user/user.module'
 import { ProfileUserDto } from '../user/user.types'
 import { AuthModule } from './auth.module'
 import { AuthContext, SignInFunc, SignInResDto, SignUpFunc, SignUpResDto } from './auth.types'
@@ -24,6 +25,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
       action: {
         success(res) {
           AuthModule.saveToken(res.data.accessToken)
+          UserModule.getProfile().then((res) => setProfile(res.data))
           modals.closeAll()
         },
       },
@@ -46,6 +48,13 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
     AuthModule.removeToken()
     setProfile(null)
   }
+
+  useEffect(() => {
+    const accessToken = AuthModule.getToken()
+    if (accessToken) {
+      UserModule.getProfile().then((res) => setProfile(res.data))
+    }
+  }, [])
 
   const context: AuthContext<ProfileUserDto> = {
     profile,
