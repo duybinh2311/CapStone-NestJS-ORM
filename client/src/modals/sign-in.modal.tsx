@@ -8,7 +8,7 @@ import { modalStyle } from './modal.css'
 
 export const onModalSignIn = () => {
   return modals.open({
-    title: <AppLogo />,
+    title: <AppLogo w={35} />,
     children: (
       <>
         <Title

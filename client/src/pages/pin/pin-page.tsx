@@ -15,7 +15,7 @@ export const PinPage: FC = () => {
     <>
       <section
         style={{
-          paddingTop: vars.spacing.md,
+          paddingTop: vars.spacing.sm,
         }}
       >
         <Container size={'lg'}>

@@ -2,7 +2,7 @@ const AppRoutes = {
   home: '/',
   detail: '/pin/:id',
   profile: {
-    index: '/profile',
+    root: '/profile',
     editProfile: '/profile/edit-profile',
   },
   upload: '/upload',

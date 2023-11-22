@@ -20,9 +20,9 @@ export const App: FC = () => {
     <AuthProvider>
       <Provider store={store}>
         <MantineProvider theme={theme}>
-          <Notifications />
           <ModalsProvider>
-            <RouterProvider router={router} />
+            <Notifications />
+            <RouterProvider router={router}  />
           </ModalsProvider>
         </MantineProvider>
       </Provider>

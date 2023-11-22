@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Group, Button } from '@mantine/core'
+import { Button, Group } from '@mantine/core'
 
 import { onModalSignIn } from '@/modals/sign-in.modal'
 import { onModalSignUp } from '@/modals/sign-up.modal'
@@ -15,6 +15,7 @@ export const AuthButton: FC = () => {
       >
         Log in
       </Button>
+
       <Button
         radius={'xl'}
         variant='light'

@@ -5,6 +5,7 @@ import { Avatar, Box, Group, Menu, Text } from '@mantine/core'
 
 import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
 
+import { SignOutFunc } from '@/modules/auth/auth.types'
 import { ProfileUserDto } from '@/modules/user/user.types'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
@@ -12,7 +13,8 @@ import { vars } from '@/theme'
 import { userMenuStyle } from './user-menu.css'
 
 interface UserMenuProps {
-  profile: ProfileUserDto
+  profile: ProfileUserDto | null
+  signOutFunc: SignOutFunc
 }
 
 export const UserMenu: FC<UserMenuProps> = (props) => {
@@ -40,10 +42,10 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
       <Box
         display={'flex'}
         className={userMenuStyle.menuItem}
-        onClick={() => navigate(AppRoutes.profile.index)}
+        onClick={() => navigate(AppRoutes.profile.root)}
       >
         <Avatar
-          src={props.profile.avatar}
+          src={props.profile?.avatar}
           size={'sm'}
         />
       </Box>
@@ -66,14 +68,14 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
           <Menu.Label>Currently in</Menu.Label>
           <Menu.Item
             bg={'gray.1'}
-            onClick={() => navigate(AppRoutes.profile.index)}
+            onClick={() => navigate(AppRoutes.profile.root)}
           >
             <Group
               wrap='nowrap'
               gap={'xs'}
             >
               <Avatar
-                src={props.profile.avatar}
+                src={props.profile?.avatar}
                 size={'lg'}
               />
 
@@ -87,7 +89,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
                   fw={500}
                   fz={14}
                 >
-                  {props.profile.fullName}
+                  {props.profile?.fullName || 'User'}
                 </Text>
                 <Text
                   inline
@@ -104,7 +106,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
                   c={'dimmed'}
                   truncate
                 >
-                  {props.profile.email}
+                  {props.profile?.email || 'user@gmail.com'}
                 </Text>
               </Box>
 
@@ -133,6 +135,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
                 <Menu.Item
                   fw={'bold'}
                   key={item}
+                  onClick={item === 'Log out' ? props.signOutFunc : undefined}
                 >
                   {item}
                 </Menu.Item>

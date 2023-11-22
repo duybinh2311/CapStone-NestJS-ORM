@@ -1,19 +1,14 @@
 import { FC } from 'react'
 
-import { Box, BoxProps, Image } from '@mantine/core'
+import { Image, ImageProps } from '@mantine/core'
 
-interface AppLogoProps extends BoxProps {}
+interface AppLogoProps extends ImageProps {}
 
 export const AppLogo: FC<AppLogoProps> = (props) => {
   return (
-    <Box
-      w={35}
-      style={{
-        cursor: 'pointer',
-      }}
+    <Image
+      src={'/images/logo.png'}
       {...props}
-    >
-      <Image src={'/img/logo.png'} />
-    </Box>
+    />
   )
 }

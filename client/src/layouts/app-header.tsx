@@ -4,7 +4,7 @@ import Sticky from 'react-stickynode'
 import { Container, Group, useMantineTheme } from '@mantine/core'
 
 import { ActionMenu } from '@/components/action-menu'
-import { AppLogo } from '@/components/app-logo'
+import { AppLogoLink } from '@/components/app-logo-link'
 import { AuthButton } from '@/components/auth-button'
 import { UserMenu } from '@/components/user-menu'
 import { useAuth } from '@/modules/auth/auth.provider'
@@ -13,7 +13,8 @@ interface AppHeaderProps {}
 
 export const AppHeader: FC<AppHeaderProps> = () => {
   /* App State */
-  const { profile } = useAuth()
+  const { profile, signOut } = useAuth()
+
   /* Hook Init */
   const theme = useMantineTheme()
 
@@ -31,13 +32,23 @@ export const AppHeader: FC<AppHeaderProps> = () => {
         }}
       >
         <Container fluid>
-          <Group gap={'sm'}>
-            <AppLogo />
+          {profile ? (
+            <Group gap={'sm'}>
+              <AppLogoLink />
 
-            <ActionMenu />
+              <ActionMenu />
 
-            {profile ? <UserMenu profile={profile} /> : <AuthButton />}
-          </Group>
+              <UserMenu
+                profile={profile}
+                signOutFunc={signOut}
+              />
+            </Group>
+          ) : (
+            <Group justify='space-between'>
+              <AppLogoLink type='text' />
+              <AuthButton />
+            </Group>
+          )}
         </Container>
       </header>
     </Sticky>
