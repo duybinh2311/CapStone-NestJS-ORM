@@ -10,7 +10,7 @@ import { ProfileUserDto } from '@/modules/user/user.types'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
-import { userMenuStyle } from './user-menu.css'
+import { classes } from './user-menu.css'
 
 interface UserMenuProps {
   profile: ProfileUserDto | null
@@ -26,7 +26,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
       <Box
         display={'flex'}
         c={vars.colors.gray[6]}
-        className={userMenuStyle.menuItem}
+        className={classes.menuItem}
       >
         <IconBellFilled />
       </Box>
@@ -34,14 +34,14 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
       <Box
         display={'flex'}
         c={vars.colors.gray[6]}
-        className={userMenuStyle.menuItem}
+        className={classes.menuItem}
       >
         <IconMessageCircle />
       </Box>
 
       <Box
         display={'flex'}
-        className={userMenuStyle.menuItem}
+        className={classes.menuItem}
         onClick={() => navigate(AppRoutes.profile.root)}
       >
         <Avatar
@@ -58,7 +58,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
           <Box
             display={'flex'}
             c={vars.colors.gray[6]}
-            className={userMenuStyle.menuItem}
+            className={classes.menuItem}
           >
             <IconChevronDown size={22} />
           </Box>

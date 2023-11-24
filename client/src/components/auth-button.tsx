@@ -13,7 +13,7 @@ export const AuthButton: FC = () => {
         color='red'
         onClick={onModalSignIn}
       >
-        Log in
+        Sign in
       </Button>
 
       <Button

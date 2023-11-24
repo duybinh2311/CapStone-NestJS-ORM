@@ -16,3 +16,22 @@ export type IResError = {
   message?: string
   statusCode: number
 }
+
+export enum SortOrderEnum {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+export interface QueryDto {
+  sortOrder?: SortOrderEnum
+}
+
+export interface PaginationQueryDto {
+  page?: number
+  pageSize?: number
+  sortOrder?: SortOrderEnum
+}
+
+export interface AuthorDto {
+  fullName: string
+  avatar: string
+}

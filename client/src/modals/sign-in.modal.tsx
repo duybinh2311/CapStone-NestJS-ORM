@@ -4,7 +4,7 @@ import { modals } from '@mantine/modals'
 import { AppLogo } from '@/components/app-logo'
 import { FormSignIn } from '@/components/form-sign-in'
 
-import { modalStyle } from './modal.css'
+import { classes } from './modal.css'
 
 export const onModalSignIn = () => {
   return modals.open({
@@ -25,10 +25,10 @@ export const onModalSignIn = () => {
     closeButtonProps: {
       size: 'lg',
       radius: 'xl',
-      className: modalStyle.closeButton,
+      className: classes.closeButton,
     },
     classNames: {
-      title: modalStyle.title,
+      title: classes.title,
     },
   })
 }

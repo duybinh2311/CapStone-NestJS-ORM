@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css'
 
 import { vars } from '@/theme'
 
-export const modalStyle = {
+export const classes = {
   closeButton: style({
     ':hover': {
       backgroundColor: vars.colors.dark.light,

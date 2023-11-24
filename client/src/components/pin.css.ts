@@ -2,12 +2,12 @@ import { style } from '@vanilla-extract/css'
 
 import { vars } from '@/theme'
 
-export const pinStyle = {
+export const classes = {
   image: style({
-    borderRadius: vars.radius.lg,
+    borderRadius: vars.radius.md,
   }),
   pin: style({
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     margin: 8,
   }),
   small: style({

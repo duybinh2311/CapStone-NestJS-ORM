@@ -2,7 +2,7 @@ import { style } from '@vanilla-extract/css'
 
 import { vars } from '@/theme'
 
-export const formUploadStyle = {
+export const classes = {
   textInput: style({
     border: 'unset',
     borderBottom: `2px solid ${vars.colors.dark.light}`,

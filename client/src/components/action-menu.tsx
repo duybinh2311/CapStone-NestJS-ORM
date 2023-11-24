@@ -7,7 +7,7 @@ import { IconChevronDown, IconSearch } from '@tabler/icons-react'
 
 import AppRoutes from '@/routes/routes'
 
-import { actionMenuStyle } from './action-menu.css'
+import { classes } from './action-menu.css'
 
 interface ActionMenuProps {}
 
@@ -26,7 +26,7 @@ export const ActionMenu: FC<ActionMenuProps> = () => {
       <Menu
         offset={5}
         classNames={{
-          item: actionMenuStyle.menuItem,
+          item: classes.menuItem,
         }}
       >
         <Menu.Target>

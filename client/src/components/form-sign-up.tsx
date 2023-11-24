@@ -9,9 +9,10 @@ import { SignUpDto } from '@/modules/auth/auth.types'
 interface FormSignUpProps {}
 
 export const FormSignUp: FC<FormSignUpProps> = (props) => {
-  /* Hook Init */
+  /* App State */
   const { signUp } = useAuth()
 
+  /* Hook Init */
   const form = useForm<SignUpDto>({
     initialValues: {
       email: '',
@@ -41,6 +42,7 @@ export const FormSignUp: FC<FormSignUpProps> = (props) => {
     <form onSubmit={submit}>
       <Stack gap={'xs'}>
         <TextInput
+          data-autofocus
           label='Email'
           {...form.getInputProps('email')}
         />

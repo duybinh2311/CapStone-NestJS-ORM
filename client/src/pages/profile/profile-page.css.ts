@@ -1,6 +1,6 @@
 import { CSSProperties, style } from '@vanilla-extract/css'
 
-export const profilePageStyle = {
+export const classes = {
   Tabs: {
     list: style({
       ':before': {

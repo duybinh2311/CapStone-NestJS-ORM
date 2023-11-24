@@ -8,7 +8,7 @@ import { PinLayout } from '@/components/pin-layout'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
-import { profilePageStyle } from './profile-page.css'
+import { classes } from './profile-page.css'
 
 export const ProfilePage: FC = () => {
   const navigate = useNavigate()
@@ -69,8 +69,8 @@ export const ProfilePage: FC = () => {
             defaultValue={'created'}
             w={'100%'}
             classNames={{
-              list: profilePageStyle.Tabs.list,
-              tab: profilePageStyle.Tabs.tab,
+              list: classes.Tabs.list,
+              tab: classes.Tabs.tab,
             }}
           >
             <Tabs.List

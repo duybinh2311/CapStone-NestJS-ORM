@@ -5,7 +5,7 @@ import { ActionIcon, Button, Group } from '@mantine/core'
 
 import { IconDots, IconShare, IconUpload } from '@tabler/icons-react'
 
-import { pinActionMenuStyle } from './pin-action-menu.css'
+import { classes } from './pin-action-menu.css'
 
 interface PinActionMenuProps {}
 
@@ -14,8 +14,8 @@ export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
     <Sticky
       top={68}
       innerZ={1}
-      innerClass={pinActionMenuStyle.pinActionMenu}
-      innerActiveClass={pinActionMenuStyle.pinActionMenuActive}
+      innerClass={classes.pinActionMenu}
+      innerActiveClass={classes.pinActionMenuActive}
       bottomBoundary={'#pin-description'}
     >
       <Group justify='space-between'>

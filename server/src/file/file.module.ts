@@ -1,8 +1,8 @@
-import { diskStorage } from 'multer'
-import * as path from 'path'
-
 import { Module, UnsupportedMediaTypeException } from '@nestjs/common'
 import { MulterModule } from '@nestjs/platform-express'
+
+import { diskStorage } from 'multer'
+import * as path from 'path'
 
 import { StringUtils } from 'src/utils/string.utils'
 
@@ -21,7 +21,7 @@ import { FileMessage } from './types/file.messages'
         return callback(new UnsupportedMediaTypeException(FileMessage.UNSUPPORTED), false)
       },
       limits: {
-        fileSize: 5e6,
+        fileSize: 1024 * 1024 * 2,
       },
       storage: diskStorage({
         destination: process.cwd() + '/assets/images',

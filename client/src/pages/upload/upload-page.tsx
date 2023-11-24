@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { Container } from '@mantine/core'
+import { Button, Container } from '@mantine/core'
 
 import { FormUpload } from './component/form-upload'
 
