@@ -17,7 +17,7 @@ interface FormUploadProps {}
 
 export const FormUpload: FC<FormUploadProps> = (props) => {
   /* Local State */
-  const [file, setFile] = useState<File>()
+  const [file, setFile] = useState<File | null>(null)
 
   /* Hook Init */
   const form = useFormUpload({
@@ -37,7 +37,7 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
         action: {
           success: () => {
             form.reset()
-            setFile(undefined)
+            setFile(null)
           },
         },
       })

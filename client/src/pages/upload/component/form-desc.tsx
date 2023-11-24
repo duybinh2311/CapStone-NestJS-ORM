@@ -45,6 +45,7 @@ export const FormDesc: FC<FormDescProps> = (props) => {
             classNames={{
               input: clsx(classes.textInput, classes.titleInput),
             }}
+            value={form.values.title}
             onChange={(e) => form.setFieldValue('title', e.currentTarget.value)}
           />
 
@@ -84,6 +85,7 @@ export const FormDesc: FC<FormDescProps> = (props) => {
 
                 element.style.setProperty('opacity', '0')
               }}
+              value={form.values.description}
               onChange={(e) => form.setFieldValue('description', e.currentTarget.value)}
             />
 

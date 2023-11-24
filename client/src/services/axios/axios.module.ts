@@ -3,9 +3,6 @@ import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import { AuthModule } from '@/modules/auth/auth.module'
 
 export class AxiosModule {
-  static URL_MAIN_API = 'http://localhost:3000'
-  static timeout = 30000
-
   static requestHandler(config: InternalAxiosRequestConfig) {
     const token = AuthModule.getToken()
     if (token) {

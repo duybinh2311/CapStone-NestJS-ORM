@@ -1,10 +1,12 @@
 import axios from 'axios'
 
+import { AppModule } from '@/modules/app/app.module'
+
 import { AxiosModule } from './axios.module'
 
 const http = axios.create({
-  baseURL: AxiosModule.URL_MAIN_API,
-  timeout: AxiosModule.timeout,
+  baseURL: AppModule.config.APP_API_URL,
+  timeout: AppModule.config.APP_API_TIMEOUT,
 })
 
 http.interceptors.request.use(AxiosModule.requestHandler, AxiosModule.requestErrorHandler)

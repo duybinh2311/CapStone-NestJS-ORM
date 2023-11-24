@@ -1,10 +1,19 @@
 import http from '@/services/axios/axios.config'
-import { IRes } from '@/types'
+import { IRes, IResList } from '@/types'
 
-import { CreatePinDto, PinResDto } from './pin.types'
+import { CreatePinDto, PinQueryDto, PinResDto } from './pin.types'
 
 export class PinModule {
+  static url = {
+    root: '/pin',
+    create: '/pin/create',
+  }
+
   static create(payload: CreatePinDto): IRes<PinResDto> {
-    return http.post('/pin/create', payload)
+    return http.post(this.url.create, payload)
+  }
+
+  static getAll(query?: PinQueryDto): IResList<PinResDto> {
+    return http.get(this.url.root, { params: query })
   }
 }

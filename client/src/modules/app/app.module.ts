@@ -3,6 +3,11 @@ import { notifications } from '@mantine/notifications'
 import { ParamsOnPromise } from './app.types'
 
 export class AppModule {
+  static config = {
+    APP_API_URL: import.meta.env.VITE_APP_API_URL,
+    APP_API_TIMEOUT: import.meta.env.VITE_APP_API_TIMEOUT,
+  }
+
   static onSuccess(message: string) {
     notifications.show({
       title: 'Success',

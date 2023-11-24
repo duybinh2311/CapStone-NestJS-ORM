@@ -7,6 +7,12 @@ import { StorageUtils } from '@/utils/storage.utils'
 import { AuthEnum, SignInDto, SignInResDto, SignUpDto, SignUpResDto } from './auth.types'
 
 export class AuthModule {
+  static url = {
+    root: '/auth',
+    signIn: '/auth/sign-in',
+    signUp: '/auth/sign-up',
+  }
+
   static getToken(): null | string {
     const accessToken = StorageUtils.local.get(AuthEnum.ACCESS_TOKEN)
     if (!accessToken) return null
@@ -30,10 +36,10 @@ export class AuthModule {
   }
 
   static signIn(payload: SignInDto): IRes<SignInResDto> {
-    return http.post('/auth/sign-in', payload)
+    return http.post(this.url.signIn, payload)
   }
 
   static signUp(payload: SignUpDto): IRes<SignUpResDto> {
-    return http.post('/auth/sign-up', payload)
+    return http.post(this.url.signUp, payload)
   }
 }

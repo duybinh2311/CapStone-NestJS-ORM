@@ -1,12 +1,39 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { Container } from '@mantine/core'
 
 import { Pin } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
+import { PinModule } from '@/modules/pin/pin.module'
+import { PinResDto } from '@/modules/pin/pin.types'
 import { vars } from '@/theme'
 
 export const HomePage: FC = () => {
+  /* Local State */
+  const [pinList, setPinList] = useState<PinResDto[]>([])
+  console.log(6 % 3)
+
+  /* Logic */
+  useEffect(() => {
+    PinModule.getAll().then((res) => {
+      setPinList(res.data)
+    })
+  }, [])
+
+  /* Render */
+  const renderPins = () => {
+    const sizes = ['small', 'medium', 'large']
+    return pinList.map((pin, index) => {
+      const size = sizes[index % sizes.length]
+      return (
+        <Pin
+          key={pin.id}
+          size={size as any}
+          pin={pin}
+        />
+      )
+    })
+  }
   return (
     <section
       style={{
@@ -15,35 +42,7 @@ export const HomePage: FC = () => {
       }}
     >
       <Container fluid>
-        <PinLayout>
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-          <Pin size='small' />
-          <Pin size='medium' />
-          <Pin size='large' />
-        </PinLayout>
+        <PinLayout>{renderPins()}</PinLayout>
       </Container>
     </section>
   )

@@ -69,8 +69,8 @@ export const ProfilePage: FC = () => {
             defaultValue={'created'}
             w={'100%'}
             classNames={{
-              list: classes.Tabs.list,
-              tab: classes.Tabs.tab,
+              list: classes.list,
+              tab: classes.tab,
             }}
           >
             <Tabs.List
@@ -111,17 +111,7 @@ export const ProfilePage: FC = () => {
             </Tabs.Panel>
 
             <Tabs.Panel value='saved'>
-              <PinLayout>
-                <Pin size='small' />
-                <Pin size='medium' />
-                <Pin size='large' />
-                <Pin size='small' />
-                <Pin size='medium' />
-                <Pin size='large' />
-                <Pin size='small' />
-                <Pin size='medium' />
-                <Pin size='large' />
-              </PinLayout>
+              <PinLayout></PinLayout>
             </Tabs.Panel>
           </Tabs>
         </Stack>

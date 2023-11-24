@@ -9,20 +9,20 @@ import { AppModule } from '@/modules/app/app.module'
 import { vars } from '@/theme'
 
 interface FormFileProps {
-  file?: File
+  file?: File | null
   setFile: (file: File) => void
 }
 
 export const FormFile: FC<FormFileProps> = (props) => {
   /* Local State */
-  const [createdURL, setCreatedURL] = useState<string>()
+  const [createdURL, setCreatedURL] = useState<string | null>(null)
 
   /* Logic */
   useEffect(() => {
     if (props.file) {
       setCreatedURL(URL.createObjectURL(props.file))
     } else {
-      setCreatedURL(undefined)
+      setCreatedURL(null)
     }
   }, [props.file])
 

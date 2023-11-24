@@ -6,6 +6,10 @@ import { IRes } from '@/types'
 import { FileUploadDto, FileUploadResDto } from './file.types'
 
 export class FileModule {
+  static url = {
+    root: '/file',
+  }
+
   static async upLoad(payload: FileUploadDto): IRes<FileUploadResDto> {
     if (payload.file.size > 1024 * 1024 * 2) {
       const compressedFile = await imageCompression(payload.file, {
@@ -15,6 +19,6 @@ export class FileModule {
       payload.file = new File([compressedFile], compressedFile.name, { type: compressedFile.type })
     }
 
-    return http.postForm('/file', payload)
+    return http.postForm(this.url.root, payload)
   }
 }
