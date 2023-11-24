@@ -4,6 +4,7 @@ import { ActionIcon, Box, Button, Grid, Stack } from '@mantine/core'
 
 import { IconDots } from '@tabler/icons-react'
 
+import { AppModule } from '@/modules/app/app.module'
 import { FileModule } from '@/modules/file/file.module'
 import { PinModule } from '@/modules/pin/pin.module'
 import { vars } from '@/theme'
@@ -28,10 +29,17 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
   })
 
   /* Logic */
-  const submit = form.onSubmit((values) => {
+  const submit = form.onSubmit(async (values) => {
     if (file) {
-      FileModule.upLoad({ file: file }).then((res) => {
-        PinModule.create({ ...values, path: res.data.path })
+      const { path } = (await FileModule.upLoad({ file })).data
+      AppModule.onPromise({
+        promise: PinModule.create({ ...values, path }),
+        action: {
+          success: () => {
+            form.reset()
+            setFile(undefined)
+          },
+        },
       })
     }
   })

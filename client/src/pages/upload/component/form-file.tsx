@@ -21,6 +21,8 @@ export const FormFile: FC<FormFileProps> = (props) => {
   useEffect(() => {
     if (props.file) {
       setCreatedURL(URL.createObjectURL(props.file))
+    } else {
+      setCreatedURL(undefined)
     }
   }, [props.file])
 
@@ -35,7 +37,10 @@ export const FormFile: FC<FormFileProps> = (props) => {
   return (
     <>
       {createdURL ? (
-        <Image src={createdURL} radius={'lg'} />
+        <Image
+          src={createdURL}
+          radius={'lg'}
+        />
       ) : (
         <Stack>
           <Dropzone
