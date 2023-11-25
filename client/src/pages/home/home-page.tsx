@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react'
 
 import { Container } from '@mantine/core'
 
-import { Pin } from '@/components/pin'
+import { Pin, PinSizeEnum } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
 import { PinModule } from '@/modules/pin/pin.module'
 import { PinResDto } from '@/modules/pin/pin.types'
@@ -11,7 +11,6 @@ import { vars } from '@/theme'
 export const HomePage: FC = () => {
   /* Local State */
   const [pinList, setPinList] = useState<PinResDto[]>([])
-  console.log(6 % 3)
 
   /* Logic */
   useEffect(() => {
@@ -22,7 +21,7 @@ export const HomePage: FC = () => {
 
   /* Render */
   const renderPins = () => {
-    const sizes = ['small', 'medium', 'large']
+    const sizes = ['small', 'medium', 'large'] as PinSizeEnum[]
     return pinList.map((pin, index) => {
       const size = sizes[index % sizes.length]
       return (

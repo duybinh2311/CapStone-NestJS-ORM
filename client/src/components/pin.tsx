@@ -10,8 +10,14 @@ import { vars } from '@/theme'
 
 import { classes } from './pin.css'
 
+export enum PinSizeEnum {
+  small = 'small',
+  medium = 'medium',
+  large = 'large',
+}
+
 interface PinProps {
-  size: 'small' | 'medium' | 'large'
+  size: PinSizeEnum
   pin: PinResDto
 }
 
