@@ -27,7 +27,7 @@ export const HomePage: FC = () => {
       return (
         <Pin
           key={pin.id}
-          size={size as any}
+          size={size}
           pin={pin}
         />
       )
