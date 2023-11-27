@@ -1,5 +1,7 @@
 export class StringUtils {
-  /* Regex */
+  /* The `regex` property in the `StringUtils` class is an object that contains regular expressions for
+various patterns. These regular expressions can be used to validate and match specific patterns in
+strings. */
   static regex = {
     number: /^[0-9]+$/,
     letter: /^[a-z A-Z]+$/,
@@ -9,7 +11,11 @@ export class StringUtils {
     extension: /\.(jpeg|jpg|png|gif)$/i,
   }
 
-  /* Nguyễn Duy Bình => nguyen duy binh */
+  /**
+   * The function removes diacritic marks from a given string.
+   * @param {string} string - The parameter "string" is a string that contains text.
+   * @returns a string.
+   */
   static removeAscent(string: string): string {
     string = string.toLowerCase()
     string = string.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a')
@@ -23,7 +29,13 @@ export class StringUtils {
     return string as string
   }
 
-  /* Nguyễn Duy Bình => nguyen-duy-binh */
+  /**
+   * The `toSlug` function converts a string into a slug format by removing special characters, replacing
+   * diacritic characters with their corresponding ASCII characters, and replacing spaces with hyphens.
+   * @param {string} string - The `string` parameter is a string that you want to convert to a slug. A
+   * slug is a URL-friendly version of a string, typically used in URLs or file names.
+   * @returns a slug version of the input string.
+   */
   static toSlug(string: string): string {
     let slug = string.toLowerCase()
     slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a')

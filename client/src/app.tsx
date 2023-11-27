@@ -12,7 +12,7 @@ import '@/assets/styles/global-style.scss'
 import router from '@/routes/router'
 
 import { AuthProvider } from './modules/auth/auth.provider'
-import { store } from './services/redux/store'
+import { store } from './modules/redux/store'
 import { theme } from './theme'
 
 export const App: FC = () => {
@@ -22,7 +22,7 @@ export const App: FC = () => {
         <MantineProvider theme={theme}>
           <ModalsProvider>
             <Notifications />
-            <RouterProvider router={router}  />
+            <RouterProvider router={router} />
           </ModalsProvider>
         </MantineProvider>
       </Provider>

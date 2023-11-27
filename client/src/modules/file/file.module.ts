@@ -1,8 +1,8 @@
 import imageCompression from 'browser-image-compression'
 
-import http from '@/services/axios/axios.config'
 import { IRes } from '@/types'
 
+import http from '../axios/axios.config'
 import { FileUploadDto, FileUploadResDto } from './file.types'
 
 export class FileModule {

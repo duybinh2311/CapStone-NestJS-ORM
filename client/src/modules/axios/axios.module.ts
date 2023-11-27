@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 
-import { AuthModule } from '@/modules/auth/auth.module'
+import { AuthModule } from '../auth/auth.module'
 
 export class AxiosModule {
   static requestHandler(config: InternalAxiosRequestConfig) {

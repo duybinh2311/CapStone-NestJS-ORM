@@ -1,4 +1,4 @@
-import http from '@/services/axios/axios.config'
+import http from '@/modules/axios/axios.config'
 import { IRes } from '@/types'
 
 import { ProfileUserDto } from './user.types'

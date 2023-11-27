@@ -1,13 +1,7 @@
 import { style } from '@vanilla-extract/css'
 
 export const classes = {
-  overlay: style({}),
-
-  pin: style({
-    ':active': {
-      transform: 'scale(0.95)',
-    },
-  }),
+  overlayPin: style({}),
 
   small: style({
     gridRowEnd: 'span 26',

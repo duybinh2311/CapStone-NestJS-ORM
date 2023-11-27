@@ -9,6 +9,11 @@
     /* Consistent file name */
     "forceConsistentCasingInFileNames": true,
 
+    /* Paths */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -17,17 +22,12 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Paths */
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "src/theme-custom.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

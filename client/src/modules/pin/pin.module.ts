@@ -1,4 +1,4 @@
-import http from '@/services/axios/axios.config'
+import http from '@/modules/axios/axios.config'
 import { IRes, IResList } from '@/types'
 
 import { CreatePinDto, PinQueryDto, PinResDto } from './pin.types'
