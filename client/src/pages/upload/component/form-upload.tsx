@@ -1,17 +1,20 @@
 import { FC, useState } from 'react'
 
 import { ActionIcon, Box, Button, Grid, Stack } from '@mantine/core'
+import { createFormContext } from '@mantine/form'
 
 import { IconDots } from '@tabler/icons-react'
 
 import { AppModule } from '@/modules/app/app.module'
 import { FileModule } from '@/modules/file/file.module'
 import { PinModule } from '@/modules/pin/pin.module'
+import { CreatePinDto } from '@/modules/pin/pin.types'
 import { vars } from '@/theme'
 
-import { FormUploadProvider, useFormUpload } from '../providers/form-upload.provider'
 import { FormDesc } from './form-desc'
 import { FormFile } from './form-file'
+
+export const [FormUploadProvider, useFormUploadContext, useFormUpload] = createFormContext<CreatePinDto>()
 
 interface FormUploadProps {}
 

@@ -6,8 +6,8 @@ import clsx from 'clsx'
 
 import { useAuth } from '@/modules/auth/auth.provider'
 
-import { useFormUploadContext } from '../providers/form-upload.provider'
 import { classes } from './form-desc.css'
+import { useFormUploadContext } from './form-upload'
 
 interface FormDescProps {}
 
