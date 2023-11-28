@@ -1,13 +1,16 @@
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 
 import { ActionIcon, Box, Button, Group, Image, Stack, Text, rgba, useMantineTheme } from '@mantine/core'
 
-import { IconClipboardCopy, IconCopy } from '@tabler/icons-react'
+import { IconLink } from '@tabler/icons-react'
 
 import { AppModule } from '@/modules/app/app.module'
 import { PinResDto } from '@/modules/pin/pin.types'
+import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 import { ColorUtils } from '@/utils/color.utils'
+import { DateUtils } from '@/utils/date.utils'
 
 import { classes } from './pin.css'
 
@@ -26,13 +29,6 @@ export const Pin: FC<PinProps> = (props) => {
   /* Hook Init */
   const theme = useMantineTheme()
 
-  console.log(
-    `linear-gradient(180deg, ${rgba(theme.colors.dark[9], 0.5)} 0%, ${rgba(theme.colors.dark[9], 0.5)} 70%, ${rgba(
-      theme.colors.dark[9],
-      1
-    )} 100%)`
-  )
-
   return (
     <Box
       className={classes[props.size]}
@@ -41,6 +37,8 @@ export const Pin: FC<PinProps> = (props) => {
       style={{
         cursor: 'pointer',
       }}
+      component={Link}
+      to={AppRoutes.detail(props.pin.id)}
     >
       <Box
         className={classes.overlayPin}
@@ -62,6 +60,9 @@ export const Pin: FC<PinProps> = (props) => {
           pos={'absolute'}
           top={10}
           right={10}
+          onClick={(e) => {
+            e.preventDefault()
+          }}
         >
           Save
         </Button>
@@ -73,19 +74,27 @@ export const Pin: FC<PinProps> = (props) => {
           justify='space-between'
           w={'100%'}
         >
-          <Stack gap={0}>
+          <Stack
+            gap={0}
+            w={0}
+            style={{
+              flex: 1,
+            }}
+          >
             <Text
               c='white'
-              size='sm'
+              size='xs'
               fw={500}
+              truncate
             >
-              SimpleB96
+              {props.pin.author.fullName}
             </Text>
+
             <Text
               c={'dimmed'}
               size='xs'
             >
-              1.2k views
+              {DateUtils.formatDate(props.pin.createdAt, 'DD/MM/YYYY hh:mm:ss')}
             </Text>
           </Stack>
 
@@ -93,8 +102,11 @@ export const Pin: FC<PinProps> = (props) => {
             color='gray.6'
             radius={'xl'}
             size={'lg'}
+            onClick={(e) => {
+              e.preventDefault()
+            }}
           >
-            <IconCopy size={18} />
+            <IconLink size={18} />
           </ActionIcon>
         </Group>
       </Box>

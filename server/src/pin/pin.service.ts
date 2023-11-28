@@ -1,9 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 
-import { query } from 'express'
 import { PrismaService } from 'nestjs-prisma'
 
-import { async } from 'rxjs'
 import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { SortOrderEnum } from 'src/common/dto/app-query.dto'
 import { IRes, IResList } from 'src/common/types/app.types'

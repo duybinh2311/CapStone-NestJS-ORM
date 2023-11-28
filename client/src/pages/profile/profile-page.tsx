@@ -59,7 +59,7 @@ export const ProfilePage: FC = () => {
               radius={'xl'}
               size='md'
               variant='light'
-              onClick={() => navigate(AppRoutes.profile.editProfile)}
+              onClick={() => navigate(AppRoutes.profile.edit)}
             >
               Edit Profile
             </Button>

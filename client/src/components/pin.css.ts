@@ -1,7 +1,13 @@
 import { style } from '@vanilla-extract/css'
 
 export const classes = {
-  overlayPin: style({}),
+  overlayPin: style({
+    transition: 'opacity 0.2s ease-in-out',
+    opacity: 0,
+    ':hover': {
+      opacity: 1,
+    },
+  }),
 
   small: style({
     gridRowEnd: 'span 26',
