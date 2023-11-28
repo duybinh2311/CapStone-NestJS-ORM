@@ -17,18 +17,18 @@ export interface SavedPinEntity {
   updatedAt: Date
 }
 
-enum SortByEnum {
+export enum PinSortByEnum {
   createdAt = 'createdAt',
   updatedAt = 'updatedAt',
   title = 'title',
 }
 
 export interface PinQueryDto extends QueryDto {
-  sortBy?: SortByEnum
+  sortBy?: PinSortByEnum
 }
 
 export interface PinPaginationQueryDto extends PaginationQueryDto {
-  sortBy?: SortByEnum
+  sortBy?: PinSortByEnum
 }
 
 export interface CreatePinDto {

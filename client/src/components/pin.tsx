@@ -38,7 +38,7 @@ export const Pin: FC<PinProps> = (props) => {
         cursor: 'pointer',
       }}
       component={Link}
-      to={AppRoutes.detail(props.pin.id)}
+      to={AppRoutes.detail.replace(':id', `${props.pin.id}`)}
     >
       <Box
         className={classes.overlayPin}

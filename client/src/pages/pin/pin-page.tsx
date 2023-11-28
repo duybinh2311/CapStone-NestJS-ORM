@@ -1,14 +1,18 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Container } from '@mantine/core'
 
+import { PinResDto } from '@/modules/pin/pin.types'
 import { vars } from '@/theme'
 
 import { PinDetail } from './components/pin-detail'
 import { PinSuggest } from './components/pin-suggest'
 
 export const PinPage: FC = () => {
+  /* Local State */
+  const [pin, setPin] = useState<PinResDto>()
+
   /* Hook Init */
   const params = useParams<{ id: string }>()
 
