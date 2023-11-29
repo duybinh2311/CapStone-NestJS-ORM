@@ -1,7 +1,7 @@
 import http from '@/modules/axios/axios.config'
-import { IRes, IResList, SortOrderEnum } from '@/types'
+import { IRes, IResList } from '@/types'
 
-import { CreatePinDto, PinPaginationQueryDto, PinQueryDto, PinResDto, PinSortByEnum, SavePinResDto } from './pin.types'
+import { CreatePinDto, PinPaginationQueryDto, PinQueryDto, PinResDto, SavePinResDto, UpdatePinDto } from './pin.types'
 
 export class PinModule {
   static url = {
@@ -24,5 +24,17 @@ export class PinModule {
 
   static getPagination(query?: PinPaginationQueryDto): IResList<PinResDto> {
     return http.get(this.url.root, { params: query })
+  }
+
+  static getById(id: string): IRes<PinResDto> {
+    return http.get(`${this.url.root}/${id}`)
+  }
+
+  static update(id: string, payload: UpdatePinDto): IRes<PinResDto> {
+    return http.put(`${this.url.root}/${id}`, payload)
+  }
+
+  static delete(id: string): IRes<null> {
+    return http.delete(`${this.url.root}/${id}`)
   }
 }

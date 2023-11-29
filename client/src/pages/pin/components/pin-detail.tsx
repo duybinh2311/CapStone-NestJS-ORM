@@ -2,13 +2,19 @@ import { FC } from 'react'
 
 import { SimpleGrid, Box, ScrollArea, Image } from '@mantine/core'
 
+import { AppModule } from '@/modules/app/app.module'
+import { CommentResDto } from '@/modules/comment/comment.types'
+import { PinResDto } from '@/modules/pin/pin.types'
 import { vars } from '@/theme'
 
 import { PinActionMenu } from './pin-action-menu'
 import { PinCommentBox } from './pin-comment-box'
 import { PinDescription } from './pin-description'
 
-interface PinDetailProps {}
+interface PinDetailProps {
+  pin: PinResDto
+  comments: CommentResDto[]
+}
 
 export const PinDetail: FC<PinDetailProps> = (props) => {
   return (
@@ -26,7 +32,7 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
         <Image
           height={'100%'}
           width={'100%'}
-          src={'https://i.pinimg.com/564x/e6/22/ce/e622ce555bcb0ac835a98027868934f3.jpg'}
+          src={`${AppModule.config.APP_API_URL}/${props.pin.path}`}
         />
       </Box>
 
@@ -35,7 +41,13 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
           <PinActionMenu />
 
           <ScrollArea h={'calc(100vh - 325px'}>
-            <PinDescription />
+            <PinDescription
+              title={props.pin.title}
+              description={props.pin.description}
+              path={props.pin.path}
+              author={props.pin.author}
+              comments={props.comments}
+            />
           </ScrollArea>
         </Box>
 

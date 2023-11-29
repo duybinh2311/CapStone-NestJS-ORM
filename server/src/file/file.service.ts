@@ -12,7 +12,7 @@ export class FileService {
 
     return {
       data: {
-        path: `/${file.filename}`,
+        path: file.filename,
         url: `${process.env.SERVER_URL}/${file.filename}`,
         type: file.mimetype,
         size: file.size,

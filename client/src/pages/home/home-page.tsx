@@ -16,29 +16,18 @@ export const HomePage: FC = () => {
 
   /* Logic */
   useEffect(() => {
-    PinModule.getAll({ sortBy: PinSortByEnum.createdAt, sortOrder: SortOrderEnum.DESC })
+    PinModule.getAll({
+      sortBy: PinSortByEnum.createdAt,
+      sortOrder: SortOrderEnum.DESC,
+    })
       .then((res) => {
         setPinList(res.data)
       })
       .catch((err: IResError) => {
-        AppModule.onError(err.error)
+        AppModule.onError(err?.message || err.error)
       })
   }, [])
 
-  /* Render */
-  const renderPins = () => {
-    const sizes = ['small', 'medium', 'large'] as PinSizeEnum[]
-    return pinList.map((pin, index) => {
-      const size = sizes[index % sizes.length]
-      return (
-        <Pin
-          key={pin.id}
-          size={size}
-          pin={pin}
-        />
-      )
-    })
-  }
   return (
     <section
       style={{
@@ -47,7 +36,21 @@ export const HomePage: FC = () => {
       }}
     >
       <Container fluid>
-        <PinLayout>{renderPins()}</PinLayout>
+        <PinLayout>
+          {((): JSX.Element[] => {
+            const sizes = ['small', 'medium', 'large'] as PinSizeEnum[]
+            return pinList.map((pin, index) => {
+              const size = sizes[index % sizes.length]
+              return (
+                <Pin
+                  key={pin.id}
+                  size={size}
+                  pin={pin}
+                />
+              )
+            })
+          })()}
+        </PinLayout>
       </Container>
     </section>
   )

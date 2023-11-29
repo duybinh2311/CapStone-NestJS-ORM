@@ -4,9 +4,19 @@ import { ActionIcon, Anchor, Avatar, Button, Group, Stack, Text, Title } from '@
 
 import { IconChevronDown } from '@tabler/icons-react'
 
+import { AppModule } from '@/modules/app/app.module'
+import { CommentResDto } from '@/modules/comment/comment.types'
+import { AuthorDto } from '@/types'
+
 import { PinComment } from './pin-comment'
 
-interface PinDescriptionProps {}
+interface PinDescriptionProps {
+  title?: string
+  description?: string
+  path: string
+  author: AuthorDto
+  comments?: CommentResDto[]
+}
 
 export const PinDescription: FC<PinDescriptionProps> = (props) => {
   /* Local State */
@@ -21,8 +31,9 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
       <Stack>
         <Anchor
           underline='always'
-          href='/'
+          href={`${AppModule.config.APP_API_URL}/${props.path}`}
           c={'blue'}
+          target='_blank'
         >
           Link
         </Anchor>
@@ -31,29 +42,24 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
           order={2}
           fw={500}
         >
-          Galaxy Universe
+          {props?.title}
         </Title>
-        <Text lineClamp={3}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, ut voluptatum. Mollitia, repellendus
-          voluptates ipsum quae accusamus exercitationem neque dignissimos atque molestiae minima. Non voluptate dolor
-          veritatis consequatur quas eos?
-        </Text>
+
+        <Text lineClamp={3}>{props?.description}</Text>
       </Stack>
 
       <Group justify='space-between'>
         <Group gap={'xs'}>
           <Avatar
             size={'md'}
-            src={
-              'https://scontent.fsgn5-6.fna.fbcdn.net/v/t39.30808-6/261463275_2098436070312988_9106714437153092476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=nNYtUUOdgkgAX8pMjLC&_nc_ht=scontent.fsgn5-6.fna&oh=00_AfD7xbI12F-6COeXpKZf6jeGdH7CM9ai2bLjKFmP4tAisg&oe=652FFB4B'
-            }
+            src={props.author.avatar}
           />
           <Stack gap={0}>
             <Text
               fz='sm'
               fw={500}
             >
-              Vanshika
+              {props.author.fullName}
             </Text>
             <Text
               fz='xs'
