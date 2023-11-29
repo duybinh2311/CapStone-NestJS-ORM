@@ -15,7 +15,7 @@ interface PinDescriptionProps {
   description?: string
   path: string
   author: AuthorDto
-  comments?: CommentResDto[]
+  comments: CommentResDto[]
 }
 
 export const PinDescription: FC<PinDescriptionProps> = (props) => {
@@ -100,15 +100,17 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
           </ActionIcon>
         </Group>
 
-        {showComment && (
-          <>
-            <PinComment />
-            <PinComment />
-            <PinComment />
-            <PinComment />
-            <PinComment />
-          </>
-        )}
+        <>
+          {showComment &&
+            props.comments.map((comment) => {
+              return (
+                <PinComment
+                  key={comment.id}
+                  comment={comment}
+                />
+              )
+            })}
+        </>
       </Stack>
     </Stack>
   )

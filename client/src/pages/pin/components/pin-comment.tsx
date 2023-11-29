@@ -4,7 +4,11 @@ import { ActionIcon, Avatar, Group, Stack, Text } from '@mantine/core'
 
 import { IconDots, IconHeart } from '@tabler/icons-react'
 
-interface PinCommentProps {}
+import { CommentResDto } from '@/modules/comment/comment.types'
+
+interface PinCommentProps {
+  comment: CommentResDto
+}
 
 export const PinComment: FC<PinCommentProps> = (props) => {
   return (
