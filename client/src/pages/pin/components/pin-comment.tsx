@@ -5,6 +5,7 @@ import { ActionIcon, Avatar, Group, Stack, Text } from '@mantine/core'
 import { IconDots, IconHeart } from '@tabler/icons-react'
 
 import { CommentResDto } from '@/modules/comment/comment.types'
+import { DateUtils } from '@/utils/date.utils'
 
 interface PinCommentProps {
   comment: CommentResDto
@@ -16,7 +17,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
       wrap='nowrap'
       align='flex-start'
     >
-      <Avatar src={'https://i.pravatar.cc/300'} />
+      <Avatar src={props.comment.author.avatar} />
 
       <Stack gap={5}>
         <Text>
@@ -24,9 +25,9 @@ export const PinComment: FC<PinCommentProps> = (props) => {
             span
             fw={500}
           >
-            SimpleB
+            {props.comment.author.fullName}
           </Text>{' '}
-          ayo when I do that with my hand it matches his hand perfectly lol 🤣 I smell luv blossoming 🤨🤨
+          {props.comment.content}
         </Text>
 
         <Group>
@@ -34,7 +35,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
             fz='xs'
             c={'dimmed'}
           >
-            14w
+            {DateUtils.diffDate(props.comment.createdAt)}
           </Text>
           <Text
             fz='xs'
