@@ -7,16 +7,16 @@ import { IResponseData } from '@/types'
 
 import { AppModule } from '../app/app.module'
 import { UserModule } from '../user/user.module'
-import { ProfileUserDto } from '../user/user.types'
+import { ProfileUserResDto } from '../user/user.types'
 import { AuthModule } from './auth.module'
 import { AuthContext, SignInFunc, SignInResDto, SignUpFunc, SignUpResDto } from './auth.types'
 
-export const authContext = createContext({} as AuthContext<ProfileUserDto>)
+export const authContext = createContext({} as AuthContext<ProfileUserResDto>)
 export const useAuth = () => useContext(authContext)
 
 export const AuthProvider: FC<PropsWithChildren> = (props) => {
   /* App State */
-  const [profile, setProfile] = useState<ProfileUserDto | null>(null)
+  const [profile, setProfile] = useState<ProfileUserResDto | null>(null)
 
   /* Logic */
   const signIn: SignInFunc = (payload) => {
@@ -56,7 +56,7 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
     }
   }, [])
 
-  const context: AuthContext<ProfileUserDto> = {
+  const context: AuthContext<ProfileUserResDto> = {
     profile,
     signIn,
     signUp,

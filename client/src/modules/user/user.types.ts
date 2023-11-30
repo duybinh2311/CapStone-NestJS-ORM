@@ -4,3 +4,7 @@ export interface ProfileUserDto {
   age?: number
   avatar?: string
 }
+
+export interface ProfileUserResDto extends ProfileUserDto {
+  id: number
+}

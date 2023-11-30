@@ -1,7 +1,7 @@
 import http from '@/modules/axios/axios.config'
 import { IRes } from '@/types'
 
-import { ProfileUserDto } from './user.types'
+import { ProfileUserResDto } from './user.types'
 
 export class UserModule {
   static url = {
@@ -9,7 +9,7 @@ export class UserModule {
     profile: '/user/profile',
   }
 
-  static getProfile(): IRes<ProfileUserDto> {
+  static getProfile(): IRes<ProfileUserResDto> {
     return http.get(this.url.profile)
   }
 }

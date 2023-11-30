@@ -94,7 +94,7 @@ export const Pin: FC<PinProps> = (props) => {
               c={'dimmed'}
               size='xs'
             >
-              {DateUtils.format(props.pin.createdAt, 'DD/MM/YYYY hh:mm:ss')}
+              {DateUtils.format(props.pin.updatedAt, 'HH:mm - DD/MM/YYYY')}
             </Text>
           </Stack>
 

@@ -1,4 +1,8 @@
 export class DateUtils {
+  static daysOfYear = 365
+  static weeksOfYear = 52
+  static monthsOfYear = 12
+  static daysOfWeek = 7
   static hoursOfDay12 = 12
   static hoursOfDay24 = 24
   static minutesOfHour = 60
@@ -16,59 +20,74 @@ export class DateUtils {
    */
   static format(date: string | number | Date, format: string): string {
     const inputDate = new Date(date)
-    const day = inputDate.getDate()
+    const dayOfMonth = inputDate.getDate()
     const month = inputDate.getMonth() + 1
     const year = inputDate.getFullYear()
-    const hour = inputDate.getHours()
+    const hour24Format = inputDate.getHours()
+    const hour12Format = hour24Format % this.hoursOfDay12 || this.hoursOfDay12
     const minute = inputDate.getMinutes()
     const second = inputDate.getSeconds()
 
-    const is12HourFormat = format.includes('a')
-    const formatHour = is12HourFormat ? hour % this.hoursOfDay12 || this.hoursOfDay12 : hour.toString()
-
     return format
-      .replace('DD', day.toString().padStart(2, '0'))
-      .replace('D', day.toString())
+      .replace('DD', dayOfMonth.toString().padStart(2, '0'))
+      .replace('D', dayOfMonth.toString())
       .replace('MM', month.toString().padStart(2, '0'))
       .replace('M', month.toString())
       .replace('YYYY', year.toString())
       .replace('YY', year.toString().slice(-2))
-      .replace('hh', formatHour.toString().padStart(2, '0'))
-      .replace('h', formatHour.toString())
+      .replace('HH', hour24Format.toString().padStart(2, '0'))
+      .replace('H', hour24Format.toString())
+      .replace('hh', hour12Format.toString().padStart(2, '0'))
+      .replace('h', hour12Format.toString())
       .replace('mm', minute.toString().padStart(2, '0'))
       .replace('m', minute.toString())
       .replace('ss', second.toString().padStart(2, '0'))
       .replace('s', second.toString())
-      .replace('a', hour >= 12 ? 'PM' : 'AM')
+      .replace('a', hour24Format >= 12 ? 'pm' : 'am')
+      .replace('A', hour24Format >= 12 ? 'PM' : 'AM')
   }
 
   /**
-   * The function calculates the difference between a given date and the current date and returns a
-   * string representing the difference in minutes, hours, days, or weeks.
+   * The `diffDate` function calculates the difference between a given date and the current date and
+   * returns a formatted string representing the difference in minutes, hours, days, weeks, or years.
    * @param {Date | string | number} date - The `date` parameter can be of type `Date`, `string`, or
    * `number`. It represents the date for which you want to calculate the difference.
+   * @param {string} [suffix] - The `suffix` parameter is an optional parameter that specifies a string
+   * to be appended to the end of the result. It is used to provide additional context or information
+   * about the time difference. If no suffix is provided, an empty string will be used as the default
+   * value.
    * @returns a string representing the difference between the input date and the current date. The
-   * string can have the following formats: d, h, m, or 'Just now'.
+   * returned string includes the number of minutes, hours, days, weeks, or years, depending on the
+   * difference. The suffix parameter is appended to the end of the string.
    */
-  static diffDate(date: Date | string | number, suffix?: string) {
+  static diffDate(date: Date | string | number, suffix: string = '') {
     const inputDate = new Date(date)
     const currentDate = new Date()
     const diffTime = Math.abs(currentDate.getTime() - inputDate.getTime())
 
-    const diffDays = Math.floor(diffTime / (this.millisecondsOfSecond * this.secondsOfHour * this.hoursOfDay24))
-    const diffHours = Math.floor(diffTime / (this.millisecondsOfSecond * this.secondsOfHour))
     const diffMinutes = Math.floor(diffTime / (this.millisecondsOfSecond * this.minutesOfHour))
+    const diffHours = Math.floor(diffTime / (this.millisecondsOfSecond * this.secondsOfHour))
+    const diffDays = Math.floor(diffTime / (this.millisecondsOfSecond * this.secondsOfHour * this.hoursOfDay24))
+    const diffWeeks = Math.floor(diffTime / (this.millisecondsOfSecond * this.secondsOfHour * this.hoursOfDay24 * 7))
 
-    if (diffMinutes < 1) {
-      return 'Just now'
-    } else if (diffMinutes < 60) {
-      return `${diffMinutes}m ${suffix || ''}`
-    } else if (diffHours < 24) {
-      return `${diffHours}h ${suffix || ''}`
-    } else if (diffDays < 7) {
-      return `${diffDays}d ${suffix || ''}`
-    } else {
-      return `${Math.floor(diffDays / 7)}w ${suffix || ''}`
+    switch (true) {
+      case diffMinutes < 1:
+        return 'Just now'
+
+      case diffMinutes < this.minutesOfHour:
+        return `${diffMinutes}m ${suffix}`
+
+      case diffHours < this.hoursOfDay24:
+        return `${diffHours}h ${suffix}`
+
+      case diffDays < this.daysOfWeek:
+        return `${diffDays}d ${suffix}`
+
+      case diffWeeks < this.weeksOfYear:
+        return `${diffWeeks}w ${suffix}`
+
+      default:
+        return `${Math.floor(diffWeeks / this.weeksOfYear)}y ${suffix}`
     }
   }
 }

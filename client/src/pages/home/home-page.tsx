@@ -17,7 +17,7 @@ export const HomePage: FC = () => {
   /* Logic */
   useEffect(() => {
     PinModule.getAll({
-      sortBy: PinSortByEnum.createdAt,
+      sortBy: PinSortByEnum.updatedAt,
       sortOrder: SortOrderEnum.DESC,
     })
       .then((res) => {

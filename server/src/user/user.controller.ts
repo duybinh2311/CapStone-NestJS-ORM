@@ -6,6 +6,7 @@ import { PinResDto } from 'src/pin/dto/pin-res.dto'
 import { PinService } from 'src/pin/pin.service'
 
 import { ProfileUserDto } from './dto/user-req.dto'
+import { ProfileUserResDto } from './dto/user-res.dto'
 import { UserMessages } from './types/user.messages'
 import { UserService } from './user.service'
 
@@ -18,14 +19,14 @@ export class UserController {
   ) {}
 
   @ApiOperation({ summary: UserMessages.GET_PROFILE_SUMMARY })
-  @ApiOkResponse({ description: UserMessages.GET_PROFILE_SUCCESS, type: ProfileUserDto })
+  @ApiOkResponse({ description: UserMessages.GET_PROFILE_SUCCESS, type: ProfileUserResDto })
   @Get('profile')
   getProfile(@AuthUser() authUser: AuthUser) {
     return this.userService.getProfile(authUser)
   }
 
   @ApiOperation({ summary: UserMessages.UPDATE_PROFILE_SUMMARY })
-  @ApiOkResponse({ description: UserMessages.UPDATE_PROFILE_SUCCESS, type: ProfileUserDto })
+  @ApiOkResponse({ description: UserMessages.UPDATE_PROFILE_SUCCESS, type: ProfileUserResDto })
   @Patch('profile')
   updateProfile(@AuthUser() authUser: AuthUser, @Body() dto: ProfileUserDto) {
     return this.userService.updateProfile(authUser, dto)

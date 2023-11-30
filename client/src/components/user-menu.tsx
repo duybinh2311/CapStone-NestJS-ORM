@@ -6,14 +6,14 @@ import { Avatar, Box, Group, Menu, Text } from '@mantine/core'
 import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
 
 import { SignOutFunc } from '@/modules/auth/auth.types'
-import { ProfileUserDto } from '@/modules/user/user.types'
+import { ProfileUserResDto } from '@/modules/user/user.types'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
 import { classes } from './user-menu.css'
 
 interface UserMenuProps {
-  profile: ProfileUserDto | null
+  profile: ProfileUserResDto | null
   signOutFunc: SignOutFunc
 }
 

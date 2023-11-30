@@ -36,7 +36,12 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
         />
       </Box>
 
-      <Box>
+      <Box
+        h={'calc(100vh - 96px)'}
+        style={{
+          overflow: 'auto',
+        }}
+      >
         <Box id='pin-description'>
           <PinActionMenu />
 

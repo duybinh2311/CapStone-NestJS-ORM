@@ -18,6 +18,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
 
   /* Hook Init */
   const emojiPickerRef = useClickOutside(() => setShowEmojiPicker(false))
+
   const form = useForm({
     initialValues: {
       comment: '',
@@ -37,6 +38,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
       px={'xl'}
       style={{
         borderTop: `1px solid ${vars.colors.gray[2]}`,
+        outline: '1px solid red',
       }}
     >
       <Group justify='space-between'>
@@ -70,12 +72,6 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
           wrap='nowrap'
           pos={'relative'}
         >
-          <Avatar
-            src={
-              'https://scontent.fsgn5-6.fna.fbcdn.net/v/t39.30808-6/261463275_2098436070312988_9106714437153092476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=nNYtUUOdgkgAX8pMjLC&_nc_ht=scontent.fsgn5-6.fna&oh=00_AfD7xbI12F-6COeXpKZf6jeGdH7CM9ai2bLjKFmP4tAisg&oe=652FFB4B'
-            }
-          />
-
           <Box
             ref={emojiPickerRef}
             pos={'absolute'}
@@ -86,32 +82,50 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
             <EmojiPicker onEmojiClick={(emojiClickData) => setEmojiClickData(emojiClickData)} />
           </Box>
 
-          <Textarea
-            size='md'
-            placeholder='Add a comment'
-            radius={'xl'}
-            autosize
-            w={'100%'}
-            rightSection={
-              <ActionIcon
-                variant='transparent'
-                onClick={() => setShowEmojiPicker((s) => !s)}
-              >
-                <Text
-                  span
-                  fz='xl'
-                >
-                  {String.fromCodePoint(128515)}
-                </Text>
-              </ActionIcon>
+          <Avatar
+            src={
+              'https://scontent.fsgn5-6.fna.fbcdn.net/v/t39.30808-6/261463275_2098436070312988_9106714437153092476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=nNYtUUOdgkgAX8pMjLC&_nc_ht=scontent.fsgn5-6.fna&oh=00_AfD7xbI12F-6COeXpKZf6jeGdH7CM9ai2bLjKFmP4tAisg&oe=652FFB4B'
             }
-            styles={{
-              input: {
-                padding: '12px 16px',
-              },
-            }}
-            {...form.getInputProps('comment')}
           />
+
+          <Group
+            gap={'xs'}
+            px={'xs'}
+            style={{
+              border: `1px solid ${vars.colors.gray[2]}`,
+              borderRadius: vars.radius.xl,
+            }}
+            w={'100%'}
+          >
+            <Textarea
+              size='md'
+              placeholder='Add a comment'
+              autosize
+              py={5}
+              maxRows={2}
+              style={{
+                flex: 1,
+              }}
+              styles={{
+                input: {
+                  border: 'none',
+                },
+              }}
+              {...form.getInputProps('comment')}
+            />
+
+            <ActionIcon
+              variant='transparent'
+              onClick={() => setShowEmojiPicker((s) => !s)}
+            >
+              <Text
+                span
+                fz='xl'
+              >
+                {String.fromCodePoint(128515)}
+              </Text>
+            </ActionIcon>
+          </Group>
         </Group>
       </form>
     </Stack>

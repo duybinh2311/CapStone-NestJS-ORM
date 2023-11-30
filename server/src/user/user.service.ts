@@ -8,6 +8,7 @@ import { SignUpDto } from 'src/auth/dto/auth-req.dto'
 import { IRes } from 'src/common/types/app.types'
 
 import { ProfileUserDto } from './dto/user-req.dto'
+import { ProfileUserResDto } from './dto/user-res.dto'
 import { UserEntity } from './entities/user.entity'
 import { UserMessages } from './types/user.messages'
 
@@ -57,11 +58,12 @@ export class UserService {
     })
   }
 
-  async getProfile(authUser: AuthUser): IRes<ProfileUserDto> {
+  async getProfile(authUser: AuthUser): IRes<ProfileUserResDto> {
     const user = await this.getById(authUser.userId)
 
     return {
       data: {
+        id: user.id,
         email: user.email,
         fullName: user.fullName,
         age: user.age,
@@ -71,11 +73,12 @@ export class UserService {
     }
   }
 
-  async updateProfile(authUser: AuthUser, dto: ProfileUserDto): IRes<ProfileUserDto> {
+  async updateProfile(authUser: AuthUser, dto: ProfileUserDto): IRes<ProfileUserResDto> {
     const user = await this.update(authUser, dto)
 
     return {
       data: {
+        id: user.id,
         email: user.email,
         fullName: user.fullName,
         age: user.age,
