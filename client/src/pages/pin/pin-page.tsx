@@ -22,6 +22,18 @@ export const PinPage: FC = () => {
   const params = useParams<{ id: string }>()
 
   /* Logic */
+  const fetchComments = () => {
+    if (pin) {
+      CommentModule.getByPinId(`${pin.id}`)
+        .then((res) => {
+          setComments(res.data)
+        })
+        .catch((err) => {
+          AppModule.onError(err?.message || err.error)
+        })
+    }
+  }
+
   useEffect(() => {
     if (params.id) {
       PinModule.getById(params.id)
@@ -35,15 +47,7 @@ export const PinPage: FC = () => {
   }, [params.id])
 
   useEffect(() => {
-    if (pin) {
-      CommentModule.getByPinId(`${pin.id}`)
-        .then((res) => {
-          setComments(res.data)
-        })
-        .catch((err) => {
-          AppModule.onError(err?.message || err.error)
-        })
-    }
+    fetchComments()
   }, [pin])
 
   if (!pin) {
@@ -61,6 +65,7 @@ export const PinPage: FC = () => {
           <PinDetail
             pin={pin}
             comments={comments}
+            fetchComments={fetchComments}
           />
         </Container>
       </section>

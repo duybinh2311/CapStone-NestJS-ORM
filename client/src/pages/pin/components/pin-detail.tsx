@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { SimpleGrid, Box, ScrollArea, Image, Stack } from '@mantine/core'
+import { Box, Image, ScrollArea, SimpleGrid } from '@mantine/core'
 
 import { AppModule } from '@/modules/app/app.module'
 import { CommentResDto } from '@/modules/comment/comment.types'
@@ -14,6 +14,7 @@ import { PinDescription } from './pin-description'
 interface PinDetailProps {
   pin: PinResDto
   comments: CommentResDto[]
+  fetchComments: () => void
 }
 
 export const PinDetail: FC<PinDetailProps> = (props) => {
@@ -54,11 +55,15 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
               path={props.pin.path}
               author={props.pin.author}
               comments={props.comments}
+              fetchComments={props.fetchComments}
             />
           </ScrollArea>
         </Box>
 
-        <PinCommentBox pinId={props.pin.id} />
+        <PinCommentBox
+          pinId={props.pin.id}
+          fetchComments={props.fetchComments}
+        />
       </Box>
     </SimpleGrid>
   )

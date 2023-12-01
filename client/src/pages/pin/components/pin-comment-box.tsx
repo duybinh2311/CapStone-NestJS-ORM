@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 import { ActionIcon, Avatar, Box, Group, Stack, Text, Textarea, rgba } from '@mantine/core'
 import { useForm } from '@mantine/form'
@@ -7,6 +7,8 @@ import { useClickOutside } from '@mantine/hooks'
 import { IconHeart, IconSend } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
+import { AppModule } from '@/modules/app/app.module'
+import { CommentModule } from '@/modules/comment/comment.module'
 import { CreateCommentDto } from '@/modules/comment/comment.types'
 import { vars } from '@/theme'
 
@@ -14,6 +16,7 @@ import { classes } from './pin-comment-box.css'
 
 interface PinCommentBoxProps {
   pinId: number
+  fetchComments: () => void
 }
 
 export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
@@ -23,6 +26,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
 
   /* Hook Init */
   const emojiPickerRef = useClickOutside(() => setShowEmojiPicker(false))
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const form = useForm<CreateCommentDto>({
     initialValues: {
@@ -32,9 +36,32 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   })
 
   /* Logic */
+  const handleEmojiClick = (emojiClickData: EmojiClickData) => {
+    if (textAreaRef) {
+      const cursorPosition = textAreaRef.current?.selectionStart || 0
+      const newCursorPosition = cursorPosition + emojiClickData.emoji.length
+
+      const content = form.values.content
+      const newContent = content.slice(0, cursorPosition) + emojiClickData.emoji + content.slice(cursorPosition)
+      form.setFieldValue('content', newContent)
+
+      setTimeout(() => {
+        textAreaRef.current?.setSelectionRange(newCursorPosition, newCursorPosition)
+        textAreaRef.current?.focus()
+      }, 0)
+    }
+  }
+
+  const submit = form.onSubmit((values) => {
+    CommentModule.create(values).then(() => {
+      form.reset()
+      props.fetchComments()
+    })
+  })
+
   useEffect(() => {
     if (emojiClickData) {
-      form.setFieldValue('content', form.values.content + emojiClickData.emoji)
+      handleEmojiClick(emojiClickData)
     }
   }, [emojiClickData])
 
@@ -72,7 +99,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
         </Group>
       </Group>
 
-      <form>
+      <form onSubmit={submit}>
         <Group
           wrap='nowrap'
           pos={'relative'}
@@ -100,6 +127,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
             w={'100%'}
           >
             <Textarea
+              ref={textAreaRef}
               classNames={{
                 input: classes.textAreaInput,
               }}

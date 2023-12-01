@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css'
+import { CSSProperties, style } from '@vanilla-extract/css'
 
 import { vars } from '@/theme'
 
@@ -11,14 +11,14 @@ export const classes = {
     ':focus-within': {
       borderColor: vars.colors.dark[4],
       backgroundColor: 'transparent',
-    },
+      '& textarea': {
+        backgroundColor: 'transparent',
+      },
+    } as CSSProperties,
   }),
 
   textAreaInput: style({
     backgroundColor: vars.colors.gray[1],
     border: 'none',
-    ':focus': {
-      backgroundColor: 'transparent',
-    },
   }),
 }

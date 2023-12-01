@@ -7,11 +7,13 @@ import { IconDots, IconHeart } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
 import { useAuth } from '@/modules/auth/auth.provider'
+import { CommentModule } from '@/modules/comment/comment.module'
 import { CommentResDto } from '@/modules/comment/comment.types'
 import { DateUtils } from '@/utils/date.utils'
 
 interface PinCommentProps {
   comment: CommentResDto
+  fetchComments: () => void
 }
 
 export const PinComment: FC<PinCommentProps> = (props) => {
@@ -128,7 +130,16 @@ export const PinComment: FC<PinCommentProps> = (props) => {
                     >
                       Edit
                     </Menu.Item>
-                    <Menu.Item fw={500}>Delete</Menu.Item>
+                    <Menu.Item
+                      fw={500}
+                      onClick={() => {
+                        CommentModule.delete(`${props.comment.id}`).then(() => {
+                          props.fetchComments()
+                        })
+                      }}
+                    >
+                      Delete
+                    </Menu.Item>
                   </>
                 ) : (
                   <>

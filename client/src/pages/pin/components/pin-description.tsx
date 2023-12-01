@@ -15,11 +15,12 @@ interface PinDescriptionProps {
   path: string
   author: AuthorDto
   comments: CommentResDto[]
+  fetchComments: () => void
 }
 
 export const PinDescription: FC<PinDescriptionProps> = (props) => {
   /* Local State */
-  const [showComment, setShowComment] = useState<boolean>(false)
+  const [showComment, setShowComment] = useState<boolean>(true)
 
   return (
     <Stack
@@ -97,6 +98,7 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
                 <PinComment
                   key={comment.id}
                   comment={comment}
+                  fetchComments={props.fetchComments}
                 />
               )
             })}
