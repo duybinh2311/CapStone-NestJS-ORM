@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { SimpleGrid, Box, ScrollArea, Image } from '@mantine/core'
+import { SimpleGrid, Box, ScrollArea, Image, Stack } from '@mantine/core'
 
 import { AppModule } from '@/modules/app/app.module'
 import { CommentResDto } from '@/modules/comment/comment.types'
@@ -27,14 +27,16 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
       mx={'auto'}
       cols={2}
       spacing={0}
+      h={'calc(100vh - 98px)'}
     >
-      <Box>
-        <Image
-          height={'100%'}
-          width={'100%'}
-          src={`${AppModule.config.APP_API_URL}/${props.pin.path}`}
-        />
-      </Box>
+      <Image
+        w={'100%'}
+        h={'100%'}
+        style={{
+          overflow: 'auto',
+        }}
+        src={`${AppModule.config.APP_API_URL}/${props.pin.path}`}
+      />
 
       <Box
         h={'calc(100vh - 96px)'}
@@ -45,7 +47,7 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
         <Box id='pin-description'>
           <PinActionMenu />
 
-          <ScrollArea h={'calc(100vh - 325px'}>
+          <ScrollArea mih={'calc(100vh - 319px'}>
             <PinDescription
               title={props.pin.title}
               description={props.pin.description}
@@ -56,9 +58,7 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
           </ScrollArea>
         </Box>
 
-        <Box>
-          <PinCommentBox />
-        </Box>
+        <PinCommentBox pinId={props.pin.id} />
       </Box>
     </SimpleGrid>
   )

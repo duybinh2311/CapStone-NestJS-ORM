@@ -8,8 +8,6 @@ import { useAuth } from '@/modules/auth/auth.provider'
 import { CommentResDto } from '@/modules/comment/comment.types'
 import { DateUtils } from '@/utils/date.utils'
 
-import { PinCommentBox } from './pin-comment-box'
-
 interface PinCommentProps {
   comment: CommentResDto
 }
@@ -17,6 +15,7 @@ interface PinCommentProps {
 export const PinComment: FC<PinCommentProps> = (props) => {
   /* App State */
   const { profile } = useAuth()
+  profile?.age
 
   /* Local State */
   const [editComment, setEditComment] = useState<boolean>(false)

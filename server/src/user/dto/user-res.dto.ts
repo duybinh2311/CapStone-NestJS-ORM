@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger'
 
-import { ProfileUserDto } from './user-req.dto'
+import { UpdateUserDto } from './user-req.dto'
 
-export class ProfileUserResDto extends ProfileUserDto {
+export class ProfileUserResDto extends UpdateUserDto {
   @ApiProperty()
   id: number
 }

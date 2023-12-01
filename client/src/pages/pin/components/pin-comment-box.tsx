@@ -4,12 +4,15 @@ import { ActionIcon, Avatar, Box, Group, Stack, Text, Textarea, rgba } from '@ma
 import { useForm } from '@mantine/form'
 import { useClickOutside } from '@mantine/hooks'
 
-import { IconHeart } from '@tabler/icons-react'
+import { IconHeart, IconSend } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
+import { CreateCommentDto } from '@/modules/comment/comment.types'
 import { vars } from '@/theme'
 
-interface PinCommentBoxProps {}
+interface PinCommentBoxProps {
+  pinId: number
+}
 
 export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   /* Local State */
@@ -19,16 +22,18 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   /* Hook Init */
   const emojiPickerRef = useClickOutside(() => setShowEmojiPicker(false))
 
-  const form = useForm({
+  const form = useForm<CreateCommentDto>({
     initialValues: {
-      comment: '',
+      content: '',
+      pinId: props.pinId,
     },
   })
 
   /* Logic */
   useEffect(() => {
     if (emojiClickData) {
-      form.setFieldValue('comment', form.values.comment + emojiClickData.emoji)
+      form.setFieldValue('content', form.values.content + emojiClickData.emoji)
+      console.log('vào đây')
     }
   }, [emojiClickData])
 
@@ -38,7 +43,6 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
       px={'xl'}
       style={{
         borderTop: `1px solid ${vars.colors.gray[2]}`,
-        outline: '1px solid red',
       }}
     >
       <Group justify='space-between'>
@@ -92,8 +96,9 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
             gap={'xs'}
             px={'xs'}
             style={{
-              border: `1px solid ${vars.colors.gray[2]}`,
+              border: `1px solid ${vars.colors.gray[3]}`,
               borderRadius: vars.radius.xl,
+              overflow: 'hidden',
             }}
             w={'100%'}
           >
@@ -101,7 +106,6 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
               size='md'
               placeholder='Add a comment'
               autosize
-              py={5}
               maxRows={2}
               style={{
                 flex: 1,
@@ -111,7 +115,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
                   border: 'none',
                 },
               }}
-              {...form.getInputProps('comment')}
+              {...form.getInputProps('content')}
             />
 
             <ActionIcon
@@ -125,6 +129,21 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
                 {String.fromCodePoint(128515)}
               </Text>
             </ActionIcon>
+
+            {form.values.content && (
+              <ActionIcon
+                radius={'xl'}
+                color='red'
+                type='submit'
+              >
+                <IconSend
+                  size={16}
+                  style={{
+                    transform: 'rotate(45deg)',
+                  }}
+                />
+              </ActionIcon>
+            )}
           </Group>
         </Group>
       </form>

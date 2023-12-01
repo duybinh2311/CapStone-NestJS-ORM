@@ -7,7 +7,7 @@ import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { SignUpDto } from 'src/auth/dto/auth-req.dto'
 import { IRes } from 'src/common/types/app.types'
 
-import { ProfileUserDto } from './dto/user-req.dto'
+import { UpdateUserDto } from './dto/user-req.dto'
 import { ProfileUserResDto } from './dto/user-res.dto'
 import { UserEntity } from './entities/user.entity'
 import { UserMessages } from './types/user.messages'
@@ -47,13 +47,9 @@ export class UserService {
     })
   }
 
-  async update(authUser: AuthUser, dto: ProfileUserDto): Promise<UserEntity> {
-    const user = dto.email && (await this.getByEmail(dto.email))
-
-    if (user && user.id !== authUser.userId) throw new ConflictException(UserMessages.EMAIL_EXISTS)
-
+  async update(id: number, dto: UpdateUserDto): Promise<UserEntity> {
     return await this.prisma.user.update({
-      where: { id: authUser.userId },
+      where: { id },
       data: dto,
     })
   }
@@ -73,16 +69,21 @@ export class UserService {
     }
   }
 
-  async updateProfile(authUser: AuthUser, dto: ProfileUserDto): IRes<ProfileUserResDto> {
-    const user = await this.update(authUser, dto)
+  async updateProfile(authUser: AuthUser, dto: UpdateUserDto): IRes<ProfileUserResDto> {
+    const user = dto.email && (await this.getByEmail(dto.email))
+    if (user && user.id !== authUser.userId) {
+      throw new ConflictException(UserMessages.EMAIL_EXISTS)
+    }
+
+    const userUpdate = await this.update(authUser.userId, dto)
 
     return {
       data: {
-        id: user.id,
-        email: user.email,
-        fullName: user.fullName,
-        age: user.age,
-        avatar: user.avatar,
+        id: userUpdate.id,
+        email: userUpdate.email,
+        fullName: userUpdate.fullName,
+        age: userUpdate.age,
+        avatar: userUpdate.avatar,
       },
       message: UserMessages.UPDATE_PROFILE_SUCCESS,
     }

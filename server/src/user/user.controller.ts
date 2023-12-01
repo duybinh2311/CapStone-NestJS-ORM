@@ -5,7 +5,7 @@ import { AuthUser } from 'src/auth/decorators/auth-user.decorator'
 import { PinResDto } from 'src/pin/dto/pin-res.dto'
 import { PinService } from 'src/pin/pin.service'
 
-import { ProfileUserDto } from './dto/user-req.dto'
+import { UpdateUserDto } from './dto/user-req.dto'
 import { ProfileUserResDto } from './dto/user-res.dto'
 import { UserMessages } from './types/user.messages'
 import { UserService } from './user.service'
@@ -28,7 +28,7 @@ export class UserController {
   @ApiOperation({ summary: UserMessages.UPDATE_PROFILE_SUMMARY })
   @ApiOkResponse({ description: UserMessages.UPDATE_PROFILE_SUCCESS, type: ProfileUserResDto })
   @Patch('profile')
-  updateProfile(@AuthUser() authUser: AuthUser, @Body() dto: ProfileUserDto) {
+  updateProfile(@AuthUser() authUser: AuthUser, @Body() dto: UpdateUserDto) {
     return this.userService.updateProfile(authUser, dto)
   }
 

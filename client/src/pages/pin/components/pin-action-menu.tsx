@@ -12,7 +12,7 @@ interface PinActionMenuProps {}
 export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
   return (
     <Sticky
-      top={68}
+      top={74}
       innerZ={1}
       innerClass={classes.pinActionMenu}
       innerActiveClass={classes.pinActionMenuActive}

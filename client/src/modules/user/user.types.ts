@@ -1,10 +1,10 @@
-export interface ProfileUserDto {
+export interface UpdateUserDto {
   email?: string
   fullName?: string
   age?: number
   avatar?: string
 }
 
-export interface ProfileUserResDto extends ProfileUserDto {
+export interface ProfileUserResDto extends UpdateUserDto {
   id: number
 }

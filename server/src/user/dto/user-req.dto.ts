@@ -4,7 +4,7 @@ import { IsNumber, IsOptional, IsString, Max, Min } from 'class-validator'
 
 import { UserEntity } from '../entities/user.entity'
 
-export class ProfileUserDto implements Partial<UserEntity> {
+export class UpdateUserDto implements Partial<UserEntity> {
   @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
