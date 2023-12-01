@@ -50,6 +50,8 @@ export class AppModule {
           title: 'Error',
           message: params.messages?.error || err?.message || 'Error',
         })
+      }).finally(() => {
+        params.action?.finally?.()
       })
   }
 }

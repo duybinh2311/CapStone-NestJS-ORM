@@ -31,9 +31,10 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
       <Stack>
         <Anchor
           underline='always'
-          href={`${AppModule.config.APP_API_URL}/${props.path}`}
+          href={AppModule.config.APP_API_URL + props.path}
           c={'blue'}
           target='_blank'
+          w={'fit-content'}
         >
           Link
         </Anchor>

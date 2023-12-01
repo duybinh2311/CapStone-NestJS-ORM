@@ -19,15 +19,15 @@ interface PinDetailProps {
 export const PinDetail: FC<PinDetailProps> = (props) => {
   return (
     <SimpleGrid
+      mx={'auto'}
+      cols={2}
+      spacing={0}
+      h={'calc(100vh - 98px)'}
       style={{
         boxShadow: '0 0 10px 5px rgba(0,0,0,0.1)',
         borderRadius: vars.radius.xl,
         overflowX: 'clip',
       }}
-      mx={'auto'}
-      cols={2}
-      spacing={0}
-      h={'calc(100vh - 98px)'}
     >
       <Image
         w={'100%'}
@@ -35,17 +35,17 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
         style={{
           overflow: 'auto',
         }}
-        src={`${AppModule.config.APP_API_URL}/${props.pin.path}`}
+        src={AppModule.config.APP_API_URL + props.pin.path}
       />
 
       <Box
-        h={'calc(100vh - 96px)'}
+        h={'100%'}
         style={{
           overflow: 'auto',
         }}
       >
         <Box id='pin-description'>
-          <PinActionMenu />
+          <PinActionMenu path={props.pin.path} />
 
           <ScrollArea mih={'calc(100vh - 319px'}>
             <PinDescription

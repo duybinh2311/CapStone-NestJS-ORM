@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { ActionIcon, Box, Button, Group, Image, Stack, Text, rgba, useMantineTheme } from '@mantine/core'
 
-import { IconLink } from '@tabler/icons-react'
+import { IconExternalLink, IconLink } from '@tabler/icons-react'
 
 import { AppModule } from '@/modules/app/app.module'
 import { PinResDto } from '@/modules/pin/pin.types'
@@ -28,6 +28,7 @@ interface PinProps {
 export const Pin: FC<PinProps> = (props) => {
   /* Hook Init */
   const theme = useMantineTheme()
+  const navigate = useNavigate()
 
   return (
     <Box
@@ -37,8 +38,7 @@ export const Pin: FC<PinProps> = (props) => {
       style={{
         cursor: 'pointer',
       }}
-      component={Link}
-      to={AppRoutes.detail.replace(':id', `${props.pin.id}`)}
+      onClick={() => navigate(AppRoutes.detail.replace(':id', `${props.pin.id}`))}
     >
       <Box
         className={classes.overlayPin}
@@ -102,17 +102,20 @@ export const Pin: FC<PinProps> = (props) => {
             color='gray.6'
             radius={'xl'}
             size={'lg'}
+            component={Link}
+            to={AppModule.config.APP_API_URL + props.pin.path}
+            target='_blank'
             onClick={(e) => {
-              e.preventDefault()
+              e.stopPropagation()
             }}
           >
-            <IconLink size={18} />
+            <IconExternalLink size={18} />
           </ActionIcon>
         </Group>
       </Box>
 
       <Image
-        src={`${AppModule.config.APP_API_URL}/${props.pin.path}`}
+        src={AppModule.config.APP_API_URL + props.pin.path}
         alt=''
         h={'100%'}
         w={'100%'}

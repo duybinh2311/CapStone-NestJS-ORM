@@ -3,11 +3,16 @@ import Sticky from 'react-stickynode'
 
 import { ActionIcon, Button, Group } from '@mantine/core'
 
-import { IconDots, IconShare, IconUpload } from '@tabler/icons-react'
+import { IconDots, IconDownload, IconShare } from '@tabler/icons-react'
+
+import { AppModule } from '@/modules/app/app.module'
+import { FileUtils } from '@/utils/file.utils'
 
 import { classes } from './pin-action-menu.css'
 
-interface PinActionMenuProps {}
+interface PinActionMenuProps {
+  path: string
+}
 
 export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
   return (
@@ -23,8 +28,11 @@ export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
           <ActionIcon variant='transparent'>
             <IconDots stroke={2.5} />
           </ActionIcon>
-          <ActionIcon variant='transparent'>
-            <IconUpload stroke={2.5} />
+          <ActionIcon
+            variant='transparent'
+            onClick={() => FileUtils.downloadURL(AppModule.config.APP_API_URL + props.path)}
+          >
+            <IconDownload stroke={2.5} />
           </ActionIcon>
           <ActionIcon variant='transparent'>
             <IconShare stroke={2.5} />

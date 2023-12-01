@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { ActionIcon, Box, Button, Grid, Stack } from '@mantine/core'
+import { ActionIcon, Box, Button, Grid, LoadingOverlay, Stack } from '@mantine/core'
 import { createFormContext } from '@mantine/form'
 
 import { IconDots } from '@tabler/icons-react'
@@ -21,6 +21,7 @@ interface FormUploadProps {}
 export const FormUpload: FC<FormUploadProps> = (props) => {
   /* Local State */
   const [file, setFile] = useState<File | null>(null)
+  const [loading, setLoading] = useState<boolean>(false)
 
   /* Hook Init */
   const form = useFormUpload({
@@ -34,13 +35,18 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
   /* Logic */
   const submit = form.onSubmit(async (values) => {
     if (file) {
+      setLoading(true)
       const { path } = (await FileModule.upLoad({ file })).data
+
       AppModule.onPromise({
         promise: PinModule.create({ ...values, path }),
         action: {
           success: () => {
             form.reset()
             setFile(null)
+          },
+          finally: () => {
+            setLoading(false)
           },
         },
       })
@@ -49,6 +55,7 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
 
   return (
     <Box
+      pos={'relative'}
       bg={'white'}
       py={40}
       px={60}
@@ -57,6 +64,13 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
         boxShadow: '0 0 8px rgba(0, 0, 0, 0.10)',
       }}
     >
+      <LoadingOverlay
+        visible={loading}
+        zIndex={1000}
+        overlayProps={{ blur: 1 }}
+        loaderProps={{ color: 'red' }}
+      />
+
       <Stack>
         <ActionIcon
           variant='transparent'

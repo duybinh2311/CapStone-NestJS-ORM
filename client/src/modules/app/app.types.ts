@@ -9,5 +9,6 @@ export interface ParamsOnPromise<T> {
   action?: {
     success?: (res: T) => void
     error?: (err: IResError) => void
+    finally?: () => void
   }
 }
