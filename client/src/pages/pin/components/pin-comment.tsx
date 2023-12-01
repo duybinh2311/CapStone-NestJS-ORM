@@ -44,8 +44,8 @@ export const PinComment: FC<PinCommentProps> = (props) => {
             <Box
               ref={emojiPickerRef}
               pos={'absolute'}
-              // bottom={'114%'}
-              left={-100}
+              bottom={'114%'}
+              right={0}
               display={showEmojiPicker ? 'block' : 'none'}
             >
               <EmojiPicker onEmojiClick={(emojiClickData) => setEmojiClickData(emojiClickData)} />
