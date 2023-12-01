@@ -7,7 +7,6 @@ import { useClickOutside } from '@mantine/hooks'
 import { IconHeart, IconSend } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
-import { AppModule } from '@/modules/app/app.module'
 import { CommentModule } from '@/modules/comment/comment.module'
 import { CreateCommentDto } from '@/modules/comment/comment.types'
 import { vars } from '@/theme'
@@ -16,6 +15,7 @@ import { classes } from './pin-comment-box.css'
 
 interface PinCommentBoxProps {
   pinId: number
+  countComments: number
   fetchComments: () => void
 }
 
@@ -78,7 +78,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
           fw={500}
           fz='xl'
         >
-          81 Comments
+          {props.countComments} Comments
         </Text>
 
         <Group>

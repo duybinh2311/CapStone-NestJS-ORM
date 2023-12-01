@@ -14,6 +14,7 @@ import { PinDescription } from './pin-description'
 interface PinDetailProps {
   pin: PinResDto
   comments: CommentResDto[]
+  countComments: number
   fetchComments: () => void
 }
 
@@ -61,6 +62,7 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
         </Box>
 
         <PinCommentBox
+          countComments={props.countComments}
           pinId={props.pin.id}
           fetchComments={props.fetchComments}
         />

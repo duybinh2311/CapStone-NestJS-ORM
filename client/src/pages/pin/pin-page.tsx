@@ -17,6 +17,7 @@ export const PinPage: FC = () => {
   /* Local State */
   const [pin, setPin] = useState<PinResDto>()
   const [comments, setComments] = useState<CommentResDto[]>([])
+  const [countComments, setCountComments] = useState<number>(0)
 
   /* Hook Init */
   const params = useParams<{ id: string }>()
@@ -27,6 +28,7 @@ export const PinPage: FC = () => {
       CommentModule.getByPinId(`${pin.id}`)
         .then((res) => {
           setComments(res.data)
+          setCountComments(res.count)
         })
         .catch((err) => {
           AppModule.onError(err?.message || err.error)
@@ -65,6 +67,7 @@ export const PinPage: FC = () => {
           <PinDetail
             pin={pin}
             comments={comments}
+            countComments={countComments}
             fetchComments={fetchComments}
           />
         </Container>
