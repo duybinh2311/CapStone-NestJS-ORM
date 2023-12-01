@@ -1,9 +1,10 @@
 import { FC } from 'react'
+import { useLocation } from 'react-router-dom'
 import Sticky from 'react-stickynode'
 
 import { ActionIcon, Button, Group } from '@mantine/core'
 
-import { IconDots, IconDownload, IconShare } from '@tabler/icons-react'
+import { IconDownload, IconExternalLink, IconShare } from '@tabler/icons-react'
 
 import { AppModule } from '@/modules/app/app.module'
 import { FileUtils } from '@/utils/file.utils'
@@ -15,6 +16,9 @@ interface PinActionMenuProps {
 }
 
 export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
+  /* Hook Init */
+  const location = useLocation()
+
   return (
     <Sticky
       top={74}
@@ -25,16 +29,26 @@ export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
     >
       <Group justify='space-between'>
         <Group>
-          <ActionIcon variant='transparent'>
-            <IconDots stroke={2.5} />
+          <ActionIcon
+            variant='transparent'
+            component={'a'}
+            href={AppModule.config.APP_API_URL + props.path}
+            target='_blank'
+          >
+            <IconExternalLink stroke={2.5} />
           </ActionIcon>
+
           <ActionIcon
             variant='transparent'
             onClick={() => FileUtils.downloadURL(AppModule.config.APP_API_URL + props.path)}
           >
             <IconDownload stroke={2.5} />
           </ActionIcon>
-          <ActionIcon variant='transparent'>
+
+          <ActionIcon
+            variant='transparent'
+            onClick={() => AppModule.onCopy(AppModule.config.APP_URL + location.pathname)}
+          >
             <IconShare stroke={2.5} />
           </ActionIcon>
         </Group>

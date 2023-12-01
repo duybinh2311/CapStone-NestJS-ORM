@@ -1,11 +1,14 @@
 import { notifications } from '@mantine/notifications'
 
+import copy from 'copy-to-clipboard'
+
 import { ParamsOnPromise } from './app.types'
 
 export class AppModule {
   static config = {
     APP_API_URL: import.meta.env.VITE_APP_API_URL,
     APP_API_TIMEOUT: import.meta.env.VITE_APP_API_TIMEOUT,
+    APP_URL: import.meta.env.VITE_APP_URL,
   }
 
   static onSuccess(message: string) {
@@ -50,8 +53,14 @@ export class AppModule {
           title: 'Error',
           message: params.messages?.error || err?.message || 'Error',
         })
-      }).finally(() => {
+      })
+      .finally(() => {
         params.action?.finally?.()
       })
+  }
+
+  static onCopy(text: string) {
+    copy(text)
+    this.onSuccess('Copied to clipboard')
   }
 }

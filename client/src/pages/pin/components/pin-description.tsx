@@ -1,10 +1,9 @@
 import { FC, useState } from 'react'
 
-import { ActionIcon, Anchor, Avatar, Button, Group, Stack, Text, Title } from '@mantine/core'
+import { ActionIcon, Avatar, Button, Group, Stack, Text, Title } from '@mantine/core'
 
 import { IconChevronDown } from '@tabler/icons-react'
 
-import { AppModule } from '@/modules/app/app.module'
 import { CommentResDto } from '@/modules/comment/comment.types'
 import { AuthorDto } from '@/types'
 
@@ -29,16 +28,6 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
       px={'xl'}
     >
       <Stack>
-        <Anchor
-          underline='always'
-          href={AppModule.config.APP_API_URL + props.path}
-          c={'blue'}
-          target='_blank'
-          w={'fit-content'}
-        >
-          Link
-        </Anchor>
-
         <Title
           order={2}
           fw={500}

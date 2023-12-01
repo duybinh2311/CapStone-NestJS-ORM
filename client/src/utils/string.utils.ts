@@ -1,7 +1,4 @@
 export class StringUtils {
-  /* The `regex` property in the `StringUtils` class is an object that contains regular expressions for
-various patterns. These regular expressions can be used to validate and match specific patterns in
-strings. */
   static regex = {
     number: /^[0-9]+$/,
     letter: /^[a-z A-Z]+$/,

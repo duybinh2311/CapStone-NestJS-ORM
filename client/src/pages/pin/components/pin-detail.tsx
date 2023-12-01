@@ -47,7 +47,7 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
         <Box id='pin-description'>
           <PinActionMenu path={props.pin.path} />
 
-          <ScrollArea mih={'calc(100vh - 319px'}>
+          <ScrollArea h={'calc(100vh - 319px'}>
             <PinDescription
               title={props.pin.title}
               description={props.pin.description}

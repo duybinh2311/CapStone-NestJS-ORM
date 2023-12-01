@@ -102,8 +102,8 @@ export const Pin: FC<PinProps> = (props) => {
             color='gray.6'
             radius={'xl'}
             size={'lg'}
-            component={Link}
-            to={AppModule.config.APP_API_URL + props.pin.path}
+            component={'a'}
+            href={AppModule.config.APP_API_URL + props.pin.path}
             target='_blank'
             onClick={(e) => {
               e.stopPropagation()

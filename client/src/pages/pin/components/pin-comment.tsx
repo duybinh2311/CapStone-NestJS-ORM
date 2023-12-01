@@ -1,8 +1,10 @@
 import { FC, useState } from 'react'
 
-import { ActionIcon, Avatar, Button, Group, Menu, Stack, Text, Textarea } from '@mantine/core'
+import { ActionIcon, Avatar, Box, Button, Group, Menu, Stack, Text, Textarea } from '@mantine/core'
+import { useClickOutside } from '@mantine/hooks'
 
 import { IconDots, IconHeart } from '@tabler/icons-react'
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
 import { useAuth } from '@/modules/auth/auth.provider'
 import { CommentResDto } from '@/modules/comment/comment.types'
@@ -15,10 +17,14 @@ interface PinCommentProps {
 export const PinComment: FC<PinCommentProps> = (props) => {
   /* App State */
   const { profile } = useAuth()
-  profile?.age
 
   /* Local State */
+  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false)
   const [editComment, setEditComment] = useState<boolean>(false)
+  const [emojiClickData, setEmojiClickData] = useState<EmojiClickData | null>(null)
+
+  /* Hook Init */
+  const emojiPickerRef = useClickOutside(() => setShowEmojiPicker(false))
 
   return (
     <Group
@@ -32,7 +38,32 @@ export const PinComment: FC<PinCommentProps> = (props) => {
           w={'100%'}
           gap={'xs'}
         >
-          <Textarea />
+          <Group pos={'relative'}>
+            <Box
+              ref={emojiPickerRef}
+              pos={'absolute'}
+              // bottom={'114%'}
+              left={-100}
+              display={showEmojiPicker ? 'block' : 'none'}
+            >
+              <EmojiPicker onEmojiClick={(emojiClickData) => setEmojiClickData(emojiClickData)} />
+            </Box>
+
+            <Textarea />
+
+            <ActionIcon
+              variant='transparent'
+              onClick={() => setShowEmojiPicker((s) => !s)}
+            >
+              <Text
+                span
+                fz='xl'
+              >
+                {String.fromCodePoint(128515)}
+              </Text>
+            </ActionIcon>
+          </Group>
+
           <Group justify='flex-end'>
             <Button
               variant='outline'

@@ -10,6 +10,8 @@ import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 import { CreateCommentDto } from '@/modules/comment/comment.types'
 import { vars } from '@/theme'
 
+import { classes } from './pin-comment-box.css'
+
 interface PinCommentBoxProps {
   pinId: number
 }
@@ -33,7 +35,6 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   useEffect(() => {
     if (emojiClickData) {
       form.setFieldValue('content', form.values.content + emojiClickData.emoji)
-      console.log('vào đây')
     }
   }, [emojiClickData])
 
@@ -93,27 +94,21 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
           />
 
           <Group
+            className={classes.commentBox}
             gap={'xs'}
             px={'xs'}
-            style={{
-              border: `1px solid ${vars.colors.gray[3]}`,
-              borderRadius: vars.radius.xl,
-              overflow: 'hidden',
-            }}
             w={'100%'}
           >
             <Textarea
+              classNames={{
+                input: classes.textAreaInput,
+              }}
               size='md'
               placeholder='Add a comment'
               autosize
               maxRows={2}
               style={{
                 flex: 1,
-              }}
-              styles={{
-                input: {
-                  border: 'none',
-                },
               }}
               {...form.getInputProps('content')}
             />
