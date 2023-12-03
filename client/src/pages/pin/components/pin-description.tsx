@@ -20,7 +20,7 @@ interface PinDescriptionProps {
 
 export const PinDescription: FC<PinDescriptionProps> = (props) => {
   /* Local State */
-  const [showComment, setShowComment] = useState<boolean>(true)
+  const [isShowComments, setIsShowComments] = useState<boolean>(true)
 
   return (
     <Stack
@@ -80,19 +80,19 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
 
           <ActionIcon
             variant='transparent'
-            onClick={() => setShowComment((s) => !s)}
+            onClick={() => setIsShowComments((s) => !s)}
           >
             <IconChevronDown
               style={{
                 transition: 'transform 0.2s ease-in-out',
-                transform: showComment ? 'rotate(-180deg)' : 'rotate(0deg)',
+                transform: isShowComments ? 'rotate(-180deg)' : 'rotate(0deg)',
               }}
             />
           </ActionIcon>
         </Group>
 
         <>
-          {showComment &&
+          {isShowComments &&
             props.comments.map((comment) => {
               return (
                 <PinComment

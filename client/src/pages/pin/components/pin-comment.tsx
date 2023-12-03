@@ -21,12 +21,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
   const { profile } = useAuth()
 
   /* Local State */
-  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false)
-  const [editComment, setEditComment] = useState<boolean>(false)
-  const [emojiClickData, setEmojiClickData] = useState<EmojiClickData | null>(null)
-
-  /* Hook Init */
-  const emojiPickerRef = useClickOutside(() => setShowEmojiPicker(false))
+  const [isEditingComment, setIsEditingComment] = useState<boolean>(false)
 
   return (
     <Group
@@ -35,28 +30,16 @@ export const PinComment: FC<PinCommentProps> = (props) => {
     >
       <Avatar src={props.comment.author.avatar} />
 
-      {editComment ? (
-        <Stack
-          w={'100%'}
-          gap={'xs'}
-        >
-          <Group pos={'relative'}>
-            <Box
-              ref={emojiPickerRef}
-              pos={'absolute'}
-              bottom={'114%'}
-              right={0}
-              display={showEmojiPicker ? 'block' : 'none'}
-            >
-              <EmojiPicker onEmojiClick={(emojiClickData) => setEmojiClickData(emojiClickData)} />
-            </Box>
+      {isEditingComment ? (
+        <Stack w={'100%'}>
+          <Group>
+            <Textarea
+              style={{
+                flex: 1,
+              }}
+            />
 
-            <Textarea />
-
-            <ActionIcon
-              variant='transparent'
-              onClick={() => setShowEmojiPicker((s) => !s)}
-            >
+            <ActionIcon variant='transparent'>
               <Text
                 span
                 fz='xl'
@@ -68,12 +51,19 @@ export const PinComment: FC<PinCommentProps> = (props) => {
 
           <Group justify='flex-end'>
             <Button
+              radius={'xl'}
               variant='outline'
-              onClick={() => setEditComment(false)}
+              onClick={() => setIsEditingComment(false)}
             >
               Cancel
             </Button>
-            <Button color='red'>Save</Button>
+
+            <Button
+              radius={'xl'}
+              color='red'
+            >
+              Save
+            </Button>
           </Group>
         </Stack>
       ) : (
@@ -126,7 +116,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
                   <>
                     <Menu.Item
                       fw={500}
-                      onClick={() => setEditComment(true)}
+                      onClick={() => setIsEditingComment(true)}
                     >
                       Edit
                     </Menu.Item>

@@ -21,7 +21,7 @@ interface FormUploadProps {}
 export const FormUpload: FC<FormUploadProps> = (props) => {
   /* Local State */
   const [file, setFile] = useState<File | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   /* Hook Init */
   const form = useFormUpload({
@@ -35,7 +35,7 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
   /* Logic */
   const submit = form.onSubmit(async (values) => {
     if (file) {
-      setLoading(true)
+      setIsLoading(true)
       const { path } = (await FileModule.upLoad({ file })).data
 
       AppModule.onPromise({
@@ -46,7 +46,7 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
             setFile(null)
           },
           finally: () => {
-            setLoading(false)
+            setIsLoading(false)
           },
         },
       })
@@ -65,7 +65,7 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
       }}
     >
       <LoadingOverlay
-        visible={loading}
+        visible={isLoading}
         zIndex={1000}
         overlayProps={{ blur: 1 }}
         loaderProps={{ color: 'red' }}

@@ -21,11 +21,11 @@ interface PinCommentBoxProps {
 
 export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   /* Local State */
-  const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false)
+  const [isShowEmojiPicker, setIsShowEmojiPicker] = useState<boolean>(false)
   const [emojiClickData, setEmojiClickData] = useState<EmojiClickData | null>(null)
 
   /* Hook Init */
-  const emojiPickerRef = useClickOutside(() => setShowEmojiPicker(false))
+  const emojiPickerRef = useClickOutside(() => setIsShowEmojiPicker(false))
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const form = useForm<CreateCommentDto>({
@@ -109,7 +109,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
             pos={'absolute'}
             bottom={'114%'}
             right={0}
-            display={showEmojiPicker ? 'block' : 'none'}
+            display={isShowEmojiPicker ? 'block' : 'none'}
           >
             <EmojiPicker onEmojiClick={(emojiClickData) => setEmojiClickData(emojiClickData)} />
           </Box>
@@ -143,7 +143,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
 
             <ActionIcon
               variant='transparent'
-              onClick={() => setShowEmojiPicker((s) => !s)}
+              onClick={() => setIsShowEmojiPicker((s) => !s)}
             >
               <Text
                 span
