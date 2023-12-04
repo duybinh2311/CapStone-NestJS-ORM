@@ -20,11 +20,11 @@ interface PinCommentBoxProps {
 
 export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   /* Local State */
-  const [isShowEmojiPicker, setIsShowEmojiPicker] = useState<boolean>(false)
+  const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState<boolean>(false)
   const [emojiClickData, setEmojiClickData] = useState<EmojiClickData | null>(null)
 
   /* Hook Init */
-  const emojiPickerRef = useClickOutside(() => setIsShowEmojiPicker(false))
+  const emojiPickerRef = useClickOutside(() => setIsEmojiPickerOpen(false))
   const textAreaRef = useRef<HTMLTextAreaElement>(null)
 
   const form = useForm<CreateCommentDto>({
@@ -108,7 +108,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
             pos={'absolute'}
             bottom={'114%'}
             right={0}
-            display={isShowEmojiPicker ? 'block' : 'none'}
+            display={isEmojiPickerOpen ? 'block' : 'none'}
           >
             <EmojiPicker onEmojiClick={(emojiClickData) => setEmojiClickData(emojiClickData)} />
           </Box>
@@ -134,7 +134,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
               size='md'
               placeholder='Add a comment'
               autosize
-              maxRows={2}
+              maxRows={1}
               style={{
                 flex: 1,
               }}
@@ -148,7 +148,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
 
             <ActionIcon
               variant='transparent'
-              onClick={() => setIsShowEmojiPicker((s) => !s)}
+              onClick={() => setIsEmojiPickerOpen((s) => !s)}
             >
               <Text
                 span

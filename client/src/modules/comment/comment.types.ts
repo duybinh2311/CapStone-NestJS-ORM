@@ -15,7 +15,7 @@ export interface CreateCommentDto {
 }
 
 export interface UpdateCommentDto {
-  content?: string
+  content: string
 }
 
 export interface CommentResDto extends CommentEntity {
