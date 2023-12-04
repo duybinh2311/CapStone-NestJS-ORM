@@ -1,13 +1,13 @@
-import { css } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css-hooks'
 import { vars } from '@/theme'
 
 export const styles = {
-  closeButton: css({
+  closeButton: useCss({
     hover: {
       backgroundColor: vars.colors.dark.light,
     },
   }),
-  title: css({
+  title: useCss({
     position: 'absolute',
     left: '50%',
     transform: 'translateX(-50%)',

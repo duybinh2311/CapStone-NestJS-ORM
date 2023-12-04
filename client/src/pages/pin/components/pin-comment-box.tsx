@@ -7,11 +7,10 @@ import { useClickOutside } from '@mantine/hooks'
 import { IconHeart, IconSend } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
-import { css } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css-hooks'
 import { CommentModule } from '@/modules/comment/comment.module'
 import { CreateCommentDto } from '@/modules/comment/comment.types'
 import { vars } from '@/theme'
-
 
 interface PinCommentBoxProps {
   pinId: number
@@ -124,7 +123,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
             gap={'xs'}
             px={'xs'}
             w={'100%'}
-            style={css({
+            style={useCss({
               border: `1px solid ${vars.colors.gray[4]}`,
               borderRadius: vars.radius.xl,
               overflow: 'hidden',

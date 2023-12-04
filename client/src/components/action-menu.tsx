@@ -5,7 +5,7 @@ import { Button, Menu, TextInput, rgba } from '@mantine/core'
 
 import { IconChevronDown, IconSearch } from '@tabler/icons-react'
 
-import { css } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css-hooks'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
@@ -26,7 +26,7 @@ export const ActionMenu: FC<ActionMenuProps> = () => {
       <Menu
         offset={5}
         styles={{
-          item: css({
+          item: useCss({
             hover: {
               backgroundColor: rgba(vars.colors.dark[0], 0.1),
             },

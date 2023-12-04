@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Avatar, Box, Button, Container, Group, Stack, Tabs, Text, Title } from '@mantine/core'
 
 import { PinLayout } from '@/components/pin-layout'
-import { css } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css-hooks'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
@@ -67,12 +67,12 @@ export const ProfilePage: FC = () => {
             defaultValue={'created'}
             w={'100%'}
             styles={{
-              list: css({
+              list: useCss({
                 before: {
                   position: 'unset',
                 },
               }),
-              tab: css({
+              tab: useCss({
                 dataActive: {
                   borderBottomWidth: '3px',
                 },

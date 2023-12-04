@@ -5,7 +5,7 @@ import { ActionIcon, Box, Button, Group, Image, Stack, Text, rgba, useMantineThe
 
 import { IconExternalLink } from '@tabler/icons-react'
 
-import { css } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css-hooks'
 import { AppModule } from '@/modules/app/app.module'
 import { PinResDto } from '@/modules/pin/pin.types'
 import AppRoutes from '@/routes/routes'
@@ -46,7 +46,7 @@ export const Pin: FC<PinProps> = (props) => {
         pos={'absolute'}
         w={'100%'}
         h={'100%'}
-        style={css({
+        style={useCss({
           borderRadius: vars.radius.md,
           background: ColorUtils.linearGradient(180, [
             `${rgba(theme.colors.dark[9], 0.6)} 0%`,

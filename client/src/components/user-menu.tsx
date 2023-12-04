@@ -5,7 +5,7 @@ import { ActionIcon, Avatar, Box, Group, Menu, Text } from '@mantine/core'
 
 import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
 
-import { css } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css-hooks'
 import { SignOutFunc } from '@/modules/account/account.types'
 import { ProfileUserResDto } from '@/modules/user/user.types'
 import AppRoutes from '@/routes/routes'
@@ -20,7 +20,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
   /* Hook Init */
   const navigate = useNavigate()
 
-  const menuItemStyle = css({
+  const menuItemStyle = useCss({
     borderRadius: vars.radius.xl,
     backgroundColor: 'transparent',
     hover: {

@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Avatar, Button, Group, Input, Stack, Text, TextInput, Textarea } from '@mantine/core'
 
 import { useAccount } from '@/hooks/account-hooks'
-import { css } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css-hooks'
 import { vars } from '@/theme'
 
 import { useFormUploadContext } from './form-upload'
@@ -42,7 +42,7 @@ export const FormDesc: FC<FormDescProps> = (props) => {
               element.style.setProperty('opacity', '0')
             }}
             styles={{
-              input: css({
+              input: useCss({
                 border: 'unset',
                 borderBottom: `2px solid ${vars.colors.dark.light}`,
                 focus: {
@@ -78,7 +78,7 @@ export const FormDesc: FC<FormDescProps> = (props) => {
               placeholder='Tell everyone what your Pin is about'
               autosize
               styles={{
-                input: css({
+                input: useCss({
                   border: 'unset',
                   borderBottom: `2px solid ${vars.colors.dark.light}`,
                   focus: {
@@ -129,7 +129,7 @@ export const FormDesc: FC<FormDescProps> = (props) => {
         radius={0}
         placeholder='Add a destination link'
         styles={{
-          input: css({
+          input: useCss({
             border: 'unset',
             borderBottom: `2px solid ${vars.colors.dark.light}`,
             focus: {
