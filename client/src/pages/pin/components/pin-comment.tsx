@@ -1,12 +1,10 @@
 import { FC, useState } from 'react'
 
-import { ActionIcon, Avatar, Box, Button, Group, Menu, Stack, Text, Textarea } from '@mantine/core'
-import { useClickOutside } from '@mantine/hooks'
+import { ActionIcon, Avatar, Button, Group, Menu, Stack, Text, Textarea } from '@mantine/core'
 
 import { IconDots, IconHeart } from '@tabler/icons-react'
-import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
-import { useAuth } from '@/modules/auth/auth.provider'
+import { useAccount } from '@/hooks/account-hooks'
 import { CommentModule } from '@/modules/comment/comment.module'
 import { CommentResDto } from '@/modules/comment/comment.types'
 import { DateUtils } from '@/utils/date.utils'
@@ -18,7 +16,7 @@ interface PinCommentProps {
 
 export const PinComment: FC<PinCommentProps> = (props) => {
   /* App State */
-  const { profile } = useAuth()
+  const { profile } = useAccount()
 
   /* Local State */
   const [isEditingComment, setIsEditingComment] = useState<boolean>(false)
@@ -34,6 +32,10 @@ export const PinComment: FC<PinCommentProps> = (props) => {
         <Stack w={'100%'}>
           <Group>
             <Textarea
+              radius={'lg'}
+              // autosize
+              // minRows={3}
+              maxRows={10}
               style={{
                 flex: 1,
               }}

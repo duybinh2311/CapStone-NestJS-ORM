@@ -2,18 +2,17 @@ import { FC } from 'react'
 
 import { Avatar, Button, Group, Input, Stack, Text, TextInput, Textarea } from '@mantine/core'
 
-import clsx from 'clsx'
+import { useAccount } from '@/hooks/account-hooks'
+import { css } from '@/hooks/css-hooks'
+import { vars } from '@/theme'
 
-import { useAuth } from '@/modules/auth/auth.provider'
-
-import { classes } from './form-desc.css'
 import { useFormUploadContext } from './form-upload'
 
 interface FormDescProps {}
 
 export const FormDesc: FC<FormDescProps> = (props) => {
   /* App State */
-  const { profile } = useAuth()
+  const { profile } = useAccount()
 
   /* Hook Init */
   const form = useFormUploadContext()
@@ -42,8 +41,18 @@ export const FormDesc: FC<FormDescProps> = (props) => {
 
               element.style.setProperty('opacity', '0')
             }}
-            classNames={{
-              input: clsx(classes.textInput, classes.titleInput),
+            styles={{
+              input: css({
+                border: 'unset',
+                borderBottom: `2px solid ${vars.colors.dark.light}`,
+                focus: {
+                  borderBottomColor: vars.colors.blue.lightColor,
+                },
+                paddingTop: vars.spacing.lg,
+                paddingBottom: vars.spacing.lg,
+                fontSize: '1.5rem',
+                fontWeight: 'bold',
+              }),
             }}
             value={form.values.title}
             onChange={(e) => form.setFieldValue('title', e.currentTarget.value)}
@@ -68,8 +77,14 @@ export const FormDesc: FC<FormDescProps> = (props) => {
               radius={0}
               placeholder='Tell everyone what your Pin is about'
               autosize
-              classNames={{
-                input: classes.textInput,
+              styles={{
+                input: css({
+                  border: 'unset',
+                  borderBottom: `2px solid ${vars.colors.dark.light}`,
+                  focus: {
+                    borderBottomColor: vars.colors.blue.lightColor,
+                  },
+                }),
               }}
               onFocus={(e) => {
                 const element = e.currentTarget
@@ -113,8 +128,17 @@ export const FormDesc: FC<FormDescProps> = (props) => {
       <TextInput
         radius={0}
         placeholder='Add a destination link'
-        classNames={{
-          input: clsx(classes.textInput, classes.linkInput),
+        styles={{
+          input: css({
+            border: 'unset',
+            borderBottom: `2px solid ${vars.colors.dark.light}`,
+            focus: {
+              borderBottomColor: vars.colors.blue.lightColor,
+            },
+            fontSize: '1.15rem',
+            fontWeight: 500,
+            height: 40,
+          }),
         }}
       />
     </Stack>

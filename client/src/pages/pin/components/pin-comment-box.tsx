@@ -7,11 +7,11 @@ import { useClickOutside } from '@mantine/hooks'
 import { IconHeart, IconSend } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
+import { css } from '@/hooks/css-hooks'
 import { CommentModule } from '@/modules/comment/comment.module'
 import { CreateCommentDto } from '@/modules/comment/comment.types'
 import { vars } from '@/theme'
 
-import { classes } from './pin-comment-box.css'
 
 interface PinCommentBoxProps {
   pinId: number
@@ -121,22 +121,28 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
           />
 
           <Group
-            className={classes.commentBox}
             gap={'xs'}
             px={'xs'}
             w={'100%'}
+            style={css({
+              border: `1px solid ${vars.colors.gray[4]}`,
+              borderRadius: vars.radius.xl,
+              overflow: 'hidden',
+            })}
           >
             <Textarea
               ref={textAreaRef}
-              classNames={{
-                input: classes.textAreaInput,
-              }}
               size='md'
               placeholder='Add a comment'
               autosize
               maxRows={2}
               style={{
                 flex: 1,
+              }}
+              styles={{
+                input: {
+                  border: 'none',
+                },
               }}
               {...form.getInputProps('content')}
             />

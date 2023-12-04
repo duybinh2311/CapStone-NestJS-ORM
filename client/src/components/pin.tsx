@@ -1,18 +1,17 @@
 import { FC } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { ActionIcon, Box, Button, Group, Image, Stack, Text, rgba, useMantineTheme } from '@mantine/core'
 
-import { IconExternalLink, IconLink } from '@tabler/icons-react'
+import { IconExternalLink } from '@tabler/icons-react'
 
+import { css } from '@/hooks/css-hooks'
 import { AppModule } from '@/modules/app/app.module'
 import { PinResDto } from '@/modules/pin/pin.types'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 import { ColorUtils } from '@/utils/color.utils'
 import { DateUtils } from '@/utils/date.utils'
-
-import { classes } from './pin.css'
 
 export enum PinSizeEnum {
   small = 'small',
@@ -30,29 +29,36 @@ export const Pin: FC<PinProps> = (props) => {
   const theme = useMantineTheme()
   const navigate = useNavigate()
 
+  const size = props.size === PinSizeEnum.small ? 26 : props.size === PinSizeEnum.medium ? 36 : 46
+
   return (
     <Box
-      className={classes[props.size]}
+      // className={classes[props.size]}
       pos={'relative'}
       m={8}
       style={{
         cursor: 'pointer',
+        gridRowEnd: `span ${size}`,
       }}
       onClick={() => navigate(AppRoutes.detail.replace(':id', `${props.pin.id}`))}
     >
       <Box
-        className={classes.overlayPin}
         pos={'absolute'}
         w={'100%'}
         h={'100%'}
-        style={{
+        style={css({
           borderRadius: vars.radius.md,
           background: ColorUtils.linearGradient(180, [
             `${rgba(theme.colors.dark[9], 0.6)} 0%`,
             `${rgba(theme.colors.dark[9], 0.6)} 70%`,
             `${rgba(theme.colors.dark[9], 1)} 100%`,
           ]),
-        }}
+          transition: 'opacity 0.1s ease-in-out',
+          opacity: 0,
+          hover: {
+            opacity: 1,
+          },
+        })}
       >
         <Button
           color='red'

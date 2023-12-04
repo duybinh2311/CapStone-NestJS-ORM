@@ -71,15 +71,6 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
           />
         </Box>
       </SimpleGrid>
-
-      <Box
-        w={'fit-content'}
-        style={{
-          outline: '5px solid red',
-        }}
-      >
-        <EmojiPicker />
-      </Box>
     </>
   )
 }

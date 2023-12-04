@@ -7,13 +7,13 @@ import { ActionMenu } from '@/components/action-menu'
 import { AppLogoLink } from '@/components/app-logo-link'
 import { AuthButton } from '@/components/auth-button'
 import { UserMenu } from '@/components/user-menu'
-import { useAuth } from '@/modules/auth/auth.provider'
+import { useAccount } from '@/hooks/account-hooks'
 
 interface AppHeaderProps {}
 
 export const AppHeader: FC<AppHeaderProps> = () => {
   /* App State */
-  const { profile, signOut } = useAuth()
+  const { profile, signOut } = useAccount()
 
   /* Hook Init */
   const theme = useMantineTheme()

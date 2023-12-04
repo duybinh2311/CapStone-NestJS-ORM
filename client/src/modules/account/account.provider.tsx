@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, createContext, useContext, useEffect, useState } from 'react'
+import { createContext, FC, PropsWithChildren, useState, useEffect } from 'react'
 
 import { modals } from '@mantine/modals'
 
@@ -6,15 +6,15 @@ import { onModalSignIn } from '@/modals/sign-in.modal'
 import { IResponseData } from '@/types'
 
 import { AppModule } from '../app/app.module'
+import { AuthModule } from '../auth/auth.module'
+import { SignInResDto, SignUpResDto } from '../auth/auth.types'
 import { UserModule } from '../user/user.module'
 import { ProfileUserResDto } from '../user/user.types'
-import { AuthModule } from './auth.module'
-import { AuthContext, SignInFunc, SignInResDto, SignUpFunc, SignUpResDto } from './auth.types'
+import { AccountContext, SignInFunc, SignUpFunc } from './account.types'
 
-export const authContext = createContext({} as AuthContext<ProfileUserResDto>)
-export const useAuth = () => useContext(authContext)
+export const accountContext = createContext({} as AccountContext<ProfileUserResDto>)
 
-export const AuthProvider: FC<PropsWithChildren> = (props) => {
+export const AccountProvider: FC<PropsWithChildren> = (props) => {
   /* App State */
   const [profile, setProfile] = useState<ProfileUserResDto | null>(null)
 
@@ -56,12 +56,12 @@ export const AuthProvider: FC<PropsWithChildren> = (props) => {
     }
   }, [])
 
-  const context: AuthContext<ProfileUserResDto> = {
+  const context: AccountContext<ProfileUserResDto> = {
     profile,
     signIn,
     signUp,
     signOut,
   }
 
-  return <authContext.Provider value={context}>{props.children}</authContext.Provider>
+  return <accountContext.Provider value={context}>{props.children}</accountContext.Provider>
 }

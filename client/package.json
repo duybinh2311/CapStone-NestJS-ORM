@@ -12,6 +12,7 @@
     "format:fix": "prettier --write ."
   },
   "dependencies": {
+    "@css-hooks/react": "^1.3.0",
     "@mantine/core": "^7.1.0",
     "@mantine/dropzone": "^7.1.5",
     "@mantine/form": "^7.1.3",

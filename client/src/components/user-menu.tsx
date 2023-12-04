@@ -1,16 +1,15 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { Avatar, Box, Group, Menu, Text } from '@mantine/core'
+import { ActionIcon, Avatar, Box, Group, Menu, Text } from '@mantine/core'
 
 import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
 
-import { SignOutFunc } from '@/modules/auth/auth.types'
+import { css } from '@/hooks/css-hooks'
+import { SignOutFunc } from '@/modules/account/account.types'
 import { ProfileUserResDto } from '@/modules/user/user.types'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
-
-import { classes } from './user-menu.css'
 
 interface UserMenuProps {
   profile: ProfileUserResDto | null
@@ -21,47 +20,60 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
   /* Hook Init */
   const navigate = useNavigate()
 
+  const menuItemStyle = css({
+    borderRadius: vars.radius.xl,
+    backgroundColor: 'transparent',
+    hover: {
+      backgroundColor: vars.colors.dark.light,
+    },
+  })
+
   return (
     <Group gap={0}>
-      <Box
-        display={'flex'}
+      <ActionIcon
         c={vars.colors.gray[6]}
-        className={classes.menuItem}
+        radius={'xl'}
+        size={40}
+        style={menuItemStyle}
       >
         <IconBellFilled />
-      </Box>
+      </ActionIcon>
 
-      <Box
-        display={'flex'}
+      <ActionIcon
         c={vars.colors.gray[6]}
-        className={classes.menuItem}
+        radius={'xl'}
+        size={40}
+        style={menuItemStyle}
       >
         <IconMessageCircle />
-      </Box>
+      </ActionIcon>
 
-      <Box
-        display={'flex'}
-        className={classes.menuItem}
+      <ActionIcon
+        c={vars.colors.gray[6]}
+        radius={'xl'}
+        size={40}
+        style={menuItemStyle}
         onClick={() => navigate(AppRoutes.profile.root)}
       >
         <Avatar
           src={props.profile?.avatar}
           size={'sm'}
         />
-      </Box>
+      </ActionIcon>
 
       <Menu
         position='bottom-end'
         width={300}
       >
         <Menu.Target>
-          <Box
-            display={'flex'}
+          <ActionIcon
             c={vars.colors.gray[6]}
-            className={classes.menuItem}
+            radius={'xl'}
+            size={40}
+            style={menuItemStyle}
           >
-            <IconChevronDown size={22} />
-          </Box>
+            <IconChevronDown />
+          </ActionIcon>
         </Menu.Target>
 
         <Menu.Dropdown>

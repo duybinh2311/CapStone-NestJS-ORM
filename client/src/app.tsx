@@ -11,21 +11,23 @@ import '@mantine/notifications/styles.css'
 import '@/assets/styles/global-style.scss'
 import router from '@/routes/router'
 
-import { AuthProvider } from './modules/auth/auth.provider'
+import { hooks } from './hooks/css-hooks'
+import { AccountProvider } from './modules/account/account.provider'
 import { store } from './modules/redux/store'
 import { theme } from './theme'
 
 export const App: FC = () => {
   return (
-    <AuthProvider>
+    <AccountProvider>
       <Provider store={store}>
         <MantineProvider theme={theme}>
+          <style dangerouslySetInnerHTML={{ __html: hooks }} />
           <ModalsProvider>
             <Notifications />
             <RouterProvider router={router} />
           </ModalsProvider>
         </MantineProvider>
       </Provider>
-    </AuthProvider>
+    </AccountProvider>
   )
 }

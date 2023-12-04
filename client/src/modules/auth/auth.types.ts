@@ -23,14 +23,3 @@ export interface SignUpResDto {
   fullName: string
   age: number
 }
-
-export type SignInFunc = (payload: SignInDto) => void
-export type SignUpFunc = (payload: SignUpDto) => void
-export type SignOutFunc = () => void
-
-export interface AuthContext<T> {
-  profile: T | null
-  signIn: SignInFunc
-  signUp: SignUpFunc
-  signOut: SignOutFunc
-}
