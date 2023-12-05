@@ -19,6 +19,12 @@ export enum PinSizeEnum {
   large = 'large',
 }
 
+const sizes = {
+  [PinSizeEnum.small]: 26,
+  [PinSizeEnum.medium]: 36,
+  [PinSizeEnum.large]: 46,
+}
+
 interface PinProps {
   size: PinSizeEnum
   pin: PinResDto
@@ -29,11 +35,7 @@ export const Pin: FC<PinProps> = (props) => {
   const theme = useMantineTheme()
   const navigate = useNavigate()
 
-  const sizes = {
-    [PinSizeEnum.small]: 26,
-    [PinSizeEnum.medium]: 36,
-    [PinSizeEnum.large]: 46,
-  }
+  /* Logic */
 
   return (
     <Box

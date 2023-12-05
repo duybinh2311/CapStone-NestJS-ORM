@@ -14,7 +14,7 @@ import { DateUtils } from '@/utils/date.utils'
 
 interface PinCommentProps {
   comment: CommentResDto
-  fetchComments: () => void
+  getComments: () => void
 }
 
 export const PinComment: FC<PinCommentProps> = (props) => {
@@ -61,7 +61,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
     CommentModule.update(`${props.comment.id}`, values).then(() => {
       form.reset()
       setIsEditingComment(false)
-      props.fetchComments()
+      props.getComments()
     })
   })
 
@@ -205,7 +205,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
                       fw={500}
                       onClick={() => {
                         CommentModule.delete(`${props.comment.id}`).then(() => {
-                          props.fetchComments()
+                          props.getComments()
                         })
                       }}
                     >

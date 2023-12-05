@@ -15,7 +15,7 @@ interface PinDetailProps {
   pin: PinResDto
   comments: CommentResDto[]
   countComments: number
-  fetchComments: () => void
+  getComments: () => void
 }
 
 export const PinDetail: FC<PinDetailProps> = (props) => {
@@ -51,7 +51,7 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
               path={props.pin.path}
               author={props.pin.author}
               comments={props.comments}
-              fetchComments={props.fetchComments}
+              getComments={props.getComments}
             />
           </ScrollArea>
         </Box>
@@ -59,7 +59,7 @@ export const PinDetail: FC<PinDetailProps> = (props) => {
         <PinCommentBox
           countComments={props.countComments}
           pinId={props.pin.id}
-          fetchComments={props.fetchComments}
+          getComments={props.getComments}
         />
       </Box>
     </SimpleGrid>

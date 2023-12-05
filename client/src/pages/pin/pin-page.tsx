@@ -23,7 +23,7 @@ export const PinPage: FC = () => {
   const params = useParams<{ id: string }>()
 
   /* Logic */
-  const fetchComments = () => {
+  const getComments = () => {
     if (pin) {
       CommentModule.getByPinId(`${pin.id}`)
         .then((res) => {
@@ -49,7 +49,7 @@ export const PinPage: FC = () => {
   }, [params.id])
 
   useEffect(() => {
-    fetchComments()
+    getComments()
   }, [pin])
 
   if (!pin) {
@@ -68,7 +68,7 @@ export const PinPage: FC = () => {
             pin={pin}
             comments={comments}
             countComments={countComments}
-            fetchComments={fetchComments}
+            getComments={getComments}
           />
         </Container>
       </section>

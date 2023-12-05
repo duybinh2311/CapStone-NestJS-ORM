@@ -15,7 +15,7 @@ import { vars } from '@/theme'
 interface PinCommentBoxProps {
   pinId: number
   countComments: number
-  fetchComments: () => void
+  getComments: () => void
 }
 
 export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
@@ -54,7 +54,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   const submit = form.onSubmit((values) => {
     CommentModule.create(values).then(() => {
       form.reset()
-      props.fetchComments()
+      props.getComments()
     })
   })
 

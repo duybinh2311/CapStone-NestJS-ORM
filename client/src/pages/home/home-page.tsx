@@ -37,7 +37,7 @@ export const HomePage: FC = () => {
     >
       <Container fluid>
         <PinLayout>
-          {(() => {
+          {((): JSX.Element[] => {
             const sizes = [PinSizeEnum.small, PinSizeEnum.medium, PinSizeEnum.large]
             return pinList.map((pin, index) => {
               const size = sizes[index % sizes.length]

@@ -15,7 +15,7 @@ interface PinDescriptionProps {
   path: string
   author: AuthorDto
   comments: CommentResDto[]
-  fetchComments: () => void
+  getComments: () => void
 }
 
 export const PinDescription: FC<PinDescriptionProps> = (props) => {
@@ -98,7 +98,7 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
                 <PinComment
                   key={comment.id}
                   comment={comment}
-                  fetchComments={props.fetchComments}
+                  getComments={props.getComments}
                 />
               )
             })}
