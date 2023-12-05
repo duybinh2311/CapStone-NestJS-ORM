@@ -31,7 +31,7 @@ export class PinModule {
   }
 
   static update(id: string, payload: UpdatePinDto): IRes<PinResDto> {
-    return http.put(`${this.url.root}/${id}`, payload)
+    return http.patch(`${this.url.root}/${id}`, payload)
   }
 
   static delete(id: string): IRes<null> {

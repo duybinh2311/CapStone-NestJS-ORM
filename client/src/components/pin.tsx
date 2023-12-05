@@ -29,16 +29,19 @@ export const Pin: FC<PinProps> = (props) => {
   const theme = useMantineTheme()
   const navigate = useNavigate()
 
-  const size = props.size === PinSizeEnum.small ? 26 : props.size === PinSizeEnum.medium ? 36 : 46
+  const sizes = {
+    [PinSizeEnum.small]: 26,
+    [PinSizeEnum.medium]: 36,
+    [PinSizeEnum.large]: 46,
+  }
 
   return (
     <Box
-      // className={classes[props.size]}
       pos={'relative'}
       m={8}
       style={{
         cursor: 'pointer',
-        gridRowEnd: `span ${size}`,
+        gridRowEnd: `span ${sizes[props.size]}`,
       }}
       onClick={() => navigate(AppRoutes.detail.replace(':id', `${props.pin.id}`))}
     >

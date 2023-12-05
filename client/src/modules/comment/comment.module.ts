@@ -18,7 +18,7 @@ export class CommentModule {
   }
 
   static update(id: string, payload: UpdateCommentDto): IRes<CommentResDto> {
-    return http.put(`${this.url.root}/${id}`, payload)
+    return http.patch(`${this.url.root}/${id}`, payload)
   }
 
   static delete(id: string): IRes<null> {
