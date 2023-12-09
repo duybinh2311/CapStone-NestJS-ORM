@@ -5,6 +5,7 @@ import { createFormContext } from '@mantine/form'
 
 import { IconDots } from '@tabler/icons-react'
 
+import { useAccount } from '@/hooks/account-hooks'
 import { AppModule } from '@/modules/app/app.module'
 import { FileModule } from '@/modules/file/file.module'
 import { PinModule } from '@/modules/pin/pin.module'
@@ -19,6 +20,9 @@ export const [FormUploadProvider, useFormUploadContext, useFormUpload] = createF
 interface FormUploadProps {}
 
 export const FormUpload: FC<FormUploadProps> = (props) => {
+  /* App State */
+  const { getCreatedPins } = useAccount()
+
   /* Local State */
   const [file, setFile] = useState<File | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -42,6 +46,7 @@ export const FormUpload: FC<FormUploadProps> = (props) => {
         promise: PinModule.create({ ...values, path }),
         action: {
           success: () => {
+            getCreatedPins()
             form.reset()
             setFile(null)
           },
