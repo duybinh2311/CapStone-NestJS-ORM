@@ -5,11 +5,14 @@ import { ActionIcon, Box, Button, Group, Image, Stack, Text, rgba, useMantineThe
 
 import { IconExternalLink } from '@tabler/icons-react'
 
+import { useAccount } from '@/hooks/account-hooks'
 import { useCss } from '@/hooks/css-hooks'
 import { AppModule } from '@/modules/app/app.module'
+import { PinModule } from '@/modules/pin/pin.module'
 import { PinResDto } from '@/modules/pin/pin.types'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
+import { IResError } from '@/types'
 import { ColorUtils } from '@/utils/color.utils'
 import { DateUtils } from '@/utils/date.utils'
 
@@ -31,11 +34,26 @@ interface PinProps {
 }
 
 export const Pin: FC<PinProps> = (props) => {
+  /* App State */
+  const { savedPins, getSavedPins } = useAccount()
+
   /* Hook Init */
   const theme = useMantineTheme()
   const navigate = useNavigate()
 
   /* Logic */
+  const isSaved = savedPins.some((pin) => pin.id === props.pin.id)
+
+  const savePin = () => {
+    PinModule.save(`${props.pin.id}`)
+      .then((res) => {
+        getSavedPins()
+        AppModule.onSuccess(res.message)
+      })
+      .catch((err: IResError) => {
+        AppModule.onError(err.message || err.error)
+      })
+  }
 
   return (
     <Box
@@ -66,16 +84,17 @@ export const Pin: FC<PinProps> = (props) => {
         })}
       >
         <Button
-          color='red'
+          color={isSaved ? 'dark' : 'red'}
           radius={'xl'}
           pos={'absolute'}
           top={10}
           right={10}
           onClick={(e) => {
-            e.preventDefault()
+            e.stopPropagation()
+            savePin()
           }}
         >
-          Save
+          {isSaved ? 'Saved' : 'Save'}
         </Button>
 
         <Group

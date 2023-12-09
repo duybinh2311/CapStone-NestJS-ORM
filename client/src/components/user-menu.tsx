@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { ActionIcon, Avatar, Box, Group, Menu, Text } from '@mantine/core'
+import { ActionIcon, Avatar, Box, Group, Menu, Stack, Text } from '@mantine/core'
 
 import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
 
@@ -91,22 +91,18 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
                 size={'lg'}
               />
 
-              <Box
-                style={{
-                  flex: 1,
-                }}
-              >
+              <Stack gap={5}>
                 <Text
                   inline
                   fw={500}
-                  fz={14}
+                  fz={'sm'}
                 >
                   {props.profile?.fullName || 'User'}
                 </Text>
                 <Text
                   inline
                   fw={'lighter'}
-                  fz={12}
+                  fz={'xs'}
                 >
                   Personal
                 </Text>
@@ -114,13 +110,13 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
                   inline
                   fw={500}
                   w={180}
-                  fz={12}
+                  fz={'xs'}
                   c={'dimmed'}
                   truncate
                 >
                   {props.profile?.email || 'user@gmail.com'}
                 </Text>
-              </Box>
+              </Stack>
 
               <Box>
                 <IconCheck size={16} />

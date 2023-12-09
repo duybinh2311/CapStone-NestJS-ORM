@@ -24,7 +24,7 @@ export const HomePage: FC = () => {
         setPinList(res.data)
       })
       .catch((err: IResError) => {
-        AppModule.onError(err?.message || err.error)
+        AppModule.onError(err.message || err.error)
       })
   }, [])
 

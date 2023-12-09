@@ -18,8 +18,8 @@ import { theme } from './theme'
 
 export const App: FC = () => {
   return (
-    <AccountProvider>
-      <Provider store={store}>
+    <Provider store={store}>
+      <AccountProvider>
         <MantineProvider theme={theme}>
           <style dangerouslySetInnerHTML={{ __html: hooks }} />
           <ModalsProvider>
@@ -27,7 +27,7 @@ export const App: FC = () => {
             <RouterProvider router={router} />
           </ModalsProvider>
         </MantineProvider>
-      </Provider>
-    </AccountProvider>
+      </AccountProvider>
+    </Provider>
   )
 }

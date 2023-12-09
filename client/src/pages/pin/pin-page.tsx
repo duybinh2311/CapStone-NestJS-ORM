@@ -31,7 +31,7 @@ export const PinPage: FC = () => {
           setCountComments(res.count)
         })
         .catch((err) => {
-          AppModule.onError(err?.message || err.error)
+          AppModule.onError(err.message || err.error)
         })
     }
   }
@@ -43,7 +43,7 @@ export const PinPage: FC = () => {
           setPin(res.data)
         })
         .catch((err) => {
-          AppModule.onError(err?.message || err.error)
+          AppModule.onError(err.message || err.error)
         })
     }
   }, [params.id])
