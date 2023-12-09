@@ -2,16 +2,12 @@ import { FC } from 'react'
 
 import { Avatar, Box, Button, Container, Group, Stack, Text, TextInput, Textarea, Title } from '@mantine/core'
 
-import { vars } from '@/theme'
-
 export const EditProfilePage: FC = () => {
   return (
     <>
-      <section
-        style={{
-          paddingTop: vars.spacing.md,
-          paddingBottom: 150,
-        }}
+      <Box
+        pt={'md'}
+        pb={150}
       >
         <Container size={'sm'}>
           <Stack
@@ -71,15 +67,15 @@ export const EditProfilePage: FC = () => {
             </form>
           </Stack>
         </Container>
-      </section>
+      </Box>
 
-      <section
+      <Box
+        pos={'fixed'}
+        bottom={0}
+        w={'100vw'}
+        bg={'white'}
         style={{
           boxShadow: '0 0 8px rgba(0, 0, 0, 0.10)',
-          position: 'fixed',
-          bottom: 0,
-          width: '100vw',
-          background: 'white',
         }}
       >
         <Container size={'sm'}>
@@ -103,7 +99,7 @@ export const EditProfilePage: FC = () => {
             </Button>
           </Group>
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

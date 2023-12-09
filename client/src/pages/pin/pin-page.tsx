@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { Container } from '@mantine/core'
+import { Box, Container } from '@mantine/core'
 
 import { AppModule } from '@/modules/app/app.module'
 import { CommentModule } from '@/modules/comment/comment.module'
@@ -58,11 +58,7 @@ export const PinPage: FC = () => {
 
   return (
     <>
-      <section
-        style={{
-          paddingTop: vars.spacing.sm,
-        }}
-      >
+      <Box pt={'sm'}>
         <Container size={'lg'}>
           <PinDetail
             pin={pin}
@@ -71,17 +67,13 @@ export const PinPage: FC = () => {
             getComments={getComments}
           />
         </Container>
-      </section>
+      </Box>
 
-      <section
-        style={{
-          padding: `${vars.spacing.xl} 0`,
-        }}
-      >
+      <Box py={'xl'}>
         <Container fluid>
           <PinSuggest />
         </Container>
-      </section>
+      </Box>
     </>
   )
 }

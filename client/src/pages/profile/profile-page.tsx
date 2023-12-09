@@ -3,125 +3,174 @@ import { useNavigate } from 'react-router-dom'
 
 import { Avatar, Box, Button, Container, Group, Stack, Tabs, Text, Title } from '@mantine/core'
 
+import { Pin, PinSizeEnum } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
+import { useAccount } from '@/hooks/account-hooks'
 import { useCss } from '@/hooks/css-hooks'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
 export const ProfilePage: FC = () => {
+  /* App State */
+  const { profile, savedPins, createdPins } = useAccount()
+
+  /* Hook Init */
   const navigate = useNavigate()
 
   return (
-    <section
-      style={{
-        paddingTop: vars.spacing.md,
-        paddingBottom: vars.spacing.xl,
-      }}
-    >
-      <Container>
-        <Stack
-          align='center'
-          mt={'lg'}
-          gap={'xl'}
-        >
-          <Stack align='center'>
-            <Avatar
-              size={120}
-              src={
-                'https://scontent.fhan3-3.fna.fbcdn.net/v/t39.30808-6/261463275_2098436070312988_9106714437153092476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=MdYKIxEeBBYAX_EYJlO&_nc_ht=scontent.fhan3-3.fna&oh=00_AfDys-zG5EZq3uhstUMsZTXFUvihHbX2yTx7oeEj_BNlxw&oe=6533EFCB'
-              }
-            />
-            <Box>
-              <Title order={2}>Nguyễn Duy Bình</Title>
-              <Text
-                mt={5}
-                fz={'sm'}
-                c={'dimmed'}
-                ta={'center'}
-              >
-                duybinh@gmail.com
-              </Text>
-              <Text ta={'center'}>0 following</Text>
-            </Box>
-          </Stack>
-
-          <Group>
-            <Button
-              radius={'xl'}
-              size='md'
-              variant='light'
-            >
-              Share
-            </Button>
-            <Button
-              radius={'xl'}
-              size='md'
-              variant='light'
-              onClick={() => navigate(AppRoutes.profile.edit)}
-            >
-              Edit Profile
-            </Button>
-          </Group>
-
-          <Tabs
-            defaultValue={'created'}
-            w={'100%'}
-            styles={{
-              list: useCss({
-                before: {
-                  position: 'unset',
-                },
-              }),
-              tab: useCss({
-                dataActive: {
-                  borderBottomWidth: '3px',
-                },
-              }),
-            }}
+    <>
+      <Box pt={'md'}>
+        <Container>
+          <Stack
+            align='center'
+            mt={'lg'}
+            gap={'xl'}
           >
-            <Tabs.List
-              style={{
-                justifyContent: 'center',
-              }}
-              mb={'xl'}
-            >
-              <Tabs.Tab
-                value='created'
-                style={{
-                  marginRight: vars.spacing.md,
-                }}
-              >
-                <Text fw={500}>Created</Text>
-              </Tabs.Tab>
-              <Tabs.Tab
-                value='saved'
-                style={{}}
-              >
-                <Text fw={500}>Saved</Text>
-              </Tabs.Tab>
-            </Tabs.List>
-
-            <Tabs.Panel value='created'>
-              <Stack align='center'>
-                <Text>Nothing to show...yet! Pins you create will live here.</Text>
-
-                <Button
-                  color='red'
-                  w={'fit-content'}
-                  radius={'xl'}
-                  size='md'
+            <Stack align='center'>
+              <Avatar
+                size={120}
+                src={profile?.avatar}
+              />
+              <Box>
+                <Title order={2}>{profile?.fullName}</Title>
+                <Text
+                  mt={5}
+                  fz={'sm'}
+                  c={'dimmed'}
+                  ta={'center'}
                 >
-                  Create Idea Pin
-                </Button>
-              </Stack>
+                  {profile?.email}
+                </Text>
+                <Text ta={'center'}>0 following</Text>
+              </Box>
+            </Stack>
+
+            <Group>
+              <Button
+                radius={'xl'}
+                size='md'
+                variant='light'
+              >
+                Share
+              </Button>
+              <Button
+                radius={'xl'}
+                size='md'
+                variant='light'
+                onClick={() => navigate(AppRoutes.profile.edit)}
+              >
+                Edit Profile
+              </Button>
+            </Group>
+          </Stack>
+        </Container>
+      </Box>
+
+      <Box
+        mt={'xl'}
+        pb={'xl'}
+      >
+        <Tabs
+          defaultValue={'created'}
+          w={'100%'}
+          styles={{
+            tab: useCss({
+              dataActive: {
+                borderBottomWidth: '3px',
+              },
+            }),
+          }}
+        >
+          <Tabs.List
+            style={{
+              justifyContent: 'center',
+            }}
+            mb={'xl'}
+          >
+            <Tabs.Tab
+              value='created'
+              style={{
+                marginRight: vars.spacing.md,
+              }}
+            >
+              <Text fw={500}>Created</Text>
+            </Tabs.Tab>
+
+            <Tabs.Tab value='saved'>
+              <Text fw={500}>Saved</Text>
+            </Tabs.Tab>
+          </Tabs.List>
+
+          <Container>
+            <Tabs.Panel value='created'>
+              {createdPins.length ? (
+                <PinLayout>
+                  {((): JSX.Element[] => {
+                    const sizes = [PinSizeEnum.small, PinSizeEnum.medium, PinSizeEnum.large]
+                    return createdPins.map((pin, index) => {
+                      const size = sizes[index % sizes.length]
+                      return (
+                        <Pin
+                          key={pin.id}
+                          size={size}
+                          pin={pin}
+                        />
+                      )
+                    })
+                  })()}
+                </PinLayout>
+              ) : (
+                <Stack align='center'>
+                  <Text>Nothing to show...yet! Pins you create will live here.</Text>
+
+                  <Button
+                    color='red'
+                    w={'fit-content'}
+                    radius={'xl'}
+                    size='md'
+                  >
+                    Create Pin
+                  </Button>
+                </Stack>
+              )}
             </Tabs.Panel>
 
             <Tabs.Panel value='saved'>
-              <PinLayout></PinLayout>
+              {savedPins.length ? (
+                <PinLayout>
+                  {((): JSX.Element[] => {
+                    const sizes = [PinSizeEnum.small, PinSizeEnum.medium, PinSizeEnum.large]
+                    return savedPins.map((pin, index) => {
+                      const size = sizes[index % sizes.length]
+                      return (
+                        <Pin
+                          key={pin.id}
+                          size={size}
+                          pin={pin}
+                        />
+                      )
+                    })
+                  })()}
+                </PinLayout>
+              ) : (
+                <Stack align='center'>
+                  <Text>Save pins you love to your boards. You’ll be able to see them here!</Text>
+
+                  <Button
+                    color='red'
+                    w={'fit-content'}
+                    radius={'xl'}
+                    size='md'
+                    onClick={() => navigate(AppRoutes.home)}
+                  >
+                    Go Home
+                  </Button>
+                </Stack>
+              )}
             </Tabs.Panel>
-          </Tabs>
-        </Stack>
-      </Container>
-    </section>
+          </Container>
+        </Tabs>
+      </Box>
+    </>
   )
 }

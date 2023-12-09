@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 
-import { Container } from '@mantine/core'
+import { Box, Container } from '@mantine/core'
 
 import { Pin, PinSizeEnum } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
@@ -29,11 +29,9 @@ export const HomePage: FC = () => {
   }, [])
 
   return (
-    <section
-      style={{
-        paddingTop: vars.spacing.md,
-        paddingBottom: vars.spacing.xl,
-      }}
+    <Box
+      pt={'md'}
+      pb={'xl'}
     >
       <Container fluid>
         <PinLayout>
@@ -52,6 +50,6 @@ export const HomePage: FC = () => {
           })()}
         </PinLayout>
       </Container>
-    </section>
+    </Box>
   )
 }
