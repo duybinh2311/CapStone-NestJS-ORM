@@ -4,6 +4,7 @@ import { ActionIcon, Avatar, Button, Group, Stack, Text, Title } from '@mantine/
 
 import { IconChevronDown } from '@tabler/icons-react'
 
+import { AppModule } from '@/modules/app/app.module'
 import { CommentResDto } from '@/modules/comment/comment.types'
 import { AuthorDto } from '@/types'
 
@@ -43,14 +44,14 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
         <Group gap={'xs'}>
           <Avatar
             size={'md'}
-            src={props.author.avatar}
+            src={AppModule.config.APP_API_URL + props.author.avatar}
           />
           <Stack gap={0}>
             <Text
               fz='sm'
               fw={500}
             >
-              {props.author.fullName}
+              {props.author.userName || props.author.fullName}
             </Text>
             <Text
               fz='xs'

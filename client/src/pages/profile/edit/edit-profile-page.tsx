@@ -1,10 +1,85 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
-import { Avatar, Box, Button, Container, Group, Stack, Text, TextInput, Textarea, Title } from '@mantine/core'
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  FileButton,
+  Group,
+  Stack,
+  Text,
+  TextInput,
+  Textarea,
+  Title,
+} from '@mantine/core'
+import { useForm } from '@mantine/form'
+
+import { useAccount } from '@/hooks/account-hooks'
+import { AppModule } from '@/modules/app/app.module'
+import { FileModule } from '@/modules/file/file.module'
+import { UserModule } from '@/modules/user/user.module'
+import { UpdateUserDto } from '@/modules/user/user.types'
+import { IResError } from '@/types'
 
 export const EditProfilePage: FC = () => {
+  /* App State */
+  const { profile, getProfile } = useAccount()
+
+  /* Local State */
+  const [avatarFile, setAvatarFile] = useState<File | null>(null)
+  const [avatarFileURL, setAvatarFileURL] = useState<string | null>(null)
+
+  /* Hook Init */
+  const form = useForm<UpdateUserDto>({
+    initialValues: {
+      email: profile?.email,
+      fullName: profile?.fullName,
+      age: profile?.age,
+      avatar: profile?.avatar,
+      userName: profile?.userName,
+      about: profile?.about,
+    },
+  })
+
+  /* Logic */
+  const submit = form.onSubmit(async (values) => {
+    if (avatarFile) {
+      values.avatar = (await FileModule.upLoad({ file: avatarFile })).data.path
+    }
+
+    UserModule.updateProfile(values)
+      .then((res) => {
+        AppModule.onSuccess(res.message)
+        getProfile()
+      })
+      .catch((err: IResError) => {
+        AppModule.onError(err.message || err.error)
+      })
+  })
+
+  useEffect(() => {
+    if (avatarFile) {
+      setAvatarFileURL(URL.createObjectURL(avatarFile))
+    } else {
+      if (avatarFileURL) {
+        URL.revokeObjectURL(avatarFileURL)
+        setAvatarFileURL(null)
+      }
+    }
+
+    return () => {
+      if (avatarFileURL) {
+        URL.revokeObjectURL(avatarFileURL)
+      }
+    }
+  }, [avatarFile])
+
   return (
-    <>
+    <form
+      onSubmit={submit}
+      onReset={form.onReset}
+    >
       <Box
         pt={'md'}
         pb={150}
@@ -28,43 +103,52 @@ export const EditProfilePage: FC = () => {
               </Text>
             </Box>
 
-            <form>
-              <Stack>
-                <Box>
-                  <Text fz={'sm'}>Photo</Text>
-                  <Group>
-                    <Avatar
-                      size={'xl'}
-                      src={
-                        'https://scontent.fsgn8-4.fna.fbcdn.net/v/t39.30808-6/261463275_2098436070312988_9106714437153092476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=MdYKIxEeBBYAX8pPNUV&_nc_ht=scontent.fsgn8-4.fna&oh=00_AfDiQqeGq2KTHlZU6afKegy5wElCUcbONDKh8G2T0yZ2DA&oe=6533EFCB'
-                      }
-                    />
-
-                    <Button
-                      variant='light'
-                      radius={'xl'}
-                    >
-                      Change
-                    </Button>
-                  </Group>
-                </Box>
-
-                <Group grow>
-                  <TextInput label='First name' />
-
-                  <TextInput label='Last name' />
+            <Stack>
+              <Box>
+                <Text fz={'sm'}>Photo</Text>
+                <Group>
+                  <Avatar
+                    size={'xl'}
+                    src={avatarFileURL || AppModule.config.APP_API_URL + profile?.avatar}
+                  />
+                  <FileButton
+                    onChange={setAvatarFile}
+                    accept='image/png,image/jpeg'
+                  >
+                    {(props) => (
+                      <Button
+                        {...props}
+                        variant='light'
+                        radius={'xl'}
+                      >
+                        Change
+                      </Button>
+                    )}
+                  </FileButton>
                 </Group>
+              </Box>
 
-                <Textarea
-                  label='About me'
-                  rows={4}
-                />
+              <TextInput
+                label='Full name'
+                {...form.getInputProps('fullName')}
+              />
 
-                <TextInput label='Website' />
+              <Textarea
+                label='About me'
+                rows={4}
+                {...form.getInputProps('about')}
+              />
 
-                <TextInput label='User name' />
-              </Stack>
-            </form>
+              <TextInput
+                label='Email'
+                {...form.getInputProps('email')}
+              />
+
+              <TextInput
+                label='User name'
+                {...form.getInputProps('userName')}
+              />
+            </Stack>
           </Stack>
         </Container>
       </Box>
@@ -87,6 +171,8 @@ export const EditProfilePage: FC = () => {
               size='md'
               variant='light'
               radius={'xl'}
+              type='reset'
+              onClick={() => setAvatarFile(null)}
             >
               Reset
             </Button>
@@ -94,12 +180,13 @@ export const EditProfilePage: FC = () => {
               size='md'
               color='red'
               radius={'xl'}
+              type='submit'
             >
               Save
             </Button>
           </Group>
         </Container>
       </Box>
-    </>
+    </form>
   )
 }

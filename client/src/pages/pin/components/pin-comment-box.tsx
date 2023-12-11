@@ -1,16 +1,19 @@
 import { FC, useEffect, useRef, useState } from 'react'
 
-import { ActionIcon, Avatar, Box, Group, Stack, Text, Textarea, rgba } from '@mantine/core'
+import { ActionIcon, Avatar, Box, Group, LoadingOverlay, Stack, Text, Textarea, rgba } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { useClickOutside } from '@mantine/hooks'
 
 import { IconHeart, IconSend } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
+import { useAccount } from '@/hooks/account-hooks'
 import { useCss } from '@/hooks/css-hooks'
+import { AppModule } from '@/modules/app/app.module'
 import { CommentModule } from '@/modules/comment/comment.module'
 import { CreateCommentDto } from '@/modules/comment/comment.types'
 import { vars } from '@/theme'
+import { IResError } from '@/types'
 
 interface PinCommentBoxProps {
   pinId: number
@@ -19,9 +22,13 @@ interface PinCommentBoxProps {
 }
 
 export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
+  /* App State */
+  const { profile } = useAccount()
+
   /* Local State */
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState<boolean>(false)
   const [emojiClickData, setEmojiClickData] = useState<EmojiClickData | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   /* Hook Init */
   const emojiPickerRef = useClickOutside(() => setIsEmojiPickerOpen(false))
@@ -52,10 +59,19 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
   }
 
   const submit = form.onSubmit((values) => {
-    CommentModule.create(values).then(() => {
-      form.reset()
-      props.getComments()
-    })
+    setIsLoading(true)
+
+    CommentModule.create(values)
+      .then(() => {
+        form.reset()
+        props.getComments()
+      })
+      .catch((err: IResError) => {
+        AppModule.onError(err.message || err.error)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   })
 
   useEffect(() => {
@@ -103,6 +119,13 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
           wrap='nowrap'
           pos={'relative'}
         >
+          <LoadingOverlay
+            visible={isLoading}
+            zIndex={1000}
+            overlayProps={{ blur: 1 }}
+            loaderProps={{ color: 'red' }}
+          />
+
           <Box
             ref={emojiPickerRef}
             pos={'absolute'}
@@ -113,11 +136,7 @@ export const PinCommentBox: FC<PinCommentBoxProps> = (props) => {
             <EmojiPicker onEmojiClick={(emojiClickData) => setEmojiClickData(emojiClickData)} />
           </Box>
 
-          <Avatar
-            src={
-              'https://scontent.fsgn5-6.fna.fbcdn.net/v/t39.30808-6/261463275_2098436070312988_9106714437153092476_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=nNYtUUOdgkgAX8pMjLC&_nc_ht=scontent.fsgn5-6.fna&oh=00_AfD7xbI12F-6COeXpKZf6jeGdH7CM9ai2bLjKFmP4tAisg&oe=652FFB4B'
-            }
-          />
+          <Avatar src={AppModule.config.APP_API_URL + profile?.avatar} />
 
           <Group
             gap={'xs'}

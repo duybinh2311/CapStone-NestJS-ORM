@@ -64,6 +64,8 @@ export class UserService {
         fullName: user.fullName,
         age: user.age,
         avatar: user.avatar,
+        userName: user.userName,
+        about: user.about,
       },
       message: UserMessages.GET_PROFILE_SUCCESS,
     }
@@ -84,6 +86,8 @@ export class UserService {
         fullName: userUpdate.fullName,
         age: userUpdate.age,
         avatar: userUpdate.avatar,
+        userName: user.userName,
+        about: user.about,
       },
       message: UserMessages.UPDATE_PROFILE_SUCCESS,
     }

@@ -117,7 +117,7 @@ export const Pin: FC<PinProps> = (props) => {
               fw={500}
               truncate
             >
-              {props.pin.author.fullName}
+              {props.pin.author.userName || props.pin.author.fullName}
             </Text>
 
             <Text

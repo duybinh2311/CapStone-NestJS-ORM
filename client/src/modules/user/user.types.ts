@@ -3,6 +3,8 @@ export interface UpdateUserDto {
   fullName?: string
   age?: number
   avatar?: string
+  userName?: string
+  about?: string
 }
 
 export interface ProfileUserResDto extends UpdateUserDto {

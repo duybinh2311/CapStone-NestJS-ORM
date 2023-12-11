@@ -7,6 +7,7 @@ import { Pin, PinSizeEnum } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
 import { useAccount } from '@/hooks/account-hooks'
 import { useCss } from '@/hooks/css-hooks'
+import { AppModule } from '@/modules/app/app.module'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
@@ -29,10 +30,10 @@ export const ProfilePage: FC = () => {
             <Stack align='center'>
               <Avatar
                 size={120}
-                src={profile?.avatar}
+                src={AppModule.config.APP_API_URL + profile?.avatar}
               />
               <Box>
-                <Title order={2}>{profile?.fullName}</Title>
+                <Title order={2}>{profile?.userName || profile?.fullName}</Title>
                 <Text
                   mt={5}
                   fz={'sm'}

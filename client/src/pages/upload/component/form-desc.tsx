@@ -7,6 +7,7 @@ import { useCss } from '@/hooks/css-hooks'
 import { vars } from '@/theme'
 
 import { useFormUploadContext } from './form-upload'
+import { AppModule } from '@/modules/app/app.module'
 
 interface FormDescProps {}
 
@@ -67,8 +68,8 @@ export const FormDesc: FC<FormDescProps> = (props) => {
         </Input.Wrapper>
 
         <Group gap={'xs'}>
-          <Avatar src={profile?.avatar} />
-          <Text fw={500}>{profile?.fullName}</Text>
+          <Avatar src={AppModule.config.APP_API_URL + profile?.avatar} />
+          <Text fw={500}>{profile?.userName || profile?.fullName}</Text>
         </Group>
 
         <Stack>

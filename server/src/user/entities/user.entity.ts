@@ -22,6 +22,12 @@ export class UserEntity implements User {
   avatar: string
 
   @ApiProperty()
+  userName: string
+
+  @ApiProperty()
+  about: string
+
+  @ApiProperty()
   createdAt: Date
 
   @ApiProperty()

@@ -25,6 +25,7 @@ export class CommentService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },
@@ -49,6 +50,7 @@ export class CommentService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },
@@ -71,6 +73,7 @@ export class CommentService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },
@@ -93,6 +96,7 @@ export class CommentService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },

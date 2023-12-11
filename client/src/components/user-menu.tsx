@@ -7,6 +7,7 @@ import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@
 
 import { useCss } from '@/hooks/css-hooks'
 import { SignOutFunc } from '@/modules/account/account.types'
+import { AppModule } from '@/modules/app/app.module'
 import { ProfileUserResDto } from '@/modules/user/user.types'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
@@ -56,7 +57,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         onClick={() => navigate(AppRoutes.profile.root)}
       >
         <Avatar
-          src={props.profile?.avatar}
+          src={AppModule.config.APP_API_URL + props.profile?.avatar}
           size={'sm'}
         />
       </ActionIcon>
@@ -87,7 +88,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
               gap={'xs'}
             >
               <Avatar
-                src={props.profile?.avatar}
+                src={AppModule.config.APP_API_URL + props.profile?.avatar}
                 size={'lg'}
               />
 
@@ -97,7 +98,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
                   fw={500}
                   fz={'sm'}
                 >
-                  {props.profile?.fullName || 'User'}
+                  {props.profile?.userName || props.profile?.fullName}
                 </Text>
                 <Text
                   inline

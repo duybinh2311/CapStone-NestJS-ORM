@@ -6,4 +6,7 @@ export class AuthorDto {
 
   @ApiProperty()
   avatar: string
+
+  @ApiProperty()
+  userName: string
 }

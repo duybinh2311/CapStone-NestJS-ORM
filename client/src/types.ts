@@ -34,4 +34,5 @@ export interface PaginationQueryDto {
 export interface AuthorDto {
   fullName: string
   avatar: string
+  userName: string
 }

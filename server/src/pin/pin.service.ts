@@ -26,6 +26,7 @@ export class PinService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },
@@ -88,6 +89,7 @@ export class PinService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },
@@ -112,6 +114,7 @@ export class PinService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },
@@ -132,6 +135,7 @@ export class PinService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },
@@ -153,6 +157,7 @@ export class PinService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },
@@ -179,6 +184,7 @@ export class PinService {
           select: {
             avatar: true,
             fullName: true,
+            userName: true,
           },
         },
       },
@@ -203,6 +209,7 @@ export class PinService {
           select: {
             fullName: true,
             avatar: true,
+            userName: true,
           },
         },
       },

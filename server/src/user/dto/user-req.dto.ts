@@ -26,4 +26,14 @@ export class UpdateUserDto implements Partial<UserEntity> {
   @IsString()
   @IsOptional()
   avatar?: string
+
+  @ApiProperty({ required: false })
+  @IsString()
+  @IsOptional()
+  userName?: string
+
+  @ApiProperty({ required: false })
+  @IsString()
+  @IsOptional()
+  about?: string
 }

@@ -1,13 +1,14 @@
 import { FC, useEffect, useRef, useState } from 'react'
 
 import { ActionIcon, Avatar, Box, Button, Group, Menu, Stack, Text, Textarea } from '@mantine/core'
-import { createFormActions, useForm } from '@mantine/form'
+import { useForm } from '@mantine/form'
 import { useClickOutside } from '@mantine/hooks'
 
 import { IconDots, IconHeart } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
 import { useAccount } from '@/hooks/account-hooks'
+import { AppModule } from '@/modules/app/app.module'
 import { CommentModule } from '@/modules/comment/comment.module'
 import { CommentResDto, UpdateCommentDto } from '@/modules/comment/comment.types'
 import { DateUtils } from '@/utils/date.utils'
@@ -76,7 +77,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
       wrap='nowrap'
       align='flex-start'
     >
-      <Avatar src={props.comment.author.avatar} />
+      <Avatar src={AppModule.config.APP_API_URL + props.comment.author.avatar} />
 
       {isEditingComment ? (
         <form
@@ -154,7 +155,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
               span
               fw={500}
             >
-              {props.comment.author.fullName}
+              {props.comment.author.userName || props.comment.author.fullName}
             </Text>{' '}
             {props.comment.content}
           </Text>
