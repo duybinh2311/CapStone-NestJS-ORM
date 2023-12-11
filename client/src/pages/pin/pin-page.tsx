@@ -8,7 +8,6 @@ import { CommentModule } from '@/modules/comment/comment.module'
 import { CommentResDto } from '@/modules/comment/comment.types'
 import { PinModule } from '@/modules/pin/pin.module'
 import { PinResDto } from '@/modules/pin/pin.types'
-import { vars } from '@/theme'
 
 import { PinDetail } from './components/pin-detail'
 import { PinSuggest } from './components/pin-suggest'
