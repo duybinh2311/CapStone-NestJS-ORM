@@ -24,6 +24,22 @@ export class UserService {
     if (emailExists) throw new ConflictException(UserMessages.EMAIL_EXISTS)
   }
 
+  async checkExistsDataBeforeUpdate(authUser: AuthUser, dto: UpdateUserDto): Promise<void> {
+    if (dto.email) {
+      const user = await this.getByEmail(dto.email)
+      if (user && user.id !== authUser.userId) {
+        throw new ConflictException(UserMessages.EMAIL_EXISTS)
+      }
+    }
+
+    if (dto.userName) {
+      const user = await this.getByUserName(dto.userName)
+      if (user && user.id !== authUser.userId) {
+        throw new ConflictException(UserMessages.USERNAME_EXISTS)
+      }
+    }
+  }
+
   async create(dto: SignUpDto): Promise<UserEntity> {
     await this.checkEmailExists(dto.email)
 
@@ -44,6 +60,12 @@ export class UserService {
   async getByEmail(email: string): Promise<UserEntity> {
     return await this.prisma.user.findUnique({
       where: { email },
+    })
+  }
+
+  async getByUserName(userName: string): Promise<UserEntity> {
+    return await this.prisma.user.findUnique({
+      where: { userName },
     })
   }
 
@@ -72,10 +94,7 @@ export class UserService {
   }
 
   async updateProfile(authUser: AuthUser, dto: UpdateUserDto): IRes<ProfileUserResDto> {
-    const user = dto.email && (await this.getByEmail(dto.email))
-    if (user && user.id !== authUser.userId) {
-      throw new ConflictException(UserMessages.EMAIL_EXISTS)
-    }
+    await this.checkExistsDataBeforeUpdate(authUser, dto)
 
     const userUpdate = await this.update(authUser.userId, dto)
 
@@ -86,8 +105,8 @@ export class UserService {
         fullName: userUpdate.fullName,
         age: userUpdate.age,
         avatar: userUpdate.avatar,
-        userName: user.userName,
-        about: user.about,
+        userName: userUpdate.userName,
+        about: userUpdate.about,
       },
       message: UserMessages.UPDATE_PROFILE_SUCCESS,
     }

@@ -12,4 +12,5 @@ export enum UserMessages {
   GET_SAVED_PINS_SUMMARY = 'Get saved pins by user',
 
   EMAIL_EXISTS = 'Email already exists',
+  USERNAME_EXISTS = 'Username already exists',
 }

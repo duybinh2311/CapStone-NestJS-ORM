@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 import {
   Avatar,
@@ -13,7 +13,7 @@ import {
   Textarea,
   Title,
 } from '@mantine/core'
-import { useForm } from '@mantine/form'
+import { hasLength, isEmail, isInRange, isNotEmpty, useForm } from '@mantine/form'
 
 import { useAccount } from '@/hooks/account-hooks'
 import { AppModule } from '@/modules/app/app.module'
@@ -40,7 +40,15 @@ export const EditProfilePage: FC = () => {
       userName: profile?.userName,
       about: profile?.about,
     },
+    validate: {
+      email: isEmail('Please enter valid email'),
+      fullName: isNotEmpty('Full name is required'),
+      age: isInRange({ min: 18, max: 100 }, 'Age must be between 18 and 100'),
+      about: hasLength({ min: 0, max: 255 }, 'About too long'),
+    },
   })
+
+  const resetRef = useRef<() => void>(null)
 
   /* Logic */
   const submit = form.onSubmit(async (values) => {
@@ -58,6 +66,11 @@ export const EditProfilePage: FC = () => {
       })
   })
 
+  const clearAvatarFile = () => {
+    setAvatarFile(null)
+    resetRef.current?.()
+  }
+
   useEffect(() => {
     if (avatarFile) {
       setAvatarFileURL(URL.createObjectURL(avatarFile))
@@ -74,6 +87,12 @@ export const EditProfilePage: FC = () => {
       }
     }
   }, [avatarFile])
+
+  useEffect(() => {
+    if (profile) {
+      form.setInitialValues(profile)
+    }
+  }, [profile])
 
   return (
     <form
@@ -105,13 +124,14 @@ export const EditProfilePage: FC = () => {
 
             <Stack>
               <Box>
-                <Text fz={'sm'}>Photo</Text>
+                <Text fz={'sm'}>Avatar</Text>
                 <Group>
                   <Avatar
                     size={'xl'}
                     src={avatarFileURL || AppModule.config.APP_API_URL + profile?.avatar}
                   />
                   <FileButton
+                    resetRef={resetRef}
                     onChange={setAvatarFile}
                     accept='image/png,image/jpeg'
                   >
@@ -129,24 +149,29 @@ export const EditProfilePage: FC = () => {
               </Box>
 
               <TextInput
+                label='Email'
+                {...form.getInputProps('email')}
+              />
+
+              <TextInput
                 label='Full name'
                 {...form.getInputProps('fullName')}
+              />
+
+              <TextInput
+                label='Age'
+                {...form.getInputProps('age')}
+              />
+
+              <TextInput
+                label='User name'
+                {...form.getInputProps('userName')}
               />
 
               <Textarea
                 label='About me'
                 rows={4}
                 {...form.getInputProps('about')}
-              />
-
-              <TextInput
-                label='Email'
-                {...form.getInputProps('email')}
-              />
-
-              <TextInput
-                label='User name'
-                {...form.getInputProps('userName')}
               />
             </Stack>
           </Stack>
@@ -172,7 +197,7 @@ export const EditProfilePage: FC = () => {
               variant='light'
               radius={'xl'}
               type='reset'
-              onClick={() => setAvatarFile(null)}
+              onClick={clearAvatarFile}
             >
               Reset
             </Button>

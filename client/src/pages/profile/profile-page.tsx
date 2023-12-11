@@ -33,7 +33,12 @@ export const ProfilePage: FC = () => {
                 src={AppModule.config.APP_API_URL + profile?.avatar}
               />
               <Box>
-                <Title order={2}>{profile?.userName || profile?.fullName}</Title>
+                <Title
+                  order={2}
+                  ta={'center'}
+                >
+                  {profile?.userName || profile?.fullName}
+                </Title>
                 <Text
                   mt={5}
                   fz={'sm'}
