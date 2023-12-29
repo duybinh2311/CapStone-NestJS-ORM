@@ -5,7 +5,8 @@ import { ActionIcon, Avatar, Box, Group, Menu, Stack, Text } from '@mantine/core
 
 import { IconBellFilled, IconCheck, IconChevronDown, IconMessageCircle } from '@tabler/icons-react'
 
-import { useCss } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css.hook'
+import { useAppNavigate } from '@/hooks/navigate.hook'
 import { SignOutFunc } from '@/modules/account/account.types'
 import { AppModule } from '@/modules/app/app.module'
 import { ProfileUserResDto } from '@/modules/user/user.types'
@@ -19,7 +20,7 @@ interface UserMenuProps {
 
 export const UserMenu: FC<UserMenuProps> = (props) => {
   /* Hook Init */
-  const navigate = useNavigate()
+  const navigate = useAppNavigate()
 
   const menuItemStyle = useCss({
     borderRadius: vars.radius.xl,
@@ -54,7 +55,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
         radius={'xl'}
         size={40}
         style={menuItemStyle}
-        onClick={() => navigate(AppRoutes.profile.root)}
+        onClick={navigate.profile.root}
       >
         <Avatar
           src={AppModule.config.APP_API_URL + props.profile?.avatar}
@@ -81,7 +82,7 @@ export const UserMenu: FC<UserMenuProps> = (props) => {
           <Menu.Label>Currently in</Menu.Label>
           <Menu.Item
             bg={'gray.1'}
-            onClick={() => navigate(AppRoutes.profile.root)}
+            onClick={navigate.profile.root}
           >
             <Group
               wrap='nowrap'

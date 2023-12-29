@@ -7,7 +7,6 @@ import { PinLayout } from '@/components/pin-layout'
 import { AppModule } from '@/modules/app/app.module'
 import { PinModule } from '@/modules/pin/pin.module'
 import { PinResDto, PinSortByEnum } from '@/modules/pin/pin.types'
-import { vars } from '@/theme'
 import { IResError, SortOrderEnum } from '@/types'
 
 export const HomePage: FC = () => {

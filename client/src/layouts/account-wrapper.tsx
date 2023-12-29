@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react'
 
-import { useAccount } from '@/hooks/account-hooks'
+import { useAccount } from '@/hooks/account.hook'
 import { AuthPage } from '@/pages/auth/auth-page'
 
 interface AccountWrapperProps extends PropsWithChildren {}

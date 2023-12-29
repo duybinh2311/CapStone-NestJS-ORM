@@ -7,7 +7,7 @@ import { useClickOutside } from '@mantine/hooks'
 import { IconDots, IconHeart } from '@tabler/icons-react'
 import EmojiPicker, { EmojiClickData } from 'emoji-picker-react'
 
-import { useAccount } from '@/hooks/account-hooks'
+import { useAccount } from '@/hooks/account.hook'
 import { AppModule } from '@/modules/app/app.module'
 import { CommentModule } from '@/modules/comment/comment.module'
 import { CommentResDto, UpdateCommentDto } from '@/modules/comment/comment.types'
@@ -24,7 +24,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
 
   /* Local State */
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState<boolean>(false)
-  const [isEditingComment, setIsEditingComment] = useState<boolean>(false)
+  const [isEditing, setIsEditing] = useState<boolean>(false)
   const [emojiClickData, setEmojiClickData] = useState<EmojiClickData | null>(null)
 
   /* Hook Init */
@@ -61,10 +61,21 @@ export const PinComment: FC<PinCommentProps> = (props) => {
   const submit = form.onSubmit((values) => {
     CommentModule.update(props.comment.id, values).then(() => {
       form.reset()
-      setIsEditingComment(false)
+      setIsEditing(false)
       props.getComments()
     })
   })
+
+  const cancelEdit = () => {
+    form.reset()
+    setIsEditing(false)
+  }
+
+  const deleteComment = () => {
+    CommentModule.delete(props.comment.id).then(() => {
+      props.getComments()
+    })
+  }
 
   useEffect(() => {
     if (emojiClickData) {
@@ -79,7 +90,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
     >
       <Avatar src={AppModule.config.APP_API_URL + props.comment.author.avatar} />
 
-      {isEditingComment ? (
+      {isEditing ? (
         <form
           style={{
             width: '100%',
@@ -130,10 +141,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
               <Button
                 radius={'xl'}
                 variant='outline'
-                onClick={() => {
-                  form.reset()
-                  setIsEditingComment(false)
-                }}
+                onClick={cancelEdit}
               >
                 Cancel
               </Button>
@@ -198,17 +206,13 @@ export const PinComment: FC<PinCommentProps> = (props) => {
                   <>
                     <Menu.Item
                       fw={500}
-                      onClick={() => setIsEditingComment(true)}
+                      onClick={() => setIsEditing(true)}
                     >
                       Edit
                     </Menu.Item>
                     <Menu.Item
                       fw={500}
-                      onClick={() => {
-                        CommentModule.delete(props.comment.id).then(() => {
-                          props.getComments()
-                        })
-                      }}
+                      onClick={deleteComment}
                     >
                       Delete
                     </Menu.Item>

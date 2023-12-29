@@ -2,12 +2,12 @@ import { FC } from 'react'
 
 import { Avatar, Button, Group, Input, Stack, Text, TextInput, Textarea } from '@mantine/core'
 
-import { useAccount } from '@/hooks/account-hooks'
-import { useCss } from '@/hooks/css-hooks'
+import { useAccount } from '@/hooks/account.hook'
+import { useCss } from '@/hooks/css.hook'
+import { AppModule } from '@/modules/app/app.module'
 import { vars } from '@/theme'
 
 import { useFormUploadContext } from './form-upload'
-import { AppModule } from '@/modules/app/app.module'
 
 interface FormDescProps {}
 

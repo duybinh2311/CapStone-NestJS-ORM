@@ -2,7 +2,7 @@ import { FC } from 'react'
 
 import { Box, Container } from '@mantine/core'
 
-import { FormUpload } from './component/form-upload'
+import { FormUpLoad } from './component/form-upload'
 
 export const UploadPage: FC = () => {
   return (
@@ -11,7 +11,7 @@ export const UploadPage: FC = () => {
       pb={100}
     >
       <Container size={'md'}>
-        <FormUpload />
+        <FormUpLoad />
       </Container>
     </Box>
   )

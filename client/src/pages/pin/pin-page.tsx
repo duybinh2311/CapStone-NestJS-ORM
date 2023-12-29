@@ -97,6 +97,7 @@ export const PinPage: FC = () => {
                 <PinActionMenu
                   path={pin.path}
                   authorId={pin.authorId}
+                  pinId={pin.id}
                   openEdit={open}
                 />
 

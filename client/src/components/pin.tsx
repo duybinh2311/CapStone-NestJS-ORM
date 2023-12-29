@@ -1,16 +1,15 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { ActionIcon, Box, Button, Group, Image, Stack, Text, rgba } from '@mantine/core'
 
 import { IconExternalLink } from '@tabler/icons-react'
 
-import { useAccount } from '@/hooks/account-hooks'
-import { useCss } from '@/hooks/css-hooks'
+import { useAccount } from '@/hooks/account.hook'
+import { useCss } from '@/hooks/css.hook'
+import { useAppNavigate } from '@/hooks/navigate.hook'
 import { AppModule } from '@/modules/app/app.module'
 import { PinModule } from '@/modules/pin/pin.module'
 import { PinResDto } from '@/modules/pin/pin.types'
-import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 import { IResError } from '@/types'
 import { ColorUtils } from '@/utils/color.utils'
@@ -38,7 +37,7 @@ export const Pin: FC<PinProps> = (props) => {
   const { savedPins, getSavedPins } = useAccount()
 
   /* Hook Init */
-  const navigate = useNavigate()
+  const navigate = useAppNavigate()
 
   /* Logic */
   const isSaved = savedPins.some((pin) => pin.id === props.pin.id)
@@ -62,7 +61,7 @@ export const Pin: FC<PinProps> = (props) => {
         cursor: 'pointer',
         gridRowEnd: `span ${sizes[props.size]}`,
       }}
-      onClick={() => navigate(AppRoutes.detail.replace(':id', `${props.pin.id}`))}
+      onClick={navigate.detail(props.pin.id)}
     >
       <Box
         pos={'absolute'}

@@ -1,12 +1,15 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Sticky from 'react-stickynode'
 
 import { ActionIcon, Button, Group, Menu } from '@mantine/core'
+import { modals } from '@mantine/modals'
 
-import { IconDots, IconDownload, IconEdit, IconEyeOff, IconReport, IconShare } from '@tabler/icons-react'
+import { IconDots, IconDownload, IconEdit, IconEyeOff, IconReport, IconShare, IconTrash } from '@tabler/icons-react'
 
-import { useAccount } from '@/hooks/account-hooks'
+import { useAccount } from '@/hooks/account.hook'
 import { AppModule } from '@/modules/app/app.module'
+import { PinModule } from '@/modules/pin/pin.module'
 import { FileUtils } from '@/utils/file.utils'
 
 import { classes } from './pin-action-menu.css'
@@ -14,12 +17,27 @@ import { classes } from './pin-action-menu.css'
 interface PinActionMenuProps {
   path: string
   authorId: number
+  pinId: number
   openEdit: () => void
 }
 
 export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
   /* App State */
   const { profile } = useAccount()
+
+  /* Hook Init */
+  const navigate = useNavigate()
+
+  /* Logic */
+  const deletePin = () =>
+    PinModule.delete(props.pinId).then((res) => {
+      AppModule.onSuccess(res.message)
+      navigate('/')
+    })
+
+  const downLoadPin = () => FileUtils.downloadURL(AppModule.config.APP_API_URL + props.path)
+
+  const copyPinLink = () => AppModule.onCopy(window.location.href)
 
   return (
     <Sticky
@@ -40,13 +58,36 @@ export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
 
             <Menu.Dropdown>
               {profile?.id === props.authorId && (
-                <Menu.Item
-                  leftSection={<IconEdit size={16} />}
-                  fw={500}
-                  onClick={props.openEdit}
-                >
-                  Edit Pin
-                </Menu.Item>
+                <>
+                  <Menu.Item
+                    leftSection={<IconEdit size={16} />}
+                    fw={500}
+                    onClick={props.openEdit}
+                  >
+                    Edit Pin
+                  </Menu.Item>
+
+                  <Menu.Item
+                    leftSection={<IconTrash size={16} />}
+                    fw={500}
+                    onClick={() =>
+                      modals.openConfirmModal({
+                        title: 'Delete Pin',
+                        children: 'Are you sure you want to delete this pin?',
+                        labels: {
+                          confirm: 'Delete',
+                          cancel: 'Cancel',
+                        },
+                        onConfirm: deletePin,
+                        confirmProps: {
+                          color: 'red',
+                        },
+                      })
+                    }
+                  >
+                    Delete Pin
+                  </Menu.Item>
+                </>
               )}
 
               <Menu.Item
@@ -67,14 +108,14 @@ export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
 
           <ActionIcon
             variant='transparent'
-            onClick={() => FileUtils.downloadURL(AppModule.config.APP_API_URL + props.path)}
+            onClick={downLoadPin}
           >
             <IconDownload stroke={2.5} />
           </ActionIcon>
 
           <ActionIcon
             variant='transparent'
-            onClick={() => AppModule.onCopy(window.location.href)}
+            onClick={copyPinLink}
           >
             <IconShare stroke={2.5} />
           </ActionIcon>

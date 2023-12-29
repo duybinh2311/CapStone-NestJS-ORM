@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Button, NumberInput, PasswordInput, Stack, TextInput } from '@mantine/core'
 import { isEmail, isInRange, isNotEmpty, useForm } from '@mantine/form'
 
-import { useAccount } from '@/hooks/account-hooks'
+import { useAccount } from '@/hooks/account.hook'
 import { SignUpDto } from '@/modules/auth/auth.types'
 
 interface FormSignUpProps {}

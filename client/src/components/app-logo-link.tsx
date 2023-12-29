@@ -1,14 +1,16 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { Box, Group, Image, Text } from '@mantine/core'
+
+import { useAppNavigate } from '@/hooks/navigate.hook'
 
 interface AppLogoLinkProps {
   type?: 'text' | 'image'
 }
 
 export const AppLogoLink: FC<AppLogoLinkProps> = (props) => {
-  const navigate = useNavigate()
+  /* Hook Init */
+  const navigate = useAppNavigate()
 
   return (
     <>
@@ -16,7 +18,7 @@ export const AppLogoLink: FC<AppLogoLinkProps> = (props) => {
         <Group
           gap={'xs'}
           style={{ cursor: 'pointer' }}
-          onClick={() => navigate('/')}
+          onClick={navigate.home}
         >
           <Image
             src={'/images/logo.png'}
@@ -33,7 +35,7 @@ export const AppLogoLink: FC<AppLogoLinkProps> = (props) => {
         <Box
           w={35}
           style={{ cursor: 'pointer' }}
-          onClick={() => navigate('/')}
+          onClick={navigate.home}
         >
           <Image src={'/images/logo.png'} />
         </Box>

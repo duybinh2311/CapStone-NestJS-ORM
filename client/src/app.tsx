@@ -11,7 +11,7 @@ import '@mantine/notifications/styles.css'
 import '@/assets/styles/global-style.scss'
 import router from '@/routes/router'
 
-import { hooks } from './hooks/css-hooks'
+import { hooks } from './hooks/css.hook'
 import { AccountProvider } from './modules/account/account.provider'
 import { store } from './modules/redux/store'
 import { theme } from './theme'

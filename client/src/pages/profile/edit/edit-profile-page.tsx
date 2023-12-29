@@ -15,7 +15,7 @@ import {
 } from '@mantine/core'
 import { hasLength, isEmail, isInRange, isNotEmpty, useForm } from '@mantine/form'
 
-import { useAccount } from '@/hooks/account-hooks'
+import { useAccount } from '@/hooks/account.hook'
 import { AppModule } from '@/modules/app/app.module'
 import { FileModule } from '@/modules/file/file.module'
 import { UserModule } from '@/modules/user/user.module'

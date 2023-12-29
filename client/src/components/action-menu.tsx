@@ -1,24 +1,24 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { Button, Menu, TextInput, rgba } from '@mantine/core'
 
 import { IconChevronDown, IconSearch } from '@tabler/icons-react'
 
-import { useCss } from '@/hooks/css-hooks'
-import AppRoutes from '@/routes/routes'
+import { useCss } from '@/hooks/css.hook'
+import { useAppNavigate } from '@/hooks/navigate.hook'
 import { vars } from '@/theme'
 
 interface ActionMenuProps {}
 
 export const ActionMenu: FC<ActionMenuProps> = () => {
-  const navigate = useNavigate()
+  /* Hook Init */
+  const navigate = useAppNavigate()
 
   return (
     <>
       <Button
         radius={'xl'}
-        onClick={() => navigate(AppRoutes.home)}
+        onClick={navigate.home}
       >
         Home
       </Button>
@@ -55,7 +55,7 @@ export const ActionMenu: FC<ActionMenuProps> = () => {
 
         <Menu.Dropdown w={150}>
           <Menu.Item>Create Idea Pin</Menu.Item>
-          <Menu.Item onClick={() => navigate(AppRoutes.upload)}>Create Pin</Menu.Item>
+          <Menu.Item onClick={navigate.upload}>Create Pin</Menu.Item>
         </Menu.Dropdown>
       </Menu>
 

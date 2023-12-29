@@ -1,12 +1,12 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { Avatar, Box, Button, Container, Group, Stack, Tabs, Text, Title } from '@mantine/core'
 
 import { Pin, PinSizeEnum } from '@/components/pin'
 import { PinLayout } from '@/components/pin-layout'
-import { useAccount } from '@/hooks/account-hooks'
-import { useCss } from '@/hooks/css-hooks'
+import { useAccount } from '@/hooks/account.hook'
+import { useCss } from '@/hooks/css.hook'
+import { useAppNavigate } from '@/hooks/navigate.hook'
 import { AppModule } from '@/modules/app/app.module'
 import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
@@ -16,7 +16,7 @@ export const ProfilePage: FC = () => {
   const { profile, savedPins, createdPins } = useAccount()
 
   /* Hook Init */
-  const navigate = useNavigate()
+  const navigate = useAppNavigate()
 
   return (
     <>
@@ -63,7 +63,7 @@ export const ProfilePage: FC = () => {
                 radius={'xl'}
                 size='md'
                 variant='light'
-                onClick={() => navigate(AppRoutes.profile.edit)}
+                onClick={navigate.profile.edit}
               >
                 Edit Profile
               </Button>
@@ -167,7 +167,7 @@ export const ProfilePage: FC = () => {
                     w={'fit-content'}
                     radius={'xl'}
                     size='md'
-                    onClick={() => navigate(AppRoutes.home)}
+                    onClick={navigate.home}
                   >
                     Go Home
                   </Button>

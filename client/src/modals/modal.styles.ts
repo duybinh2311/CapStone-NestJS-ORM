@@ -1,4 +1,4 @@
-import { useCss } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css.hook'
 import { vars } from '@/theme'
 
 export const styles = {

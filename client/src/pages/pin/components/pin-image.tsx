@@ -4,7 +4,7 @@ import { Box, Button, Image, rgba } from '@mantine/core'
 
 import { IconExternalLink } from '@tabler/icons-react'
 
-import { useCss } from '@/hooks/css-hooks'
+import { useCss } from '@/hooks/css.hook'
 import { AppModule } from '@/modules/app/app.module'
 import { vars } from '@/theme'
 
