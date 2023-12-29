@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { ActionIcon, Box, Button, Group, Image, Stack, Text, rgba, useMantineTheme } from '@mantine/core'
+import { ActionIcon, Box, Button, Group, Image, Stack, Text, rgba } from '@mantine/core'
 
 import { IconExternalLink } from '@tabler/icons-react'
 
@@ -38,14 +38,13 @@ export const Pin: FC<PinProps> = (props) => {
   const { savedPins, getSavedPins } = useAccount()
 
   /* Hook Init */
-  const theme = useMantineTheme()
   const navigate = useNavigate()
 
   /* Logic */
   const isSaved = savedPins.some((pin) => pin.id === props.pin.id)
 
   const savePin = () => {
-    PinModule.save(`${props.pin.id}`)
+    PinModule.save(props.pin.id)
       .then((res) => {
         getSavedPins()
         AppModule.onSuccess(res.message)
@@ -72,9 +71,9 @@ export const Pin: FC<PinProps> = (props) => {
         style={useCss({
           borderRadius: vars.radius.md,
           background: ColorUtils.linearGradient(180, [
-            `${rgba(theme.colors.dark[9], 0.6)} 0%`,
-            `${rgba(theme.colors.dark[9], 0.6)} 70%`,
-            `${rgba(theme.colors.dark[9], 1)} 100%`,
+            `${rgba(vars.colors.dark[9], 0.6)} 0%`,
+            `${rgba(vars.colors.dark[9], 0.6)} 70%`,
+            `${rgba(vars.colors.dark[9], 1)} 100%`,
           ]),
           transition: 'opacity 0.1s ease-in-out',
           opacity: 0,

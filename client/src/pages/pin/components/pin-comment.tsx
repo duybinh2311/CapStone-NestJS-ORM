@@ -59,7 +59,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
   }
 
   const submit = form.onSubmit((values) => {
-    CommentModule.update(`${props.comment.id}`, values).then(() => {
+    CommentModule.update(props.comment.id, values).then(() => {
       form.reset()
       setIsEditingComment(false)
       props.getComments()
@@ -205,7 +205,7 @@ export const PinComment: FC<PinCommentProps> = (props) => {
                     <Menu.Item
                       fw={500}
                       onClick={() => {
-                        CommentModule.delete(`${props.comment.id}`).then(() => {
+                        CommentModule.delete(props.comment.id).then(() => {
                           props.getComments()
                         })
                       }}

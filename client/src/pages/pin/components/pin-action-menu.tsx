@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import { useLocation } from 'react-router-dom'
 import Sticky from 'react-stickynode'
 
-import { ActionIcon, Button, Group } from '@mantine/core'
+import { ActionIcon, Button, Group, Menu } from '@mantine/core'
 
-import { IconDownload, IconExternalLink, IconShare } from '@tabler/icons-react'
+import { IconDots, IconDownload, IconEdit, IconEyeOff, IconReport, IconShare } from '@tabler/icons-react'
 
+import { useAccount } from '@/hooks/account-hooks'
 import { AppModule } from '@/modules/app/app.module'
 import { FileUtils } from '@/utils/file.utils'
 
@@ -13,11 +13,13 @@ import { classes } from './pin-action-menu.css'
 
 interface PinActionMenuProps {
   path: string
+  authorId: number
+  openEdit: () => void
 }
 
 export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
-  /* Hook Init */
-  const location = useLocation()
+  /* App State */
+  const { profile } = useAccount()
 
   return (
     <Sticky
@@ -29,14 +31,39 @@ export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
     >
       <Group justify='space-between'>
         <Group>
-          <ActionIcon
-            variant='transparent'
-            component={'a'}
-            href={AppModule.config.APP_API_URL + props.path}
-            target='_blank'
-          >
-            <IconExternalLink stroke={2.5} />
-          </ActionIcon>
+          <Menu>
+            <Menu.Target>
+              <ActionIcon variant='transparent'>
+                <IconDots stroke={2.5} />
+              </ActionIcon>
+            </Menu.Target>
+
+            <Menu.Dropdown>
+              {profile?.id === props.authorId && (
+                <Menu.Item
+                  leftSection={<IconEdit size={16} />}
+                  fw={500}
+                  onClick={props.openEdit}
+                >
+                  Edit Pin
+                </Menu.Item>
+              )}
+
+              <Menu.Item
+                leftSection={<IconEyeOff size={16} />}
+                fw={500}
+              >
+                Hide Pin
+              </Menu.Item>
+
+              <Menu.Item
+                leftSection={<IconReport size={16} />}
+                fw={500}
+              >
+                Report Pin
+              </Menu.Item>
+            </Menu.Dropdown>
+          </Menu>
 
           <ActionIcon
             variant='transparent'
@@ -47,7 +74,7 @@ export const PinActionMenu: FC<PinActionMenuProps> = (props) => {
 
           <ActionIcon
             variant='transparent'
-            onClick={() => AppModule.onCopy(AppModule.config.APP_URL + location.pathname)}
+            onClick={() => AppModule.onCopy(window.location.href)}
           >
             <IconShare stroke={2.5} />
           </ActionIcon>

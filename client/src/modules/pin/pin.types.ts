@@ -41,7 +41,7 @@ export interface SavePinDto {
   pinId: number
 }
 
-export class UpdatePinDto {
+export interface UpdatePinDto {
   title?: string
   description?: string
 }

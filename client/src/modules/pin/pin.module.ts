@@ -14,8 +14,8 @@ export class PinModule {
     return http.post(this.url.create, payload)
   }
 
-  static save(id: string): IRes<SavePinResDto> {
-    return http.post(this.url.save.replace(':id', id))
+  static save(id: number): IRes<SavePinResDto> {
+    return http.post(this.url.save.replace(':id', `${id}`))
   }
 
   static getAll(query?: PinQueryDto): IResList<PinResDto> {
@@ -26,15 +26,15 @@ export class PinModule {
     return http.get(this.url.root, { params: query })
   }
 
-  static getById(id: string): IRes<PinResDto> {
+  static getById(id: number): IRes<PinResDto> {
     return http.get(`${this.url.root}/${id}`)
   }
 
-  static update(id: string, payload: UpdatePinDto): IRes<PinResDto> {
+  static update(id: number, payload: UpdatePinDto): IRes<PinResDto> {
     return http.patch(`${this.url.root}/${id}`, payload)
   }
 
-  static delete(id: string): IRes<null> {
+  static delete(id: number): IRes<null> {
     return http.delete(`${this.url.root}/${id}`)
   }
 }

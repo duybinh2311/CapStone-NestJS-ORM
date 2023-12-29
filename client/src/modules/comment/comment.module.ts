@@ -13,15 +13,15 @@ export class CommentModule {
     return http.post(this.url.root, payload)
   }
 
-  static getByPinId(pinId: string): IResList<CommentResDto> {
-    return http.get(this.url.getByPinId.replace(':pinId', pinId))
+  static getByPinId(pinId: number): IResList<CommentResDto> {
+    return http.get(this.url.getByPinId.replace(':pinId', `${pinId}`))
   }
 
-  static update(id: string, payload: UpdateCommentDto): IRes<CommentResDto> {
+  static update(id: number, payload: UpdateCommentDto): IRes<CommentResDto> {
     return http.patch(`${this.url.root}/${id}`, payload)
   }
 
-  static delete(id: string): IRes<null> {
+  static delete(id: number): IRes<null> {
     return http.delete(`${this.url.root}/${id}`)
   }
 }
