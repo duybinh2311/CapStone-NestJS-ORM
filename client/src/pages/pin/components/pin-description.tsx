@@ -38,37 +38,40 @@ export const PinDescription: FC<PinDescriptionProps> = (props) => {
         </Title>
 
         <Text lineClamp={3}>{props?.description}</Text>
-      </Stack>
 
-      <Group justify='space-between'>
-        <Group gap={'xs'}>
-          <Avatar
-            size={'md'}
-            src={AppModule.config.APP_API_URL + props.author.avatar}
-          />
-          <Stack gap={0}>
-            <Text
-              fz='sm'
-              fw={500}
-            >
-              {props.author.userName || props.author.fullName}
-            </Text>
-            <Text
-              fz='xs'
-              c={'dimmed'}
-            >
-              53 followers
-            </Text>
-          </Stack>
-        </Group>
-
-        <Button
-          radius={'xl'}
-          size='md'
+        <Group
+          justify='space-between'
+          mt={'xs'}
         >
-          Follow
-        </Button>
-      </Group>
+          <Group gap={'xs'}>
+            <Avatar
+              size={'md'}
+              src={AppModule.config.APP_API_URL + props.author.avatar}
+            />
+            <Stack gap={0}>
+              <Text
+                fz='sm'
+                fw={500}
+              >
+                {props.author.userName || props.author.fullName}
+              </Text>
+              <Text
+                fz='xs'
+                c={'dimmed'}
+              >
+                53 followers
+              </Text>
+            </Stack>
+          </Group>
+
+          <Button
+            radius={'xl'}
+            size='md'
+          >
+            Follow
+          </Button>
+        </Group>
+      </Stack>
 
       <Stack>
         <Group justify='space-between'>

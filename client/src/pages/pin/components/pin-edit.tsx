@@ -70,6 +70,7 @@ export const PinEdit: FC<PinEditProps> = (props) => {
         >
           <Stack>
             <TextInput
+              data-autofocus
               label='Title'
               {...form.getInputProps('title')}
             />
