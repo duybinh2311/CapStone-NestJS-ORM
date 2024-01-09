@@ -5,9 +5,7 @@ import { isNotEmpty, useForm } from '@mantine/form'
 
 import { useAccount } from '@/hooks/account.hook'
 
-interface FormSignInProps {}
-
-export const FormSignIn: FC<FormSignInProps> = (props) => {
+export const FormSignIn: FC = () => {
   /* App State */
   const { signIn } = useAccount()
 

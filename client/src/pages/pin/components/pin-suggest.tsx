@@ -4,9 +4,7 @@ import { Text } from '@mantine/core'
 
 import { PinLayout } from '@/components/pin-layout'
 
-interface PinSuggestProps {}
-
-export const PinSuggest: FC<PinSuggestProps> = (props) => {
+export const PinSuggest: FC = () => {
   return (
     <>
       <Text

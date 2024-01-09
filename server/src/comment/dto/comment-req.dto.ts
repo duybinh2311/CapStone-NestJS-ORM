@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger'
 
 import { Comment } from '@prisma/client'
 
-import { IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsNumber, IsString } from 'class-validator'
 
 export class CreateCommentDto implements Partial<Comment> {
   @ApiProperty()

@@ -9,9 +9,7 @@ import { vars } from '@/theme'
 
 import { useFormUploadContext } from './form-upload'
 
-interface FormDescProps {}
-
-export const FormDesc: FC<FormDescProps> = (props) => {
+export const FormDesc: FC = () => {
   /* App State */
   const { profile } = useAccount()
 

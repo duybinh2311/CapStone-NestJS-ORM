@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 
-import { Box, Button, Stack, Text, ThemeIcon, Image } from '@mantine/core'
+import { Box, Button, Image, Stack, Text, ThemeIcon } from '@mantine/core'
 import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone'
 
 import { IconArrowUp } from '@tabler/icons-react'

@@ -8,7 +8,6 @@ import { useAccount } from '@/hooks/account.hook'
 import { useCss } from '@/hooks/css.hook'
 import { useAppNavigate } from '@/hooks/navigate.hook'
 import { AppModule } from '@/modules/app/app.module'
-import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
 export const ProfilePage: FC = () => {

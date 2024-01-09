@@ -6,9 +6,7 @@ import { isEmail, isInRange, isNotEmpty, useForm } from '@mantine/form'
 import { useAccount } from '@/hooks/account.hook'
 import { SignUpDto } from '@/modules/auth/auth.types'
 
-interface FormSignUpProps {}
-
-export const FormSignUp: FC<FormSignUpProps> = (props) => {
+export const FormSignUp: FC = () => {
   /* App State */
   const { signUp } = useAccount()
 

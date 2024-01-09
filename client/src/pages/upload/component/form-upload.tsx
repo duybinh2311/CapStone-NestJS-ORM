@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 
-import { Box, LoadingOverlay, Stack, ActionIcon, Grid, Button } from '@mantine/core'
+import { ActionIcon, Box, Button, Grid, LoadingOverlay, Stack } from '@mantine/core'
 import { createFormContext } from '@mantine/form'
 
 import { IconDots } from '@tabler/icons-react'
@@ -15,11 +15,9 @@ import { vars } from '@/theme'
 import { FormDesc } from './form-desc'
 import { FormFile } from './form-file'
 
-interface FormUpLoadProps {}
-
 export const [FormUploadProvider, useFormUploadContext, useFormUpload] = createFormContext<CreatePinDto>()
 
-export const FormUpLoad: FC<FormUpLoadProps> = (props) => {
+export const FormUpLoad: FC = () => {
   /* App State */
   const { getCreatedPins } = useAccount()
 

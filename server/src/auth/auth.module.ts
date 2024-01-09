@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common'
 import { JwtModule } from '@nestjs/jwt'
 
-import { CommentModule } from 'src/comment/comment.module'
-import { PinModule } from 'src/pin/pin.module'
 import { UserModule } from 'src/user/user.module'
 
 import { AuthController } from './auth.controller'

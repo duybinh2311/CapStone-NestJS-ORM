@@ -19,5 +19,5 @@
   "embeddedLanguageFormatting": "auto",
   "importOrder": ["^react(.*)", "@mantine/(.*)", "<THIRD_PARTY_MODULES>", "@/(.*)", "^[./]"],
   "importOrderSeparation": true,
-  "plugins": ["prettier-plugin-organize-imports", "@trivago/prettier-plugin-sort-imports"]
+  "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-organize-imports"]
 }

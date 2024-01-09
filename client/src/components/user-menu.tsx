@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 import { ActionIcon, Avatar, Box, Group, Menu, Stack, Text } from '@mantine/core'
 
@@ -10,7 +9,6 @@ import { useAppNavigate } from '@/hooks/navigate.hook'
 import { SignOutFunc } from '@/modules/account/account.types'
 import { AppModule } from '@/modules/app/app.module'
 import { ProfileUserResDto } from '@/modules/user/user.types'
-import AppRoutes from '@/routes/routes'
 import { vars } from '@/theme'
 
 interface UserMenuProps {
