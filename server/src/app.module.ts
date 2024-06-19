@@ -12,6 +12,7 @@ import { CommentModule } from './comment/comment.module'
 import { FileModule } from './file/file.module'
 import { PinModule } from './pin/pin.module'
 import { UserModule } from './user/user.module'
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { UserModule } from './user/user.module'
     PinModule,
     FileModule,
     CommentModule,
+    CloudinaryModule,
   ],
   controllers: [AppController],
   providers: [
