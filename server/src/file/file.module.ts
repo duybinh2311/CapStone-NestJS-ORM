@@ -29,6 +29,7 @@ import { FileMessage } from './types/file.messages'
           const extension = path.extname(file.originalname)
           const name = file.originalname.slice(0, file.originalname.lastIndexOf('.'))
           const fileName = `${Date.now()}-${StringUtils.toSlug(name)}${extension}`
+          console.log(extension)
 
           callback(null, fileName)
         },

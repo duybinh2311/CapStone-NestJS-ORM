@@ -8,7 +8,7 @@ import { ModalsProvider } from '@mantine/modals'
 import { Notifications } from '@mantine/notifications'
 import '@mantine/notifications/styles.css'
 
-import '@/assets/styles/global-style.scss'
+import '@/assets/styles/reset-style.scss'
 import router from '@/routes/router'
 
 import { hooks } from './hooks/css.hook'
