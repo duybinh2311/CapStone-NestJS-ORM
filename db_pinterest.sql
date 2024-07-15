@@ -16,8 +16,8 @@
 
 
 -- Dumping database structure for db_pinterest
-CREATE DATABASE IF NOT EXISTS `db_pinterest` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `db_pinterest`;
+CREATE DATABASE IF NOT EXISTS `pinterest` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `pinterest`;
 
 -- Dumping structure for table db_pinterest.Comment
 CREATE TABLE IF NOT EXISTS `Comment` (
