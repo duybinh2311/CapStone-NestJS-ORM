@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for db_pinterest
-CREATE DATABASE IF NOT EXISTS `db_pinterest` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `db_pinterest`;
+-- Dumping database structure for Pinterest
+CREATE DATABASE IF NOT EXISTS `Pinterest` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `Pinterest`;
 
--- Dumping structure for table db_pinterest.Comment
+-- Dumping structure for table Pinterest.Comment
 CREATE TABLE IF NOT EXISTS `Comment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   CONSTRAINT `Comment_pinId_fkey` FOREIGN KEY (`pinId`) REFERENCES `Pin` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table db_pinterest.Comment: ~18 rows (approximately)
+-- Dumping data for table Pinterest.Comment: ~18 rows (approximately)
 INSERT INTO `Comment` (`id`, `content`, `authorId`, `pinId`, `createdAt`, `updatedAt`) VALUES
 	(1, 'test comment', 2, 46, '2023-11-25 09:21:37.845', '2023-11-29 16:21:37.000'),
 	(3, 'test comment', 2, 46, '2023-11-25 09:21:37.845', '2023-11-29 16:21:37.000'),
@@ -54,7 +54,7 @@ INSERT INTO `Comment` (`id`, `content`, `authorId`, `pinId`, `createdAt`, `updat
 	(35, 'asdadsasdasd', 11, 59, '2023-12-09 19:47:24.557', '2023-12-09 19:47:40.800'),
 	(36, 'asdasd', 11, 59, '2023-12-09 19:47:26.383', '2023-12-09 19:49:44.941');
 
--- Dumping structure for table db_pinterest.Pin
+-- Dumping structure for table Pinterest.Pin
 CREATE TABLE IF NOT EXISTS `Pin` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `Pin` (
   CONSTRAINT `Pin_authorId_fkey` FOREIGN KEY (`authorId`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table db_pinterest.Pin: ~45 rows (approximately)
+-- Dumping data for table Pinterest.Pin: ~45 rows (approximately)
 INSERT INTO `Pin` (`id`, `title`, `description`, `path`, `authorId`, `createdAt`, `updatedAt`) VALUES
 	(16, 'Avatar', 'avatar ở khách sạn', '/1700859441480-5.jpg', 2, '2023-11-04 20:57:21.511', '2023-11-24 20:57:21.511'),
 	(17, '', '', '/1700860855323-4.jpg', 2, '2023-11-24 21:20:55.366', '2023-11-24 21:20:55.366'),
@@ -118,7 +118,7 @@ INSERT INTO `Pin` (`id`, `title`, `description`, `path`, `authorId`, `createdAt`
 	(62, '', '', '/1703845823446-vonic-2.png', 2, '2023-12-29 10:30:23.471', '2023-12-29 10:30:23.471'),
 	(63, '', '', '/1703846184586-vonic-2.png', 2, '2023-12-29 10:36:24.608', '2023-12-29 10:36:24.608');
 
--- Dumping structure for table db_pinterest.Saved
+-- Dumping structure for table Pinterest.Saved
 CREATE TABLE IF NOT EXISTS `Saved` (
   `userId` int NOT NULL,
   `pinId` int NOT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `Saved` (
   CONSTRAINT `Saved_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table db_pinterest.Saved: ~39 rows (approximately)
+-- Dumping data for table Pinterest.Saved: ~39 rows (approximately)
 INSERT INTO `Saved` (`userId`, `pinId`, `createdAt`, `updatedAt`) VALUES
 	(1, 28, '2023-12-09 18:46:47.007', '2023-12-09 18:46:47.007'),
 	(1, 29, '2023-12-09 18:46:46.405', '2023-12-09 18:46:46.405'),
@@ -171,7 +171,7 @@ INSERT INTO `Saved` (`userId`, `pinId`, `createdAt`, `updatedAt`) VALUES
 	(11, 58, '2023-12-10 08:12:11.888', '2023-12-10 08:12:11.888'),
 	(11, 59, '2023-12-10 08:12:10.721', '2023-12-10 08:12:10.721');
 
--- Dumping structure for table db_pinterest.User
+-- Dumping structure for table Pinterest.User
 CREATE TABLE IF NOT EXISTS `User` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `User` (
   UNIQUE KEY `User_userName_key` (`userName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table db_pinterest.User: ~6 rows (approximately)
+-- Dumping data for table Pinterest.User: ~6 rows (approximately)
 INSERT INTO `User` (`id`, `email`, `password`, `fullName`, `age`, `avatar`, `userName`, `about`, `createdAt`, `updatedAt`) VALUES
 	(1, 'hatram@gmail.com', '$2b$10$XiHX7UgJNOA9vLOm.T/IQOm9gH4Qn8Snkjm63K3CWLM04vXn5W0ca', 'Em bé ỉn', 20, 'bein.jpg', 'zamzam', NULL, '2023-11-17 05:07:39.451', '2023-11-18 13:15:28.108'),
 	(2, 'duybinh@gmail.com', '$2b$10$HfPzxwNCjGiQQQ00coKntOHwSIvPzIynAZkej6UgcozPoc4R/zjI2', 'Nguyễn Duy Bình', 20, '/1702316010012-6.jpg', 'SimpleB96', 'Mình tự do, do tự mình !!!', '2023-11-18 18:35:32.478', '2023-12-29 05:52:58.513'),
@@ -197,7 +197,7 @@ INSERT INTO `User` (`id`, `email`, `password`, `fullName`, `age`, `avatar`, `use
 	(10, 'duybinh20@gmail.com', '$2b$10$fU/ND4uSzN3RHhbnqYU5WO/TOCYN3UqL4Ui7vgBYkQchblldPoQ4C', 'Nguyễn Duy Bình', 18, NULL, NULL, NULL, '2023-11-21 11:29:44.807', '2023-11-21 11:29:44.807'),
 	(11, 'simplecheck@gmail.com', '$2b$10$lrohxFz53vi4XJQzLcUU3uAF9Yvt31NR/yf9JBQ/eOwDYJJATZroi', 'Simple Check', 18, NULL, NULL, NULL, '2023-12-09 18:53:55.009', '2023-12-09 18:53:55.009');
 
--- Dumping structure for table db_pinterest._prisma_migrations
+-- Dumping structure for table Pinterest._prisma_migrations
 CREATE TABLE IF NOT EXISTS `_prisma_migrations` (
   `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `checksum` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `_prisma_migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table db_pinterest._prisma_migrations: ~0 rows (approximately)
+-- Dumping data for table Pinterest._prisma_migrations: ~0 rows (approximately)
 INSERT INTO `_prisma_migrations` (`id`, `checksum`, `finished_at`, `migration_name`, `logs`, `rolled_back_at`, `started_at`, `applied_steps_count`) VALUES
 	('2a8603b2-d5a8-4995-acf7-bcf21b33b06b', '98f53c4ffc326b37475b56007f238434efe4cb124ff83dcc18ea9afe7c788e25', '2023-12-11 11:37:27.740', '20231211113727_update_user', NULL, NULL, '2023-12-11 11:37:27.540', 1),
 	('3051c992-78c9-4fb3-8ecc-b06f4011825c', 'ade2b6d8ff60ca06eebe7927c1d2f088a59ce23e4d0e263325a694f898fa5140', '2023-11-17 05:07:16.021', '20231117050714_init', NULL, NULL, '2023-11-17 05:07:14.644', 1);
